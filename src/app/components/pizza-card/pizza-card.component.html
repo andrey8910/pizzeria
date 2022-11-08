@@ -8,6 +8,6 @@
     <span *ngFor="let ingredient of pizzaItem.ingredients">|{{ingredient}}|</span>
   </div>
 
-  <div class="pizza-card-price">{{pizzaItem.minPrice}}</div>
-
+  <div class="pizza-card-price">{{pizzaItem.minPrice | currency: 'UA'}}</div>
+  <button mat-raised-button color="primary">В кошик</button>
 </div>

@@ -5,9 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsService } from './services/products.service'
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './shared/material/material.module';
 import { AppComponent } from './app.component';
 import { PizzasAllComponent } from './components/pizzas-all/pizzas-all.component';
 import { PizzaCardComponent } from './components/pizza-card/pizza-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { PizzaCardComponent } from './components/pizza-card/pizza-card.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]
