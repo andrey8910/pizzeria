@@ -1,0 +1,13 @@
+<div class="pizza-card">
+  <div class="pizza-main-img">
+    <img src="{{pizzaItem.imageMain}}" alt="{{pizzaItem.title}}">
+  </div>
+
+  <p class="pizza-card-title">{{pizzaItem.title | titlecase}}</p>
+  <div class="pizza-card-ingredients">
+    <span *ngFor="let ingredient of pizzaItem.ingredients">|{{ingredient}}|</span>
+  </div>
+
+  <div class="pizza-card-price">{{pizzaItem.minPrice}}</div>
+
+</div>

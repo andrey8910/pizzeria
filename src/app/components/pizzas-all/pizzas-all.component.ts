@@ -20,9 +20,6 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.getPizzas().subscribe((data:Pizza[]) => {
       this.pizzas = data
     })
-    setTimeout(() => {
-      console.log(this.pizzas)
-    },1000)
   }
 
 }

@@ -7,11 +7,13 @@ import { ProductsService } from './services/products.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PizzasAllComponent } from './components/pizzas-all/pizzas-all.component';
+import { PizzaCardComponent } from './components/pizza-card/pizza-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PizzasAllComponent
+    PizzasAllComponent,
+    PizzaCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,7 @@
-<p>pizzas-all works!</p>
-<ul>
-  <li *ngFor="let pizza of pizzas">{{pizza.title}}</li>
-</ul>
+<div class="container">
+  <app-pizza-card
+    *ngFor="let pizza of pizzas"
+    [pizzaItem] = pizza
+  ></app-pizza-card>
+</div>
+
