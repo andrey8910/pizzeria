@@ -11,13 +11,15 @@ import { PizzasAllComponent } from './components/pizzas-all/pizzas-all.component
 import { PizzaCardComponent } from './components/pizza-card/pizza-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyUaPipe } from './shared/pipes/currency-ua.pipe';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PizzasAllComponent,
     PizzaCardComponent,
-    CurrencyUaPipe
+    CurrencyUaPipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

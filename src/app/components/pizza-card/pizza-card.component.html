@@ -1,13 +1,19 @@
 <div class="pizza-card">
   <div class="pizza-main-img">
     <img src="{{pizzaItem.imageMain}}" alt="{{pizzaItem.title}}">
+    <span class="pizza-card-minWeight">{{pizzaItem.minWeight + ' г'}}</span>
   </div>
 
   <p class="pizza-card-title">{{pizzaItem.title | titlecase}}</p>
   <div class="pizza-card-ingredients">
-    <span *ngFor="let ingredient of pizzaItem.ingredients">|{{ingredient}}|</span>
+    <span *ngFor="let ingredient of pizzaItem.ingredients">| {{ingredient}} |</span>
+  </div>
+  <div class="pizza-card-params">
+
+  </div>
+  <div class="pizza-card-footer">
+    <div class="pizza-card-price">{{pizzaItem.minPrice | currencyUa}}</div>
+    <button mat-raised-button color="primary">В кошик</button>
   </div>
 
-  <div class="pizza-card-price">{{pizzaItem.minPrice | currencyUa}}</div>
-  <button mat-raised-button color="primary">В кошик</button>
 </div>

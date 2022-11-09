@@ -1,0 +1,37 @@
+:host{
+  display: flex;
+  flex: 0 0 100px;
+  width: 100%;
+  position: fixed;
+  top:0;
+  z-index: 100;
+  background-color: rgba(0,0,0, 0.8);
+
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .header_logo{
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
+    background: url("https://www.pngkey.com/png/detail/54-544260_pizza-express-logo.png") top no-repeat;
+    background-size: contain;
+
+  }
+  .nav-menu{
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+
+    .menu-item{
+      color: wheat;
+      font-size: 22px;
+      font-weight: 600;
+    }
+  }
+}
