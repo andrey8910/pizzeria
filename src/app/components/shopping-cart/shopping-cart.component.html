@@ -1,12 +1,20 @@
 <div class="container">
-
-  <p>shopping-cart works!</p>
-  <ul>
-
-    <li *ngFor="let shoppingItem of shoppingCart$ | async">
-      {{shoppingItem.title}}
-    </li>
-  </ul>
-
+  <div class="shopping-orders-block">
+    <p class="orders-block-title">Ваше замовлення :</p>
+      <ul class="orders-list">
+        <li class="orders-list-item" *ngFor="let shoppingItem of shoppingCart$ | async">
+          <img src="{{shoppingItem.imageMain}}" alt="order">
+          <div class="item-params">
+            <p class="item-title">{{shoppingItem.title}}</p>
+            <ul class="item-ingredients-list">
+              <li class="item-ingredient"  *ngFor="let ingredient of shoppingItem.ingredients">
+                {{ingredient}}
+              </li>
+            </ul>
+            <span class="item-price">{{shoppingItem.minPrice | currencyUa}}</span>
+          </div>
+        </li>
+      </ul>
+  </div>
 </div>
 
