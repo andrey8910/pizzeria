@@ -7,9 +7,13 @@
           <a routerLink="/pizzas" routerLinkActive="active">Піца</a>
         </div>
         <div class="menu-item">
-          <a routerLink="/shopping" routerLinkActive="active">Кошик</a>
-        </div>
+          <div class="item-orders">
+            <a routerLink="/shopping" routerLinkActive="active">Кошик</a>
+            <mat-icon *ngIf="(shoppingCart$ | async)?.length !== 0" matBadge="{{(shoppingCart$ | async)?.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
+            <mat-icon *ngIf="(shoppingCart$ | async)?.length == 0">remove_shopping_cart</mat-icon>
+          </div>
 
+        </div>
     </nav>
   </header>
 </div>

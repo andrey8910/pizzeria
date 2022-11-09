@@ -1,6 +1,7 @@
 <div class="container">
   <div class="shopping-orders-block">
     <p class="orders-block-title">Ваше замовлення :</p>
+    <span *ngIf="(shoppingCart$ | async)?.length == 0">Зробіть замовлення!</span>
       <ul class="orders-list">
         <li class="orders-list-item" *ngFor="let shoppingItem of shoppingCart$ | async">
           <img src="{{shoppingItem.imageMain}}" alt="order">

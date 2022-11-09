@@ -15,6 +15,7 @@ import { CurrencyUaPipe } from './shared/pipes/currency-ua.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     CurrencyUaPipe,
     HeaderComponent,
     NotFoundPageComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
