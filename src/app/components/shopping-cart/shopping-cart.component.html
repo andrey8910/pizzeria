@@ -1,0 +1,11 @@
+<div class="container">
+  <p>shopping-cart works!</p>
+  <ul>
+
+    <li *ngFor="let shoppingItem of shoppingCart$ | async">
+      {{shoppingItem.title}}
+    </li>
+  </ul>
+
+</div>
+

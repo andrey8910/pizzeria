@@ -31,7 +31,22 @@ header{
     .menu-item{
       color: wheat;
       font-size: 22px;
-      font-weight: 600;
+      font-weight: 500;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover{
+        color: white;
+        font-weight: 600;
+      }
+      a.active {
+        padding: 6px;
+        color: white;
+        background-color: dimgray;
+        border-radius: 10px;
+      }
     }
   }
 }

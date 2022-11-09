@@ -13,7 +13,7 @@
   </div>
   <div class="pizza-card-footer">
     <div class="pizza-card-price">{{pizzaItem.minPrice | currencyUa}}</div>
-    <button mat-raised-button color="primary">В кошик</button>
+    <button mat-raised-button color="primary" (click)="toShoppingCart(pizzaItem)">В кошик</button>
   </div>
 
 </div>
