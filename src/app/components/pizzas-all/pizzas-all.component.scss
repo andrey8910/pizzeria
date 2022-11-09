@@ -1,11 +1,16 @@
 :host {
+  flex: 1 1 auto;
   width: 100%;
 }
-.container{
+.pizza-card-spinner{
+  top: 30vh;
+  left: 40vw;
+}
+
+
+.pizzas-list{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-between;
-  width: 80%;
-  margin: 0 auto;
+
 }

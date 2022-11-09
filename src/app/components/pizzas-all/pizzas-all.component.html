@@ -1,7 +1,11 @@
 <div class="container">
-  <app-pizza-card
-    *ngFor="let pizza of pizzas"
-    [pizzaItem] = pizza
-  ></app-pizza-card>
+  <mat-spinner class="pizza-card-spinner" *ngIf="!pizzas"></mat-spinner>
+  <div class="pizzas-list">
+    <app-pizza-card
+      *ngFor="let pizza of pizzas"
+      [pizzaItem] = pizza
+    ></app-pizza-card>
+  </div>
+
 </div>
 
