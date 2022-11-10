@@ -16,6 +16,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FooterComponent } from './components/footer/footer.component';
+import {PrimengModule} from "./shared/primeng/primeng.module";
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { FooterComponent } from './components/footer/footer.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    PrimengModule
+
   ],
   providers: [ProductsService, ShoppingCartService],
   bootstrap: [AppComponent]
