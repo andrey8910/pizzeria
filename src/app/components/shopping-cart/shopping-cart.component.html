@@ -14,8 +14,12 @@
             </ul>
             <span class="item-price">{{shoppingItem.minPrice | currencyUa}}</span>
           </div>
+          <i class="delete-item" (click)="deleteItem(shoppingItem.id)">
+            <mat-icon>highlight_off</mat-icon>
+          </i>
         </li>
       </ul>
+
   </div>
 </div>
 

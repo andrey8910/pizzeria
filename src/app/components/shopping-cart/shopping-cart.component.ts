@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../services/shopping-cart.service";
 import { Pizza } from "../../interfaces/pizza";
@@ -10,11 +10,17 @@ import { Pizza } from "../../interfaces/pizza";
 })
 export class ShoppingCartComponent implements OnInit {
 
+
+
   public shoppingCart$: Observable<Pizza[]> = this.shoppingService.shoppingCart$;
 
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
+  }
+
+  public deleteItem(itemId: number){
+    this.shoppingService.delete(itemId)
   }
 
 }

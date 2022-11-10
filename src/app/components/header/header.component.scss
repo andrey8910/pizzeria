@@ -1,6 +1,7 @@
 :host{
   display: flex;
-  flex: 0 0 100px;
+  flex: 0 0 200px;
+  height: 60px;
   width: 100%;
   position: fixed;
   top:0;
@@ -15,11 +16,11 @@ header{
   width: 100%;
 
   .header_logo{
-    flex: 0 0 100px;
+    height: 100%;
     width: 100px;
-    height: 100px;
-    background: url("https://www.pngkey.com/png/detail/54-544260_pizza-express-logo.png") top no-repeat;
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbxJFWDnWv6smNalcA2UqoCI_HDf5NKeapCA&usqp=CAU") top no-repeat;
     background-size: contain;
+
 
   }
   .nav-menu{
@@ -30,7 +31,7 @@ header{
     gap: 20px;
 
     .menu-item{
-      color: wheat;
+      color: white;
       font-size: 22px;
       font-weight: 500;
 
@@ -38,6 +39,7 @@ header{
       a {
         color: inherit;
         text-decoration: none;
+        padding: 6px;
       }
       a:hover{
         color: white;
@@ -46,7 +48,7 @@ header{
         border-radius: 10px;
       }
       a.active {
-        padding: 6px;
+
         color: white;
         background-color: dimgray;
         border-radius: 10px;

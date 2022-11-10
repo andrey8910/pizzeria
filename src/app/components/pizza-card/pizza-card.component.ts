@@ -24,6 +24,5 @@ export class PizzaCardComponent implements OnInit {
 
   toShoppingCart(item: Pizza): void{
     this.shoppingService.create(item)
-    console.log(this.shoppingCart$)
   }
 }
