@@ -9,18 +9,23 @@ import { Pizza } from "../../interfaces/pizza";
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-
-
-
-  public shoppingCart$: Observable<Pizza[]> = this.shoppingService.shoppingCart$;
+  public shoppingCart$: Observable<Pizza[]> ;
+  public totalAmount: number;
 
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
+    this.shoppingService.loadAll();
+    this.totalAmount = this.shoppingService.totalAmount;
+    this.shoppingCart$ = this.shoppingService.shoppingCart$;
+
+
   }
 
   public deleteItem(itemId: number){
-    this.shoppingService.delete(itemId)
+    this.shoppingService.delete(itemId);
+    this.totalAmount = this.shoppingService.getTotalPrice()
+
   }
 
 }
