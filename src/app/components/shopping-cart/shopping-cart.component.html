@@ -1,40 +1,16 @@
 <div class="container">
   <div class="shopping-orders-block">
-    <p class="orders-block-title">Ваше замовлення : {{totalAmount}}</p>
+    <p class="orders-block-title">Ваше замовлення : {{totalAmount | currencyUa}}</p>
     <span *ngIf="(shoppingCart$ | async)?.length == 0">Зробіть замовлення!</span>
-      <ul class="orders-list">
-        <li class="orders-list-item" *ngFor="let shoppingItem of shoppingCart$ | async">
-          <img src="{{shoppingItem.imageMain}}" alt="order">
-          <div class="item-params">
-            <p class="item-title">{{shoppingItem.title}} <span>{{shoppingItem.order.size}}</span></p>
-            <ul class="item-ingredients-list">
-              <li class="item-ingredient"  *ngFor="let ingredient of shoppingItem.ingredients">
-                {{ingredient}}
-              </li>
-            </ul>
-            <span class="item-price">{{shoppingItem.order.price | currencyUa}}</span>
-          </div>
-          <div class="item-amount" >
-            <p-inputNumber
-              [style] = "{width: '30px', height: '50px'}"
-              [(ngModel)]="quantityInOrder"
-              (click)="changeQuantity($event)"
-              [showButtons]="true"
-              buttonLayout="vertical"
-              inputId="vertical"
-              decrementButtonClass="p-button-secondary"
-              incrementButtonClass="p-button-secondary"
-              incrementButtonIcon="pi pi-plus"
-              decrementButtonIcon="pi pi-minus">
-            </p-inputNumber>
-          </div>
-
-          <i class="delete-item" (click)="deleteItem(shoppingItem.id)">
-            <mat-icon>highlight_off</mat-icon>
-          </i>
-
-        </li>
-      </ul>
+    <div class="orders-list">
+      <app-shopping-cart-item
+        class="orders-list-item"
+        *ngFor="let shoppingItem of shoppingCart$ | async"
+        [itemShop] = "shoppingItem"
+        (delItem)="deleteItem($event)"
+      >
+      </app-shopping-cart-item>
+    </div>
 
   </div>
 </div>

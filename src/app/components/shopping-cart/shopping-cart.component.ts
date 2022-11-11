@@ -1,7 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../services/shopping-cart.service";
-import { Pizza } from "../../interfaces/pizza";
+import { PizzaOrder } from "../../interfaces/pizza-order";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -9,7 +9,7 @@ import { Pizza } from "../../interfaces/pizza";
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  public shoppingCart$: Observable<Pizza[]> ;
+  public shoppingCart$: Observable<PizzaOrder[]> ;
   public totalAmount: number;
   public quantityInOrder: number = 1;
 
@@ -17,16 +17,17 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingService.loadAll();
-    this.totalAmount = this.shoppingService.totalAmount
+
+    if(localStorage.getItem("totalPrice") !==null ){
+      this.totalAmount = this.shoppingService.getTotalPrice()
+    }else{this.totalAmount = this.shoppingService.totalAmount}
+
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
-
-
   }
 
-  public deleteItem(itemId: number){
-    this.shoppingService.delete(itemId);
-    this.totalAmount = this.shoppingService.getTotalPrice()
-
+  public deleteItem(item: PizzaOrder){
+    this.shoppingService.delete(item);
+    this.totalAmount = this.shoppingService.totalAmount
   }
 
   public changeQuantity(event: Event){

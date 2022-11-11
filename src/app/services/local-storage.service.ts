@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Pizza } from "../interfaces/pizza";
+import { PizzaOrder } from "../interfaces/pizza-order";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class LocalStorageService {
     const ls: any = localStorage.getItem(key);
     return JSON.parse(ls);
   }
-  public setLocalStorage(key: string, value: Pizza[] | number){
+  public setLocalStorage(key: string, value: PizzaOrder[] | number){
     localStorage.setItem(key, JSON.stringify(value));
   }
   public removeLocalStorage(key: string): void{

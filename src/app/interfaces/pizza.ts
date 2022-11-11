@@ -17,7 +17,8 @@ export interface Pizza {
       "big" : number
     }
   };
-  "order": {
+   order: {
+    "id": number,
     "size" : string,
     "weight" : number,
     "price" : number

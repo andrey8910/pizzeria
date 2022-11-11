@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../services/shopping-cart.service";
 import {Pizza} from "../../interfaces/pizza";
+import {PizzaOrder} from "../../interfaces/pizza-order";
 
 @Component({
   selector: 'app-pizza-card',
@@ -12,7 +13,7 @@ export class PizzaCardComponent implements OnInit {
 
   @Input() pizzaItem: Pizza
 
-  private shoppingCart$: Observable<Pizza[]>;
+  private shoppingCart$: Observable<PizzaOrder[]>;
 
   public pizzaSize: any[] = [
     {name: 'Мала (22см)', key: 'small'},

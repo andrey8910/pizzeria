@@ -17,6 +17,7 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {PrimengModule} from "./shared/primeng/primeng.module";
+import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
 
 
 
@@ -29,7 +30,8 @@ import {PrimengModule} from "./shared/primeng/primeng.module";
     HeaderComponent,
     NotFoundPageComponent,
     ShoppingCartComponent,
-    FooterComponent
+    FooterComponent,
+    ShoppingCartItemComponent
   ],
   imports: [
     BrowserModule,
