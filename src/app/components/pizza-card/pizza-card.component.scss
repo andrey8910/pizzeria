@@ -4,6 +4,10 @@
 
 
 }
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+}
+
 .pizza-card{
   display: flex;
   flex-direction: column;
@@ -66,6 +70,13 @@
     flex-wrap: wrap;
     font-size: 12px;
     font-weight: 300;
+
+    .pizza-ingredient{
+      height: 26px;
+      padding: 4px;
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 6px;
+    }
   }
   .pizza-card-params{
     display: flex;

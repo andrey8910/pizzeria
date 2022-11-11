@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -10,10 +10,12 @@ import {InputNumberModule} from 'primeng/inputnumber';
   ],
   imports: [
     CommonModule,
-    InputNumberModule
+    InputNumberModule,
+    DropdownModule
   ],
   exports: [
-    InputNumberModule
+    InputNumberModule,
+    DropdownModule
   ]
 })
 export class PrimengModule { }

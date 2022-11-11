@@ -11,12 +11,13 @@ import { Pizza } from "../../interfaces/pizza";
 export class ShoppingCartComponent implements OnInit {
   public shoppingCart$: Observable<Pizza[]> ;
   public totalAmount: number;
+  public quantityInOrder: number = 1;
 
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.shoppingService.loadAll();
-    this.totalAmount = this.shoppingService.totalAmount;
+    this.totalAmount = this.shoppingService.totalAmount
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
 
 
@@ -25,6 +26,15 @@ export class ShoppingCartComponent implements OnInit {
   public deleteItem(itemId: number){
     this.shoppingService.delete(itemId);
     this.totalAmount = this.shoppingService.getTotalPrice()
+
+  }
+
+  public changeQuantity(event: Event){
+    if(this.quantityInOrder > 0){
+      console.log(event)
+    }else{
+      return
+    }
 
   }
 

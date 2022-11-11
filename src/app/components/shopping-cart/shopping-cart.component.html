@@ -15,8 +15,17 @@
             <span class="item-price">{{shoppingItem.minPrice | currencyUa}}</span>
           </div>
           <div class="item-amount" >
-            <p-inputNumber [style]="{width: '30px', height: '20px', top: '40px', position: 'absolute'}"  [showButtons]="true" buttonLayout="vertical"  inputId="vertical"
-                           decrementButtonClass="p-button-secondary" incrementButtonClass="p-button-secondary" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus">
+            <p-inputNumber
+              [style]="{width: '30px', height: '20px', top: '40px', position: 'absolute'}"
+              [(ngModel)]="quantityInOrder"
+              (click)="changeQuantity($event)"
+              [showButtons]="true"
+              buttonLayout="vertical"
+              inputId="vertical"
+              decrementButtonClass="p-button-secondary"
+              incrementButtonClass="p-button-secondary"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus">
             </p-inputNumber>
           </div>
 

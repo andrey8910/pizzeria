@@ -12,17 +12,26 @@ export class PizzaCardComponent implements OnInit {
 
   @Input() pizzaItem: Pizza
 
-  private shoppingCart$: Observable<Pizza[]>
+  private shoppingCart$: Observable<Pizza[]>;
+  public pizzaSize = [
+    {name: 'Мала 22 см', code: 'small'},
+    {name: 'Середня 30 см', code: 'medium'},
+    {name: 'Велика 36 см', code: 'big'}
+  ]
+  public selectedPizzaSize: any
 
   constructor(private shoppingService: ShoppingCartService) {
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
+
   }
 
   ngOnInit(): void {
     this.shoppingService.loadAll();
+
   }
 
   toShoppingCart(item: Pizza): void{
     this.shoppingService.create(item)
+
   }
 }

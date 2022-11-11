@@ -5,11 +5,11 @@
   </div>
 
   <p class="pizza-card-title">{{pizzaItem.title | titlecase}}</p>
-  <div class="pizza-card-ingredients">
-    <span *ngFor="let ingredient of pizzaItem.ingredients">| {{ingredient}} |</span>
-  </div>
+  <ul class="pizza-card-ingredients">
+    <li class="pizza-ingredient" *ngFor="let ingredient of pizzaItem.ingredients">{{ingredient}}</li>
+  </ul>
   <div class="pizza-card-params">
-
+    <p-dropdown [options]="pizzaSize" [(ngModel)]="selectedPizzaSize" placeholder="Обрати розмір" optionLabel="name" [showClear]="true"></p-dropdown>
   </div>
   <div class="pizza-card-footer">
     <div class="pizza-card-price">{{pizzaItem.minPrice | currencyUa}}</div>
