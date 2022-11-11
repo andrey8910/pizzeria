@@ -14,7 +14,6 @@
   .orders-block-title{
     font-size: 22px;
     font-weight: 500;
-
   }
   .orders-list{
     display: flex;
@@ -52,6 +51,14 @@
           font-size: 20px;
           font-weight: 300;
           letter-spacing: 2px;
+
+          span {
+            margin-left: 10px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            background-color: rgba(0,0,0, 0.2);
+          }
         }
 
         .item-ingredients-list{
@@ -80,7 +87,7 @@
       .delete-item {
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 60px;
 
         &:hover{
           color: crimson;

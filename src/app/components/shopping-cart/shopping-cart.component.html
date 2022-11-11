@@ -6,17 +6,17 @@
         <li class="orders-list-item" *ngFor="let shoppingItem of shoppingCart$ | async">
           <img src="{{shoppingItem.imageMain}}" alt="order">
           <div class="item-params">
-            <p class="item-title">{{shoppingItem.title}}</p>
+            <p class="item-title">{{shoppingItem.title}} <span>{{shoppingItem.order.size}}</span></p>
             <ul class="item-ingredients-list">
               <li class="item-ingredient"  *ngFor="let ingredient of shoppingItem.ingredients">
                 {{ingredient}}
               </li>
             </ul>
-            <span class="item-price">{{shoppingItem.minPrice | currencyUa}}</span>
+            <span class="item-price">{{shoppingItem.order.price | currencyUa}}</span>
           </div>
           <div class="item-amount" >
             <p-inputNumber
-              [style]="{width: '30px', height: '20px', top: '40px', position: 'absolute'}"
+              [style] = "{width: '30px', height: '50px'}"
               [(ngModel)]="quantityInOrder"
               (click)="changeQuantity($event)"
               [showButtons]="true"

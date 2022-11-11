@@ -1,7 +1,7 @@
 <div class="pizza-card">
   <div class="pizza-main-img">
     <img src="{{pizzaItem.imageMain}}" alt="{{pizzaItem.title}}">
-    <span class="pizza-card-minWeight">{{pizzaItem.minWeight + ' г'}}</span>
+    <span class="pizza-card-minWeight">{{ selectedPizzaSize ? (selectedPizzaWeight ? selectedPizzaWeight : pizzaItem.minWeight) + ' г' : pizzaItem.minWeight + ' г'}}</span>
   </div>
 
   <p class="pizza-card-title">{{pizzaItem.title | titlecase}}</p>
@@ -9,10 +9,18 @@
     <li class="pizza-ingredient" *ngFor="let ingredient of pizzaItem.ingredients">{{ingredient}}</li>
   </ul>
   <div class="pizza-card-params">
-    <p-dropdown [options]="pizzaSize" [(ngModel)]="selectedPizzaSize" placeholder="Обрати розмір" optionLabel="name" [showClear]="true"></p-dropdown>
+    <div *ngFor="let size of pizzaSize" class="field-checkbox">
+      <p-radioButton [inputId]="size.key"
+                     name="category"
+                     [value]="size"
+                     [(ngModel)]="selectedPizzaSize"
+                     (click) = onSelectPizzaSize(size)
+      ></p-radioButton>
+      <label [for]="size.key">{{size.name}}</label>
+    </div>
   </div>
   <div class="pizza-card-footer">
-    <div class="pizza-card-price">{{pizzaItem.minPrice | currencyUa}}</div>
+    <div class="pizza-card-price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currencyUa) : (pizzaItem.minPrice | currencyUa) ): (pizzaItem.minPrice | currencyUa)}}</div>
     <button mat-raised-button color="primary" (click)="toShoppingCart(pizzaItem)">В кошик</button>
   </div>
 

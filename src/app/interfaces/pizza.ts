@@ -16,5 +16,10 @@ export interface Pizza {
       "medium" : number,
       "big" : number
     }
+  };
+  "order": {
+    "size" : string,
+    "weight" : number,
+    "price" : number
   }
 }

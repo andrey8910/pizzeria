@@ -13,25 +13,58 @@ export class PizzaCardComponent implements OnInit {
   @Input() pizzaItem: Pizza
 
   private shoppingCart$: Observable<Pizza[]>;
-  public pizzaSize = [
-    {name: 'Мала 22 см', code: 'small'},
-    {name: 'Середня 30 см', code: 'medium'},
-    {name: 'Велика 36 см', code: 'big'}
-  ]
-  public selectedPizzaSize: any
 
-  constructor(private shoppingService: ShoppingCartService) {
-    this.shoppingCart$ = this.shoppingService.shoppingCart$;
+  public pizzaSize: any[] = [
+    {name: 'Мала (22см)', key: 'small'},
+    {name: 'Середня (30см)', key: 'medium'},
+    {name: 'Велика (36см)', key: 'big'}
+  ];
 
-  }
+  public selectedPizzaSize: any;
+  public selectedPizzaWeight: any;
+  public selectedPizzaPrice: any;
+
+  constructor(private shoppingService: ShoppingCartService) {}
 
   ngOnInit(): void {
+    this.shoppingCart$ = this.shoppingService.shoppingCart$;
     this.shoppingService.loadAll();
+    this.selectedPizzaSize = this.pizzaSize[0];
+  }
 
+  onSelectPizzaSize(event: any){
+    switch (event.key){
+      case "small":
+        this.selectedPizzaWeight = this.pizzaItem.params.weight.small
+        this.selectedPizzaPrice = this.pizzaItem.params.price.small
+        break;
+
+      case "medium":
+        this.selectedPizzaWeight = this.pizzaItem.params.weight.medium
+        this.selectedPizzaPrice = this.pizzaItem.params.price.medium
+        break;
+
+      case "big":
+        this.selectedPizzaWeight = this.pizzaItem.params.weight.big
+        this.selectedPizzaPrice = this.pizzaItem.params.price.big
+        break;
+
+      default:
+        this.selectedPizzaWeight = null
+    }
   }
 
   toShoppingCart(item: Pizza): void{
-    this.shoppingService.create(item)
+    item.order.size = this.selectedPizzaSize.name;
+    item.order.weight = this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight;
+    item.order.price = this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice
 
+    this.shoppingService.create(item)
   }
+
+
+
+
+
+
 }
