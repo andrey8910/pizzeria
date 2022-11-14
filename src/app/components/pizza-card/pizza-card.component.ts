@@ -56,9 +56,9 @@ export class PizzaCardComponent implements OnInit {
   }
 
   toShoppingCart(item: Pizza): void{
-    item.order.size = this.selectedPizzaSize.name;
-    item.order.weight = this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight;
-    item.order.price = this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice
+    // item.order.size = this.selectedPizzaSize.name;
+    // item.order.weight = this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight;
+    // item.order.price = this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice
 
     this.shoppingService.create(item)
   }

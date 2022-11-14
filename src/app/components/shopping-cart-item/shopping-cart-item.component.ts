@@ -11,6 +11,7 @@ export class ShoppingCartItemComponent implements OnInit {
   @Input() itemShop: PizzaOrder
   @Output() delItem = new EventEmitter<PizzaOrder>;
   public quantityInOrder: number = 1
+  public multiplyAmount: number
   constructor() { }
 
   ngOnInit(): void {
@@ -21,8 +22,10 @@ export class ShoppingCartItemComponent implements OnInit {
     this.delItem.emit(item)
   }
 
-  changeQuantity(event: any){
-
+  changeQuantity(event: Event){
+    if(this.quantityInOrder > 0){
+      this.multiplyAmount = this.quantityInOrder
+    }
   }
 
 }

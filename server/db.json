@@ -18,13 +18,8 @@
           "medium" : 260,
           "big" : 290
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 2,
@@ -44,13 +39,8 @@
           "medium" : 260,
           "big" : 290
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 3,
@@ -70,13 +60,8 @@
           "medium" : 260,
           "big" : 290
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 4,
@@ -96,13 +81,8 @@
           "medium" : 260,
           "big" : 290
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 5,
@@ -122,13 +102,8 @@
           "medium" : 302,
           "big" : 339
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 6,
@@ -148,13 +123,8 @@
           "medium" : 302,
           "big" : 339
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 7,
@@ -174,13 +144,8 @@
           "medium" : 307,
           "big" : 344
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 8,
@@ -200,13 +165,8 @@
           "medium" : 302,
           "big" : 339
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 9,
@@ -226,13 +186,8 @@
           "medium" : 304,
           "big" : 342
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 10,
@@ -252,13 +207,8 @@
           "medium" : 308,
           "big" : 354
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 11,
@@ -278,13 +228,8 @@
           "medium" : 334,
           "big" : 364
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 12,
@@ -304,13 +249,8 @@
           "medium" : 330,
           "big" : 360
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 13,
@@ -330,13 +270,8 @@
           "medium" : 335,
           "big" : 365
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 14,
@@ -356,13 +291,8 @@
           "medium" : 326,
           "big" : 356
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 15,
@@ -382,13 +312,8 @@
           "medium" : 325,
           "big" : 355
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 16,
@@ -408,12 +333,6 @@
           "medium" : 296,
           "big" : 327
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
     },
     {
@@ -434,13 +353,8 @@
           "medium" : 334,
           "big" : 365
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 18,
@@ -460,13 +374,8 @@
           "medium" : 326,
           "big" : 356
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 19,
@@ -486,13 +395,8 @@
           "medium" : 346,
           "big" : 375
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     },
     {
       "id": 20,
@@ -512,12 +416,6 @@
           "medium" : 341,
           "big" : 370
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
     },
     {
@@ -538,13 +436,8 @@
           "medium" : 345,
           "big" : 373
         }
-      },
-      "order": {
-        "id": null,
-        "size" : null,
-        "weight" : null,
-        "price" : null
       }
+
     }
 
 

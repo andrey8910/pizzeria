@@ -47,9 +47,7 @@ export class ShoppingCartService {
     itemOrder.title = item.title
     itemOrder.image = item.imageMain
     itemOrder.ingredients = item.ingredients
-    itemOrder.size = item.order.size
-    itemOrder.weight = item.order.weight
-    itemOrder.price = item.order.price
+
 
     this.shoppingList.push(itemOrder);
 
