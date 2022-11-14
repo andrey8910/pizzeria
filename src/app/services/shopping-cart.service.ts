@@ -25,6 +25,7 @@ export class ShoppingCartService {
       this.shoppingSubject.next(this.shoppingList);
     }else {
       this.shoppingList =[];
+      this.totalAmount = 0;
     }
     this.shoppingSubject.next(this.shoppingList)
   }
@@ -34,8 +35,7 @@ export class ShoppingCartService {
   const itemOrder: PizzaOrder = {
      ...item,
     orderId : ++this.nextId
-
-    }
+  }
     this.shoppingList.push(itemOrder);
 
     this.totalAmount = this.shoppingList.reduce(
@@ -64,5 +64,16 @@ export class ShoppingCartService {
 
   getTotalPrice(){
     return this.localSService.getLocalStorage('totalPrice')
+  }
+
+  quantityInOneItem(quantity: number, price: number, plusOrMinus: string){
+    if(plusOrMinus === 'plus'){
+      this.totalAmount += price
+    }else if(plusOrMinus === 'minus'){
+      this.totalAmount -= price
+    }
+    this.shoppingSubject.next(Object.assign([],this.shoppingList));
+    this.localSService.setLocalStorage('totalPrice', this.totalAmount)
+    console.log(this.totalAmount)
   }
 }

@@ -1,6 +1,6 @@
 <img src="{{itemShop.imageMain}}" alt="order">
 <div class="item-params">
-  <p class="item-title">{{itemShop.title}} <span>{{itemShop.size}}</span></p>
+  <p class="item-title">{{itemShop.title}} <span>{{itemShop.size}}</span> <span>{{itemShop.weight + ' г'}}</span></p>
 
   <ul class="item-ingredients-list">
     <li class="item-ingredient"  *ngFor="let ingredient of itemShop.ingredients">
@@ -15,10 +15,11 @@
   <p-inputNumber
     [style] = "{width: '30px', height: '50px'}"
     [(ngModel)]="quantityInOrder"
-    (click)="changeQuantity($event)"
+    (onInput)="changeQuantity($event.value, itemShop.price, $event)"
     [showButtons]="true"
     buttonLayout="vertical"
     inputId="vertical"
+    [min]= 1
     decrementButtonClass="p-button-secondary"
     incrementButtonClass="p-button-secondary"
     incrementButtonIcon="pi pi-plus"

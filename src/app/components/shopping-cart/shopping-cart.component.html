@@ -8,6 +8,7 @@
         *ngFor="let shoppingItem of shoppingCart$ | async"
         [itemShop] = "shoppingItem"
         (delItem)="deleteItem($event)"
+        (howManyItem)="changeQuantity($event)"
       >
       </app-shopping-cart-item>
     </div>

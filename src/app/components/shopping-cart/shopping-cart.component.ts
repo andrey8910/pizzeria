@@ -30,12 +30,10 @@ export class ShoppingCartComponent implements OnInit {
     this.totalAmount = this.shoppingService.totalAmount
   }
 
-  public changeQuantity(event: Event){
-    if(this.quantityInOrder > 0){
-      console.log(event)
-    }else{
-      return
-    }
+  public changeQuantity(item:{quantity: number, price: number, plusOrMinus: string}){
+
+    this.shoppingService.quantityInOneItem(item.quantity, item.price, item.plusOrMinus)
+    this.totalAmount = this.shoppingService.totalAmount
 
   }
 
