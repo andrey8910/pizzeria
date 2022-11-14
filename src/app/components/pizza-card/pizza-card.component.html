@@ -8,15 +8,18 @@
   <ul class="pizza-card-ingredients">
     <li class="pizza-ingredient" *ngFor="let ingredient of pizzaItem.ingredients">{{ingredient}}</li>
   </ul>
-  <div class="pizza-card-params">
+  <div class="pizza-card-params" [formGroup]="pizzaParamsSelectForm" >
     <div *ngFor="let size of pizzaSize" class="field-checkbox">
-      <p-radioButton [inputId]="size.key"
-                     name="category"
-                     [value]="size"
-                     [(ngModel)]="selectedPizzaSize"
-                     (click) = onSelectPizzaSize(size)
-      ></p-radioButton>
-      <label [for]="size.key">{{size.name}}</label>
+      <label>
+       <p-radioButton [inputId]="size.key"
+                      name="pizzaSelectSize"
+                      [value]="size"
+                      formControlName="pizzaSelectSize"
+                      (onClick) = onSelectPizzaSize(size.key)
+
+       ></p-radioButton>
+       {{size.name}}
+     </label>
     </div>
   </div>
   <div class="pizza-card-footer">

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from "rxjs";
+import {  FormGroup, FormControl } from '@angular/forms';
+
 import { ShoppingCartService } from "../../services/shopping-cart.service";
 import {Pizza} from "../../interfaces/pizza";
 import {PizzaOrder} from "../../interfaces/pizza-order";
@@ -14,16 +16,16 @@ export class PizzaCardComponent implements OnInit {
   @Input() pizzaItem: Pizza
 
   private shoppingCart$: Observable<PizzaOrder[]>;
-
-  public pizzaSize: any[] = [
+  public pizzaParamsSelectForm: FormGroup;
+  public pizzaSize: any  = [
     {name: 'Мала (22см)', key: 'small'},
     {name: 'Середня (30см)', key: 'medium'},
     {name: 'Велика (36см)', key: 'big'}
   ];
 
   public selectedPizzaSize: any;
-  public selectedPizzaWeight: any;
-  public selectedPizzaPrice: any;
+  public selectedPizzaWeight: number;
+  public selectedPizzaPrice: number;
 
   constructor(private shoppingService: ShoppingCartService) {}
 
@@ -31,10 +33,14 @@ export class PizzaCardComponent implements OnInit {
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
     this.shoppingService.loadAll();
     this.selectedPizzaSize = this.pizzaSize[0];
+    this.pizzaParamsSelectForm = new FormGroup({
+      pizzaSelectSize: new FormControl()
+    })
   }
 
-  onSelectPizzaSize(event: any){
-    switch (event.key){
+  onSelectPizzaSize(size: string){
+
+    switch (size){
       case "small":
         this.selectedPizzaWeight = this.pizzaItem.params.weight.small
         this.selectedPizzaPrice = this.pizzaItem.params.price.small
@@ -51,16 +57,21 @@ export class PizzaCardComponent implements OnInit {
         break;
 
       default:
-        this.selectedPizzaWeight = null
+        this.selectedPizzaWeight = 0
     }
   }
 
   toShoppingCart(item: Pizza): void{
-    // item.order.size = this.selectedPizzaSize.name;
-    // item.order.weight = this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight;
-    // item.order.price = this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice
 
-    this.shoppingService.create(item)
+    const itemOrder: PizzaOrder = {
+      ...item,
+      orderId: 0,
+      size: this.pizzaParamsSelectForm.controls['pizzaSelectSize'].value.name,
+      weight: this.selectedPizzaWeight,
+      price: this.selectedPizzaPrice
+    }
+
+    this.shoppingService.create(itemOrder)
   }
 
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Pizza } from '../interfaces/pizza';
 import { PizzaOrder } from '../interfaces/pizza-order'
 import { LocalStorageService } from './local-storage.service';
 
@@ -30,25 +29,13 @@ export class ShoppingCartService {
     this.shoppingSubject.next(this.shoppingList)
   }
 
-  create(item: Pizza){
+  create(item: PizzaOrder){
 
   const itemOrder: PizzaOrder = {
-      id: 0,
-      image: '',
-      title: '',
-      ingredients: [],
-      size: '',
-      weight: 0,
-      price: 0
+     ...item,
+    orderId : ++this.nextId
 
     }
-
-    itemOrder.id = ++this.nextId
-    itemOrder.title = item.title
-    itemOrder.image = item.imageMain
-    itemOrder.ingredients = item.ingredients
-
-
     this.shoppingList.push(itemOrder);
 
     this.totalAmount = this.shoppingList.reduce(

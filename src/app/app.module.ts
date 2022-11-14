@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms'
 import { ProductsService } from './services/products.service';
 import { ShoppingCartService } from './services/shopping-cart.service'
 
@@ -39,6 +40,7 @@ import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopp
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     PrimengModule
 

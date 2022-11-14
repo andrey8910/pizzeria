@@ -1,8 +1,7 @@
-export interface PizzaOrder {
-  id: number,
-  title: string,
-  image: string,
-  ingredients: string[],
+import { Pizza } from "./pizza";
+
+export interface PizzaOrder extends Pizza{
+  orderId: number,
   size : string,
   weight : number,
   price : number
