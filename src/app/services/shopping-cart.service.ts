@@ -74,7 +74,7 @@ export class ShoppingCartService {
       this.totalAmount -= price
     }
 
-   this.shoppingList.forEach((item:PizzaOrder, index:number) => {
+   this.shoppingList.forEach((item:PizzaOrder) => {
      if(item.orderId == orderId){
        item.quantity = quantity
      }

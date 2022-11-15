@@ -29,6 +29,7 @@ export class ShoppingCartItemComponent implements OnInit {
   changeQuantity(quantity: number, price: number, orderId:number, event: any){
     let plusOrMinus: string = ''
     if(quantity > 0){
+      console.log('!')
       this.multiplyAmount = this.quantityInOrder
       if(event.originalEvent.target.classList.contains('pi-plus') || event.originalEvent.target.classList.contains('p-inputnumber-button-up') ){
         plusOrMinus = 'plus'

@@ -12,12 +12,11 @@ export class HeaderComponent implements OnInit {
 
   public shoppingCart$: Observable<PizzaOrder[]> = this.shoppingService.shoppingCart$;
 
-  constructor(private shoppingService: ShoppingCartService) {
-
-  }
+  constructor(private shoppingService: ShoppingCartService) {}
 
   ngOnInit(): void {
-
+    this.shoppingCart$ = this.shoppingService.shoppingCart$;
+    this.shoppingService.loadAll();
   }
 
 }
