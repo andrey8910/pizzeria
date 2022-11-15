@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PizzaOrder } from '../interfaces/pizza-order'
 import { LocalStorageService } from './local-storage.service';
+import {MessageService} from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,10 @@ export class ShoppingCartService {
   private nextId: number = 0;
 
 
-  constructor(private localSService: LocalStorageService) { }
+  constructor(
+    private localSService: LocalStorageService,
+    private messageService: MessageService
+    ) { }
 
   loadAll(){
 
@@ -31,23 +35,25 @@ export class ShoppingCartService {
   }
 
   create(item: PizzaOrder){
-
   const itemOrder: PizzaOrder = {
      ...item,
     orderId : ++this.nextId,
     quantity : 1
   }
     this.shoppingList.push(itemOrder);
-
     this.totalAmount = this.shoppingList.reduce(
       (accumulator, currentValue) => accumulator + currentValue.price,
       0
     )
     this.shoppingSubject.next(Object.assign([],this.shoppingList));
     this.localSService.setLocalStorage('shoppingList', this.shoppingList);
-    this.localSService.setLocalStorage('totalPrice', this.totalAmount)
+    this.localSService.setLocalStorage('totalPrice', this.totalAmount);
+    this.showSuccessAddItem(itemOrder.title)
   }
 
+  showSuccessAddItem(title: string) {
+    this.messageService.add({severity:'success', summary: `${title}`, detail: 'Товар додано до кошика !'});
+  }
 
   delete(itemId: number, itemPrice: number, itemQuantity: number){
 
@@ -55,12 +61,18 @@ export class ShoppingCartService {
       if(item.id == itemId){
         this.totalAmount -= itemPrice * itemQuantity
         this.shoppingList.splice(index, 1);
+        this.showWarnDeleteItem(item.title)
       }
     })
 
     this.shoppingSubject.next(Object.assign([],this.shoppingList));
     this.localSService.setLocalStorage('shoppingList', this.shoppingList);
-    this.localSService.setLocalStorage('totalPrice', this.totalAmount)
+    this.localSService.setLocalStorage('totalPrice', this.totalAmount);
+
+  }
+
+  showWarnDeleteItem(title: string) {
+    this.messageService.add({severity:'warn', summary: `${title}`, detail: 'Товар видалено із кошика !'});
   }
 
   getTotalPrice(){

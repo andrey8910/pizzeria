@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
 
+
 import { ShoppingCartService } from "../../services/shopping-cart.service";
 import {Pizza} from "../../interfaces/pizza";
 import {PizzaOrder } from "../../interfaces/pizza-order";
@@ -28,7 +29,10 @@ export class PizzaCardComponent implements OnInit {
   public selectedPizzaWeight: number;
   public selectedPizzaPrice: number;
 
-  constructor(private shoppingService: ShoppingCartService) {}
+  constructor(
+    private shoppingService: ShoppingCartService,
+
+    ) {}
 
   ngOnInit(): void {
     this.shoppingCart$ = this.shoppingService.shoppingCart$;

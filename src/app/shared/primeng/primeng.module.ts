@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DropdownModule} from 'primeng/dropdown';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {ToastModule} from 'primeng/toast';
+
+import {MessageService} from 'primeng/api';
 
 
 @NgModule({
@@ -13,12 +16,15 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     CommonModule,
     InputNumberModule,
     DropdownModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ToastModule
   ],
   exports: [
     InputNumberModule,
     DropdownModule,
-    RadioButtonModule
-  ]
+    RadioButtonModule,
+    ToastModule
+  ],
+  providers: [MessageService]
 })
 export class PrimengModule { }
