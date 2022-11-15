@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-spinner class="pizza-card-spinner" *ngIf="!pizzas"></mat-spinner>
+  <mat-spinner class="pizza-card-spinner" *ngIf="loader"></mat-spinner>
   <div class="pizzas-list">
     <app-pizza-card
       *ngFor="let pizza of pizzas"
