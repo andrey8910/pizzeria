@@ -4,5 +4,6 @@ export interface PizzaOrder extends Pizza{
   orderId: number,
   size : string,
   weight : number,
-  price : number
+  price : number,
+  quantity: number
 }

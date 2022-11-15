@@ -68,7 +68,8 @@ export class PizzaCardComponent implements OnInit {
       orderId: 0,
       size: this.pizzaParamsSelectForm.controls['pizzaSelectSize'].value.name,
       weight: this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight ,
-      price: this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice
+      price: this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice,
+      quantity: 1
     }
 
     this.shoppingService.create(itemOrder)

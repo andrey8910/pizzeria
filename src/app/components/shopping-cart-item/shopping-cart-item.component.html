@@ -15,7 +15,7 @@
   <p-inputNumber
     [style] = "{width: '30px', height: '50px'}"
     [(ngModel)]="quantityInOrder"
-    (onInput)="changeQuantity($event.value, itemShop.price, $event)"
+    (onInput)="changeQuantity($event.value, itemShop.price, itemShop.orderId, $event)"
     [showButtons]="true"
     buttonLayout="vertical"
     inputId="vertical"

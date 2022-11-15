@@ -30,9 +30,9 @@ export class ShoppingCartComponent implements OnInit {
     this.totalAmount = this.shoppingService.totalAmount
   }
 
-  public changeQuantity(item:{quantity: number, price: number, plusOrMinus: string}){
+  public changeQuantity(item:{quantity: number, price: number, orderId:number, plusOrMinus: string}){
 
-    this.shoppingService.quantityInOneItem(item.quantity, item.price, item.plusOrMinus)
+    this.shoppingService.quantityInOneItem(item.quantity, item.price, item.orderId, item.plusOrMinus)
     this.totalAmount = this.shoppingService.totalAmount
 
   }

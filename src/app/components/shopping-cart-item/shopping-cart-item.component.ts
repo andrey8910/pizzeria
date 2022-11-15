@@ -10,7 +10,7 @@ export class ShoppingCartItemComponent implements OnInit {
 
   @Input() itemShop: PizzaOrder
   @Output() delItem = new EventEmitter<PizzaOrder>;
-  @Output() howManyItem = new EventEmitter<{quantity: number, price: number, plusOrMinus: string}>;
+  @Output() howManyItem = new EventEmitter<{quantity: number, price: number, orderId:number, plusOrMinus: string}>;
   public quantityInOrder: number = 1
   public multiplyAmount: number
 
@@ -18,6 +18,7 @@ export class ShoppingCartItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.quantityInOrder = this.itemShop.quantity
 
   }
 
@@ -25,7 +26,7 @@ export class ShoppingCartItemComponent implements OnInit {
     this.delItem.emit(item)
   }
 
-  changeQuantity(quantity: number, price: number, event: any){
+  changeQuantity(quantity: number, price: number, orderId:number, event: any){
     let plusOrMinus: string = ''
     if(quantity > 0){
       this.multiplyAmount = this.quantityInOrder
@@ -35,7 +36,7 @@ export class ShoppingCartItemComponent implements OnInit {
         plusOrMinus = 'minus'
       }
 
-      this.howManyItem.emit({quantity,price, plusOrMinus})
+      this.howManyItem.emit({quantity,price, orderId, plusOrMinus})
 
     }else{
       return
