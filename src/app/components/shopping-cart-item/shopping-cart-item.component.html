@@ -8,13 +8,14 @@
     </li>
   </ul>
 
-  <p class="item-price">{{itemShop.price | currencyUa}} <span *ngIf="multiplyAmount"> x  {{multiplyAmount}}</span></p>
+  <p class="item-price">{{itemShop.price | currencyUa}} <span *ngIf="quantityInOrder"> x  {{quantityInOrder}}</span></p>
 
 </div>
-<div class="item-amount" >
+<div class="item-amount" [formGroup]="cartItemForm" >
   <p-inputNumber
     [style] = "{width: '30px', height: '50px'}"
-    [(ngModel)]="quantityInOrder"
+
+    formControlName = "itemQuantity"
     (onInput)="changeQuantity($event.value, itemShop.price, itemShop.orderId, $event)"
     [showButtons]="true"
     buttonLayout="vertical"

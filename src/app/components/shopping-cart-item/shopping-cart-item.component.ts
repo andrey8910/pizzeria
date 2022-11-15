@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {  FormGroup, FormControl } from '@angular/forms';
 import { PizzaOrder } from "../../interfaces/pizza-order";
 
 @Component({
@@ -11,13 +12,19 @@ export class ShoppingCartItemComponent implements OnInit {
   @Input() itemShop: PizzaOrder
   @Output() delItem = new EventEmitter<PizzaOrder>;
   @Output() howManyItem = new EventEmitter<{quantity: number, price: number, orderId:number, plusOrMinus: string}>;
+  public cartItemForm: FormGroup
   public quantityInOrder: number = 1
-  public multiplyAmount: number
+  //public multiplyAmount: number
 
 
   constructor() { }
 
   ngOnInit(): void {
+
+    this.cartItemForm = new FormGroup<any>({
+      itemQuantity : new FormControl(1)
+    })
+    this.cartItemForm.get('itemQuantity')?.setValue(this.itemShop.quantity);
     this.quantityInOrder = this.itemShop.quantity
 
   }
@@ -27,10 +34,10 @@ export class ShoppingCartItemComponent implements OnInit {
   }
 
   changeQuantity(quantity: number, price: number, orderId:number, event: any){
+
     let plusOrMinus: string = ''
     if(quantity > 0){
-      console.log('!')
-      this.multiplyAmount = this.quantityInOrder
+      this.quantityInOrder = this.cartItemForm.controls['itemQuantity'].value
       if(event.originalEvent.target.classList.contains('pi-plus') || event.originalEvent.target.classList.contains('p-inputnumber-button-up') ){
         plusOrMinus = 'plus'
       }else if(event.originalEvent.target.classList.contains('pi-minus') || event.originalEvent.target.classList.contains('p-inputnumber-button-down')){
