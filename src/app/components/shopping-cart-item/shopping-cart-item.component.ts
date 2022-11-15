@@ -10,12 +10,10 @@ import { PizzaOrder } from "../../interfaces/pizza-order";
 export class ShoppingCartItemComponent implements OnInit {
 
   @Input() itemShop: PizzaOrder
-  @Output() delItem = new EventEmitter<PizzaOrder>;
+  @Output() delItem = new EventEmitter<{itemId: number, itemPrice: number}>;
   @Output() howManyItem = new EventEmitter<{quantity: number, price: number, orderId:number, plusOrMinus: string}>;
   public cartItemForm: FormGroup
   public quantityInOrder: number = 1
-  //public multiplyAmount: number
-
 
   constructor() { }
 
@@ -29,8 +27,8 @@ export class ShoppingCartItemComponent implements OnInit {
 
   }
 
-  deleteItem(item: PizzaOrder){
-    this.delItem.emit(item)
+  deleteItem(itemId: number, itemPrice: number){
+    this.delItem.emit({itemId,itemPrice})
   }
 
   changeQuantity(quantity: number, price: number, orderId:number, event: any){

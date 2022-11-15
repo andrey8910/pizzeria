@@ -14,7 +14,6 @@
 <div class="item-amount" [formGroup]="cartItemForm" >
   <p-inputNumber
     [style] = "{width: '30px', height: '50px'}"
-
     formControlName = "itemQuantity"
     (onInput)="changeQuantity($event.value, itemShop.price, itemShop.orderId, $event)"
     [showButtons]="true"
@@ -28,6 +27,6 @@
   </p-inputNumber>
 </div>
 
-<i class="delete-item" (click)="deleteItem(itemShop)">
+<i class="delete-item" (click)="deleteItem(itemShop.id, itemShop.price)">
   <mat-icon>highlight_off</mat-icon>
 </i>

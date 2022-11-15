@@ -49,11 +49,11 @@ export class ShoppingCartService {
   }
 
 
-  delete(itemShop: PizzaOrder){
+  delete(itemId: number, itemPrice: number){
 
     this.shoppingList.forEach((item:PizzaOrder, index:number) => {
-      if(item.id == itemShop.id){
-        this.totalAmount -= itemShop.price
+      if(item.id == itemId){
+        this.totalAmount -= itemPrice
         this.shoppingList.splice(index, 1);
       }
     })
