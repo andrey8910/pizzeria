@@ -4,7 +4,8 @@ import {  FormGroup, FormControl } from '@angular/forms';
 
 import { ShoppingCartService } from "../../services/shopping-cart.service";
 import {Pizza} from "../../interfaces/pizza";
-import {PizzaOrder} from "../../interfaces/pizza-order";
+import {PizzaOrder } from "../../interfaces/pizza-order";
+import { SizeParam } from '../../interfaces/size-param'
 
 @Component({
   selector: 'app-pizza-card',
@@ -38,27 +39,11 @@ export class PizzaCardComponent implements OnInit {
     })
   }
 
-  onSelectPizzaSize(size: string){
+  onSelectPizzaSize(event: any){
+  const  param: SizeParam = event.key
+    this.selectedPizzaWeight = this.pizzaItem.params.weight[param]
+    this.selectedPizzaPrice = this.pizzaItem.params.price[param]
 
-    switch (size){
-      case "small":
-        this.selectedPizzaWeight = this.pizzaItem.params.weight.small
-        this.selectedPizzaPrice = this.pizzaItem.params.price.small
-        break;
-
-      case "medium":
-        this.selectedPizzaWeight = this.pizzaItem.params.weight.medium
-        this.selectedPizzaPrice = this.pizzaItem.params.price.medium
-        break;
-
-      case "big":
-        this.selectedPizzaWeight = this.pizzaItem.params.weight.big
-        this.selectedPizzaPrice = this.pizzaItem.params.price.big
-        break;
-
-      default:
-        this.selectedPizzaWeight = 0
-    }
   }
 
   toShoppingCart(item: Pizza): void{

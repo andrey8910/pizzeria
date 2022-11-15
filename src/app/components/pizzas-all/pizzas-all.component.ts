@@ -14,7 +14,7 @@ export class PizzasAllComponent implements OnInit {
 
   public pizzas: Pizza[];
   public loader: boolean = false;
-
+  public showErrorMassage: boolean = false
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
@@ -25,9 +25,15 @@ export class PizzasAllComponent implements OnInit {
     this.loader = true;
     this.productsService.getPizzas()
       .pipe(
-        tap((data:Pizza[]) => this.pizzas = data),
+        tap((data:Pizza[]) => {
+          this.pizzas = data
 
-        finalize(() => this.loader = false),
+        }),
+
+        finalize(() => {
+          this.loader = false
+          this.pizzas.length == 0 ? this.showErrorMassage = true : this.showErrorMassage = false
+        }),
         catchError((err) =>  {throw 'Помилка сервера. Деталі: ' + err})
       )
       .subscribe()

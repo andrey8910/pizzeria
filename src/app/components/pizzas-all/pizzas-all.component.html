@@ -1,5 +1,8 @@
 <div class="container">
   <mat-spinner class="pizza-card-spinner" *ngIf="loader"></mat-spinner>
+  <div *ngIf="showErrorMassage">
+    <p>Зараз піци відсутні !</p>
+  </div>
   <div class="pizzas-list">
     <app-pizza-card
       *ngFor="let pizza of pizzas"
