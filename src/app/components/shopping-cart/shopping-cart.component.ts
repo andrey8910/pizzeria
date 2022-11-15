@@ -25,8 +25,8 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
   }
 
-  public deleteItem(item: {itemId: number; itemPrice: number}){
-    this.shoppingService.delete(item.itemId, item.itemPrice);
+  public deleteItem(item: {itemId: number, itemPrice: number, itemQuantity: number}){
+    this.shoppingService.delete(item.itemId, item.itemPrice, item.itemQuantity);
     this.totalAmount = this.shoppingService.totalAmount
   }
 
