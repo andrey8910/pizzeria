@@ -21,6 +21,7 @@ import {PrimengModule} from "./shared/primeng/primeng.module";
 import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { AuthorizationDialogComponent } from './components/authorization-dialog/authorization-dialog.component';
+import { AdministrationComponent } from './components/administration/administration.component';
 
 
 
@@ -36,7 +37,8 @@ import { AuthorizationDialogComponent } from './components/authorization-dialog/
     FooterComponent,
     ShoppingCartItemComponent,
     AuthorizationComponent,
-    AuthorizationDialogComponent
+    AuthorizationDialogComponent,
+    AdministrationComponent
   ],
   imports: [
     BrowserModule,
