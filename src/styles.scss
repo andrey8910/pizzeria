@@ -131,6 +131,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0 100px;
 }
 
+//authorization - dialog
+
+.modal-dialog .mat-dialog-container{
+  position: relative;
+  border-radius: 6px;
+}
+.modal-dialog .mat-dialog-container .close-icon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+
+  min-width: auto;
+}
+
 
 
 

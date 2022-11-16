@@ -19,6 +19,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { FooterComponent } from './components/footer/footer.component';
 import {PrimengModule} from "./shared/primeng/primeng.module";
 import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopping-cart-item.component';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { AuthorizationDialogComponent } from './components/authorization-dialog/authorization-dialog.component';
 
 
 
@@ -32,7 +34,9 @@ import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopp
     NotFoundPageComponent,
     ShoppingCartComponent,
     FooterComponent,
-    ShoppingCartItemComponent
+    ShoppingCartItemComponent,
+    AuthorizationComponent,
+    AuthorizationDialogComponent
   ],
   imports: [
     BrowserModule,
