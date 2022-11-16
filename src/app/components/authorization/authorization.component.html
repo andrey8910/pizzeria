@@ -1,4 +1,13 @@
-<button mat-raised-button
+<button
+        mat-raised-button
         color="primary"
-        (click)="openDialogFirst()"
-     >Увійти</button>
+        (click)="openAuthorizationDialog()"
+     >{{successfulAuthorization ? 'Вийти' : 'Увійти' }}
+</button>
+<span *ngIf="successfulAuthorization">{{this.authorizationData.login}}</span>
+<button *ngIf="showGoToAdmin"
+        mat-raised-button
+        color="primary"
+      >Go To Admin
+</button>
+

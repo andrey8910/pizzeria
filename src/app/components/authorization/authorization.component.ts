@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component'
+
+import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component';
+import {AuthorizationDialogData} from '../../interfaces/authorization-dialog';
 
 @Component({
   selector: 'app-authorization',
@@ -9,12 +11,15 @@ import {AuthorizationDialogComponent} from '../authorization-dialog/authorizatio
 })
 export class AuthorizationComponent implements OnInit {
 
+  public authorizationData: AuthorizationDialogData;
+  public successfulAuthorization: boolean
+  public showGoToAdmin: boolean = false
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
-  }
 
-  public openDialogFirst(){
+  }
+  public openAuthorizationDialog(){
     const dialogRef = this.dialog.open(AuthorizationDialogComponent, {
       width: '400px',
       data: {},
@@ -24,9 +29,18 @@ export class AuthorizationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-     // this.answerCompanionDialogFirst = result;
-      console.log(result)
+     this.checkDataAuthorization(result)
+
     });
+
+
+  }
+
+  private checkDataAuthorization(data: AuthorizationDialogData){
+    this.authorizationData = data;
+    this.showGoToAdmin = data.login == 'admin';
+
+    this.successfulAuthorization = this.authorizationData.isChecked
   }
 
 }

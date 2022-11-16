@@ -1,25 +1,39 @@
 <h1 mat-dialog-title>Вхід</h1>
+
+<button mat-button class="close-icon" [mat-dialog-close]="data">
+  <mat-icon>close</mat-icon>
+</button>
+
 <div mat-dialog-content>
-  <button mat-button class="close-icon" [mat-dialog-close]="data">
-    <mat-icon>close</mat-icon>
-  </button>
   <p>Для входу введіть ваш логін та пароль</p>
 
+  <form [formGroup]="formGroupAuthorization"
+        (ngSubmit)="onSubmit(formGroupAuthorization.value)"
+        class="form"
+        #formAuthorization
+        id = 'formGroupAuthorization'
+  >
   <mat-form-field appearance="fill">
     <mat-label>Логін</mat-label>
-    <input matInput [(ngModel)]="data.login">
+    <input matInput formControlName="login">
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Пароль</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="data.password">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
+    <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+      <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
-</div>
+  </form>
 
+</div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Ні, дякую !</button>
-  <button mat-button [mat-dialog-close]="data">Увійти</button>
+  <button mat-button
+          [mat-dialog-close]="formGroupAuthorization.value"
+          type="submit"
+          form = "formGroupAuthorization"
+  >Увійти</button>
 </div>
+
