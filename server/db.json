@@ -441,5 +441,17 @@
     }
 
 
+  ],
+  "users": [
+    {
+    "name" : "administrator",
+    "login" : "admin",
+    "password" : "admin"
+    },
+    {
+      "name" : "customer",
+      "login" : "customer",
+      "password" : "123"
+    }
   ]
 }

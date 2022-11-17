@@ -1,5 +1,10 @@
 export interface AuthorizationDialogData {
   login: string;
   password: string;
-  isChecked: boolean;
+  isPassedAuthentication: boolean;
+  resultAuthentication: {
+    name : string,
+    login : string,
+    password : string
+  }
 }

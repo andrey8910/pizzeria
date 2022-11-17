@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlPizzaAll: 'http://localhost:3001/pizza'
+  urlPizzaAll: 'http://localhost:3001/pizza',
+  urlUsersAll: 'http://localhost:3001/users'
 };
 
 /*

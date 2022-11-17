@@ -1,18 +1,18 @@
 <button
-    *ngIf="!authorizationData"
+    *ngIf="!successfulAuthorization"
     mat-raised-button
     color="primary"
     (click)="openAuthorizationDialog()"
      >Увійти
 </button>
 <button
-    *ngIf="authorizationData"
+    *ngIf="successfulAuthorization"
     mat-raised-button
     color="primary"
 
 >Вийти
 </button>
-<span *ngIf="successfulAuthorization">{{this.authorizationData.login}}</span>
+<span *ngIf="successfulAuthorization">ім'я користувача : {{this.checkAuthentication.resultAuthentication.name}}</span>
 <button
   routerLink="/admin" routerLinkActive="active"
   *ngIf="showGoToAdmin"

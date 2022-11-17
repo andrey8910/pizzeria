@@ -27,9 +27,7 @@ export class PizzasAllComponent implements OnInit {
       .pipe(
         tap((data:Pizza[]) => {
           this.pizzas = data
-
         }),
-
         finalize(() => {
           this.loader = false
           this.pizzas.length == 0 ? this.showErrorMassage = true : this.showErrorMassage = false

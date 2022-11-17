@@ -34,15 +34,7 @@ export class AuthorizationDialogComponent implements OnInit {
   }
   public onSubmit(data: AuthorizationDialogData){
     this.authorizationData = data
-    this.authorizationCheck(data)
-
   }
 
-  private authorizationCheck(data: AuthorizationDialogData){
-    if(data.login == 'admin' && data.password == '123'){
-      this.authorizationData.isChecked = true
-    }else if(data.login == 'user' && data.password == '123'){
-      this.authorizationData.isChecked = true
-    }
-  }
+
 }
