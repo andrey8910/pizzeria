@@ -15,7 +15,6 @@ export class UserAuthenticationCheckService implements OnInit{
   private userAuthSubject = new BehaviorSubject<any>({});
   readonly userAuthenticationCheck$ = this.userAuthSubject.asObservable();
   private allUsers: Users[];
-  private authorizedUser: AuthorizationDialogData;
 
   constructor(private usersService: UsersService,
               private messageService : MessageService
@@ -32,18 +31,28 @@ export class UserAuthenticationCheckService implements OnInit{
           this.allUsers = data
         }),
         finalize(() => {
-          this.allUsers.forEach((user: Users) => {
-            if(user.login == data.login && user.password == data.password){
-              console.log(data)
-              data.isPassedAuthentication = true
-              data.resultAuthentication = user
-              this.userAuthSubject.next(Object.assign({}, data));
-              this.showSuccessAuthor(data.resultAuthentication.name)
-            }
-          })
+
+          if(this.allUsers.some(user =>user.login === data.login)){
+            this.allUsers.forEach((user: Users) => {
+                if(user.login == data.login && user.password == data.password){
+                  data.isPassedAuthentication = true
+                  data.resultAuthentication = user
+                  this.userAuthSubject.next(Object.assign({}, data));
+                  this.showSuccessAuthor(data.resultAuthentication.name)
+                }
+              }
+              )
+          }else{
+            this.showErrorAuthor(data.login)
+          }
+
+
+
         }),
         catchError((err) =>  {throw 'Помилка сервера. Деталі: ' + err})
       ).subscribe()
+
+
   }
 
   showSuccessAuthor(name: string) {

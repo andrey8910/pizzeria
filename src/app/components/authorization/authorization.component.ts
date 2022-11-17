@@ -44,9 +44,7 @@ export class AuthorizationComponent implements OnInit {
   }
 
   private checkDataAuthorization(data: AuthorizationDialogData){
-   this.usersCheckService.userAuthentication(data)
-
-   // this.showGoToAdmin = this.checkAuthentication.resultAuthentication.login == 'admin';
+    this.usersCheckService.userAuthentication(data)
     this.adminGuard.changeValueAdmin(data.login)
 
     this.userAuthenticationCheck$.pipe(
@@ -57,9 +55,6 @@ export class AuthorizationComponent implements OnInit {
         }
       )
     ).subscribe()
-
-    //this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
-
   }
 
 
