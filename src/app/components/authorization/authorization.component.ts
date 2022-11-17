@@ -4,7 +4,6 @@ import {MatDialog} from '@angular/material/dialog';
 
 import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component';
 import {AuthorizationDialogData} from '../../interfaces/authorization-dialog';
-import {AdminGuardService} from "../../services/admin-guard.service";
 import {UserAuthenticationCheckService} from "../../services/user-authentication-check.service";
 import {tap} from "rxjs/operators";
 
@@ -16,14 +15,14 @@ import {tap} from "rxjs/operators";
 })
 export class AuthorizationComponent implements OnInit {
 
-  public userAuthenticationCheck$: Observable<any> ;
+  public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public successfulAuthorization: boolean
   public showGoToAdmin: boolean = false
   public checkAuthentication: AuthorizationDialogData
 
   constructor(
     public dialog: MatDialog,
-    private adminGuard : AdminGuardService,
+
     private usersCheckService: UserAuthenticationCheckService,
 
   ) { }
@@ -45,7 +44,7 @@ export class AuthorizationComponent implements OnInit {
 
   private checkDataAuthorization(data: AuthorizationDialogData){
     this.usersCheckService.userAuthentication(data)
-    this.adminGuard.changeValueAdmin(data.login)
+
 
     this.userAuthenticationCheck$.pipe(
       tap(res => {
@@ -55,6 +54,10 @@ export class AuthorizationComponent implements OnInit {
         }
       )
     ).subscribe()
+  }
+
+  public logOut(){
+    this.usersCheckService.logOutUser()
   }
 
 
