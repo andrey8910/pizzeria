@@ -23,6 +23,7 @@ export class UserAuthenticationCheckService implements OnInit{
   ) { }
 
   ngOnInit() {
+
   }
 
   public userAuthentication(data : AuthorizationDialogData){

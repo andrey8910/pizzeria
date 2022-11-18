@@ -15,12 +15,12 @@
   >
   <mat-form-field appearance="fill">
     <mat-label>Логін</mat-label>
-    <input matInput formControlName="login">
+    <input matInput formControlName="login" pTooltip="від 3 до 10 символів" tooltipPosition="right" >
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Пароль</mat-label>
-    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password">
+    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" pTooltip="6-10 символів, з них мін. одна цифра та велика літера " tooltipPosition="right">
     <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
       <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
@@ -30,7 +30,8 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Ні, дякую !</button>
-  <button mat-button
+  <button [disabled] = "formGroupAuthorization.invalid"
+          mat-button
           [mat-dialog-close]="formGroupAuthorization.value"
           type="submit"
           form = "formGroupAuthorization"

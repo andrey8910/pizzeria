@@ -6,6 +6,7 @@
      >Увійти
 </button>
 <button
+  routerLink="/" routerLinkActive="active"
     *ngIf="successfulAuthorization"
     mat-raised-button
     color="primary"
@@ -15,7 +16,7 @@
 <span *ngIf="successfulAuthorization">ім'я користувача : {{this.checkAuthentication.resultAuthentication.name}}</span>
 <button
   routerLink="/admin" routerLinkActive="active"
-  *ngIf="true"
+  *ngIf="showGoToAdmin"
   mat-raised-button
   color="primary"
       >Go To Admin

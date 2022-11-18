@@ -45,7 +45,6 @@ export class AuthorizationComponent implements OnInit {
   private checkDataAuthorization(data: AuthorizationDialogData){
     this.usersCheckService.userAuthentication(data)
 
-
     this.userAuthenticationCheck$.pipe(
       tap(res => {
         this.checkAuthentication = res

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Users } from '../interfaces/users'
 import {environment} from "../../environments/environment";
+import {catchError} from "rxjs/operators";
 
 
 @Injectable({
@@ -13,6 +14,9 @@ export class UsersService {
 
   getUsers(){
     return this.httpClient.get<Users[]>(environment.urlUsersAll)
+  }
 
+  addUser(user: string){
+    return this.httpClient.post<Users>('http://localhost:3001/users/', user )
   }
 }

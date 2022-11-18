@@ -446,12 +446,12 @@
     {
     "name" : "administrator",
     "login" : "admin",
-    "password" : "admin"
+    "password" : "adminA1"
     },
     {
       "name" : "customer",
       "login" : "customer",
-      "password" : "123"
+      "password" : "customerA1"
     }
   ]
 }

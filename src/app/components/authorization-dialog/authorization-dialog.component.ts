@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
-
+import { ValidateLogin, ValidatePass } from '../../interfaces/Validators'
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {AuthorizationDialogData} from '../../interfaces/authorization-dialog'
 
@@ -25,8 +25,8 @@ export class AuthorizationDialogComponent implements OnInit {
   }
   private createFormAuthorization(){
     this.formGroupAuthorization = new FormGroup({
-      login: new FormControl(null),
-      password: new FormControl(null)
+      login: new FormControl('', [ValidateLogin]),
+      password: new FormControl('', [ValidatePass])
     })
   };
   onNoClick(): void {

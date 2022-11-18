@@ -4,7 +4,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {DropdownModule} from 'primeng/dropdown';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {ToastModule} from 'primeng/toast';
-
+import {TooltipModule} from 'primeng/tooltip';
 import {MessageService} from 'primeng/api';
 
 
@@ -17,13 +17,15 @@ import {MessageService} from 'primeng/api';
     InputNumberModule,
     DropdownModule,
     RadioButtonModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
   exports: [
     InputNumberModule,
     DropdownModule,
     RadioButtonModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
   providers: [MessageService]
 })
