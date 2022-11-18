@@ -1,9 +1,12 @@
 <button
     *ngIf="!successfulAuthorization"
+    label="Submit"
     mat-raised-button
     color="primary"
     (click)="openAuthorizationDialog()"
-     >Увійти
+     >
+  <mat-icon>login</mat-icon>
+  Вхід
 </button>
 <button
   routerLink="/" routerLinkActive="active"
@@ -11,7 +14,8 @@
     mat-raised-button
     color="primary"
     (click)="logOut()"
->Вийти
+><mat-icon>exit_to_app</mat-icon>
+  Вихід
 </button>
 <span *ngIf="successfulAuthorization">ім'я користувача : {{this.checkAuthentication.resultAuthentication.name}}</span>
 <button
@@ -19,6 +23,7 @@
   *ngIf="showGoToAdmin"
   mat-raised-button
   color="primary"
-      >Go To Admin
+><mat-icon>dashboard</mat-icon>
+  Go To Admin
 </button>
 

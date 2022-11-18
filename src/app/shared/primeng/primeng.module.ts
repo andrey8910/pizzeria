@@ -6,6 +6,7 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {MessageService} from 'primeng/api';
+import {TabViewModule} from 'primeng/tabview';
 
 
 @NgModule({
@@ -18,14 +19,16 @@ import {MessageService} from 'primeng/api';
     DropdownModule,
     RadioButtonModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    TabViewModule
   ],
   exports: [
     InputNumberModule,
     DropdownModule,
     RadioButtonModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    TabViewModule
   ],
   providers: [MessageService]
 })
