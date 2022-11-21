@@ -23,6 +23,7 @@ import { AuthorizationComponent } from './components/authorization/authorization
 import { AuthorizationDialogComponent } from './components/authorization-dialog/authorization-dialog.component';
 import { AdministrationComponent } from './components/administration/administration.component';
 import { AdminProductsComponent } from './components/administration/admin-products/admin-products.component';
+import { AdminUsersComponent } from './components/administration/admin-users/admin-users.component';
 
 
 
@@ -41,7 +42,8 @@ import { AdminProductsComponent } from './components/administration/admin-produc
     AuthorizationComponent,
     AuthorizationDialogComponent,
     AdministrationComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    AdminUsersComponent
   ],
   imports: [
     BrowserModule,

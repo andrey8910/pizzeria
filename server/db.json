@@ -452,6 +452,12 @@
       "name" : "customer",
       "login" : "customer",
       "password" : "customerA1"
+    },
+    {
+      "name" : "customer2",
+      "login" : "user2",
+      "password" : "customerA2"
     }
+
   ]
 }
