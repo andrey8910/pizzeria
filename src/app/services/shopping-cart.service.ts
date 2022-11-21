@@ -16,6 +16,7 @@ export class ShoppingCartService {
   private nextId: number = 0;
 
 
+
   constructor(
     private localSService: LocalStorageService,
     private messageService: MessageService
@@ -49,17 +50,18 @@ export class ShoppingCartService {
     this.localSService.setLocalStorage('shoppingList', this.shoppingList);
     this.localSService.setLocalStorage('totalPrice', this.totalAmount);
     this.showSuccessAddItem(itemOrder.title)
+
   }
 
   showSuccessAddItem(title: string) {
     this.messageService.add({severity:'success', summary: `${title}`, detail: 'Товар додано до кошика !'});
   }
 
-  delete(itemId: number, itemPrice: number, itemQuantity: number){
+  delete(itemId: number, sumPriceItem: number){
 
     this.shoppingList.forEach((item:PizzaOrder, index:number) => {
-      if(item.id == itemId){
-        this.totalAmount -= itemPrice * itemQuantity
+      if(item.orderId == itemId){
+        this.totalAmount -= sumPriceItem
         this.shoppingList.splice(index, 1);
         this.showWarnDeleteItem(item.title)
       }
@@ -80,11 +82,8 @@ export class ShoppingCartService {
   }
 
   quantityInOneItem(quantity: number, price: number, orderId:number, plusOrMinus: string){
-    if(plusOrMinus === 'plus'){
-      this.totalAmount += price
-    }else if(plusOrMinus === 'minus'){
-      this.totalAmount -= price
-    }
+
+    plusOrMinus === 'plus' ?  this.totalAmount += price : this.totalAmount -= price
 
    this.shoppingList.forEach((item:PizzaOrder) => {
      if(item.orderId == orderId){

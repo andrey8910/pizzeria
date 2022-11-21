@@ -10,10 +10,11 @@ import { PizzaOrder } from "../../interfaces/pizza-order";
 export class ShoppingCartItemComponent implements OnInit {
 
   @Input() itemShop: PizzaOrder
-  @Output() delItem = new EventEmitter<{itemId: number, itemPrice: number, itemQuantity: number}>;
+  @Output() delItem = new EventEmitter<{itemId: number, sumPriceItem: number, itemQuantity: number}>;
   @Output() howManyItem = new EventEmitter<{quantity: number, price: number, orderId:number, plusOrMinus: string}>;
   public cartItemForm: FormGroup
   public quantityInOrder: number = 1
+  public sumPriceItem : number
 
   constructor() { }
 
@@ -24,15 +25,17 @@ export class ShoppingCartItemComponent implements OnInit {
     })
     this.cartItemForm.get('itemQuantity')?.setValue(this.itemShop.quantity);
     this.quantityInOrder = this.itemShop.quantity
+    this.sumPriceItem = this.itemShop.price * this.itemShop.quantity
 
   }
 
   deleteItem(itemId: number, itemPrice: number, itemQuantity: number){
-    this.delItem.emit({itemId,itemPrice,itemQuantity})
+    let sumPriceItem = itemPrice * itemQuantity
+    this.delItem.emit({itemId,sumPriceItem,itemQuantity})
   }
 
   changeQuantity(quantity: number, price: number, orderId:number, event: any){
-
+    this.sumPriceItem = price * quantity
     let plusOrMinus: string = ''
     if(quantity > 0){
       this.quantityInOrder = this.cartItemForm.controls['itemQuantity'].value
@@ -42,11 +45,12 @@ export class ShoppingCartItemComponent implements OnInit {
         plusOrMinus = 'minus'
       }
 
-      this.howManyItem.emit({quantity,price, orderId, plusOrMinus})
+      this.howManyItem.emit({quantity,price, orderId, plusOrMinus});
 
     }else{
       return
     }
+
   }
 
 }

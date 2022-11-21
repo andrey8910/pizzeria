@@ -8,7 +8,7 @@
     </li>
   </ul>
 
-  <p class="item-price">{{itemShop.price | currencyUa}} <span *ngIf="quantityInOrder"> x  {{quantityInOrder}}</span></p>
+  <p class="item-price">{{itemShop.price }} <span *ngIf="quantityInOrder"> x  {{quantityInOrder}} = {{sumPriceItem | currencyUa}}</span></p>
 
 </div>
 <div class="item-amount" [formGroup]="cartItemForm" >
@@ -27,6 +27,6 @@
   </p-inputNumber>
 </div>
 
-<i class="delete-item" (click)="deleteItem(itemShop.id, itemShop.price, itemShop.quantity)">
+<i class="delete-item" (click)="deleteItem(itemShop.orderId, itemShop.price, itemShop.quantity)">
   <mat-icon>highlight_off</mat-icon>
 </i>
