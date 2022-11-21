@@ -1,5 +1,6 @@
 <div class="container">
   <mat-spinner class="pizza-card-spinner" *ngIf="loader"></mat-spinner>
+  <div class="showProductsNotFound" *ngIf="showProductsNotFound"></div>
   <div *ngIf="showErrorMassage">
     <p>Зараз піци відсутні !</p>
   </div>
