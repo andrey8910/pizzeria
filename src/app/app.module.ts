@@ -22,6 +22,7 @@ import { ShoppingCartItemComponent } from './components/shopping-cart-item/shopp
 import { AuthorizationComponent } from './components/authorization/authorization.component';
 import { AuthorizationDialogComponent } from './components/authorization-dialog/authorization-dialog.component';
 import { AdministrationComponent } from './components/administration/administration.component';
+import { AdminProductsComponent } from './components/administration/admin-products/admin-products.component';
 
 
 
@@ -39,7 +40,8 @@ import { AdministrationComponent } from './components/administration/administrat
     ShoppingCartItemComponent,
     AuthorizationComponent,
     AuthorizationDialogComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    AdminProductsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+:host {
+  width: 100%;
+}
+:host ::ng-deep .p-dialog .product-image {
+  width: 150px;
+  margin: 0 auto 2rem auto;
+  display: block;
+}
