@@ -32,6 +32,7 @@ export class AuthorizationDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   public onSubmit(data: AuthorizationDialogData){
     this.authorizationData = data
   }

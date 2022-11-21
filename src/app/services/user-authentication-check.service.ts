@@ -27,36 +27,40 @@ export class UserAuthenticationCheckService implements OnInit{
   }
 
   public userAuthentication(data : AuthorizationDialogData){
+    if(data){
+      this.usersService.getUsers()
+        .pipe(
+          tap((data:Users[]) => {
+            this.allUsers = data
+          }),
+          finalize(() => {
 
-    this.usersService.getUsers()
-      .pipe(
-        tap((data:Users[]) => {
-          this.allUsers = data
-        }),
-        finalize(() => {
+            if(this.allUsers.some(user => user.login === data.login)){
 
-          if(this.allUsers.some(user => user.login === data.login)){
+              this.allUsers.forEach((user: Users) => {
+                  if(user.login == data.login && user.password == data.password){
 
-            this.allUsers.forEach((user: Users) => {
-                if(user.login == data.login && user.password == data.password){
+                    if(user.login == 'admin'){
+                      this.adminGuard.changeValueAdmin(data.login)
+                    }
 
-                  if(user.login == 'admin'){
-                    this.adminGuard.changeValueAdmin(data.login)
+                    data.isPassedAuthentication = true
+                    data.resultAuthentication = user
+                    this.userAuthSubject.next(Object.assign({}, data));
+                    this.showSuccessAuthor(data.resultAuthentication.name)
                   }
-
-                  data.isPassedAuthentication = true
-                  data.resultAuthentication = user
-                  this.userAuthSubject.next(Object.assign({}, data));
-                  this.showSuccessAuthor(data.resultAuthentication.name)
                 }
-              }
               )
-          }else{
-            this.showErrorAuthor(data.login)
-          }
-        }),
-        catchError((err) =>  {throw 'Помилка сервера. Деталі: ' + err})
-      ).subscribe()
+            }else{
+              this.showErrorAuthor(data.login)
+            }
+          }),
+          catchError((err) =>  {throw 'Помилка сервера. Деталі: ' + err})
+        ).subscribe()
+    }else{
+      this.showErrorAuthor('')
+    }
+
 
 
   }
@@ -76,6 +80,6 @@ export class UserAuthenticationCheckService implements OnInit{
   }
 
   showErrorAuthor(login: string) {
-    this.messageService.add({severity:'error', summary: `Помилка! ${login} !`, detail: 'Помилка авторизації !'});
+    this.messageService.add({severity:'error', summary: `Помилка! ${login} `, detail: 'Помилка авторизації !'});
   }
 }
