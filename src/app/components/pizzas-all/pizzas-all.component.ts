@@ -12,6 +12,11 @@ import {finalize, tap, catchError} from 'rxjs/operators';
 
 export class PizzasAllComponent implements OnInit {
   public searchText: string
+  public sortingMethod = [
+    {name: 'Ціна низька - висока', code: 'LH'},
+    {name: 'Ціна висока - низька', code: 'HL'},
+  ];
+  public valueSortingMethod: any
 
   public pizzas: Pizza[];
   public loader: boolean = false;
@@ -44,4 +49,16 @@ export class PizzasAllComponent implements OnInit {
       .subscribe()
   }
 
+  public toSortPizzas(){
+    switch (this.valueSortingMethod.code){
+      case 'LH':
+        this.pizzas.sort((a,b) => a.minPrice - b.minPrice);
+        break;
+
+      case 'HL':
+        this.pizzas.sort((a,b) => b.minPrice - a.minPrice)
+    }
+
+
+  }
 }

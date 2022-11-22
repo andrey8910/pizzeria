@@ -1,26 +1,6 @@
 {
   "pizza": [
-    {
-      "id": 1,
-      "title": "Піца Мангеттен",
-      "minPrice": 220,
-      "ingredients": ["гриби", "моцарела","пепероні","соус альфредо"],
-      "minWeight": 570,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 570,
-          "medium" : 765,
-          "big" : 847
-        },
-        "price": {
-          "small" : 220,
-          "medium" : 260,
-          "big" : 290
-        }
-      }
 
-    },
     {
       "id": 2,
       "title": "Піца Пепероні з томатами",
@@ -33,48 +13,6 @@
           "small" : 554,
           "medium" : 738,
           "big" : 787
-        },
-        "price": {
-          "small" : 220,
-          "medium" : 260,
-          "big" : 290
-        }
-      }
-
-    },
-    {
-      "id": 3,
-      "title": "Піца Шинка та гриби",
-      "minPrice": 220,
-      "ingredients": ["моцарела", "гриби","шинка","соус фірмовий"],
-      "minWeight": 545,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2020/12/28/Vetchina_i_griby_-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 545,
-          "medium" : 764,
-          "big" : 826
-        },
-        "price": {
-          "small" : 220,
-          "medium" : 260,
-          "big" : 290
-        }
-      }
-
-    },
-    {
-      "id": 4,
-      "title": "Піца Техас",
-      "minPrice": 220,
-      "ingredients": ["моцарела", "гриби","кукурудза", "цибуля", "ковбаски баварські","соус барбекю"],
-      "minWeight": 550,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/03/%D0%A2%D0%B5%D1%85%D0%B0%D1%81_300dpi-min-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 550,
-          "medium" : 738,
-          "big" : 807
         },
         "price": {
           "small" : 220,
@@ -106,6 +44,27 @@
 
     },
     {
+      "id": 3,
+      "title": "Піца Шинка та гриби",
+      "minPrice": 220,
+      "ingredients": ["моцарела", "гриби","шинка","соус фірмовий"],
+      "minWeight": 545,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2020/12/28/Vetchina_i_griby_-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 545,
+          "medium" : 764,
+          "big" : 826
+        },
+        "price": {
+          "small" : 220,
+          "medium" : 260,
+          "big" : 290
+        }
+      }
+
+    },
+    {
       "id": 6,
       "title": "Піца Маргарита",
       "minPrice": 255,
@@ -122,27 +81,6 @@
           "small" : 255,
           "medium" : 302,
           "big" : 339
-        }
-      }
-
-    },
-    {
-      "id": 7,
-      "title": "Піца Барбекю",
-      "minPrice": 260,
-      "ingredients": ["моцарела", "курка", "цибуля", "бекон", "гриби", "соус барбекю"],
-      "minWeight": 560,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2018/02/22/BBQ-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 560,
-          "medium" : 760,
-          "big" : 800
-        },
-        "price": {
-          "small" : 260,
-          "medium" : 307,
-          "big" : 344
         }
       }
 
@@ -169,27 +107,6 @@
 
     },
     {
-      "id": 9,
-      "title": "Піца Карбонара",
-      "minPrice": 271,
-      "ingredients": ["моцарела", "шинка", "цибуля", "бекон", "гриби", "соус альфредо"],
-      "minWeight": 525,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9A%D0%B0%D1%80%D0%B1%D0%BE%D0%BD%D0%B0%D1%80%D0%B0_300dpi-min-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 525,
-          "medium" : 708,
-          "big" : 755
-        },
-        "price": {
-          "small" : 271,
-          "medium" : 304,
-          "big" : 342
-        }
-      }
-
-    },
-    {
       "id": 10,
       "title": "Піца Кантрі",
       "minPrice": 275,
@@ -206,6 +123,27 @@
           "small" : 275,
           "medium" : 308,
           "big" : 354
+        }
+      }
+
+    },
+    {
+      "id": 7,
+      "title": "Піца Барбекю",
+      "minPrice": 260,
+      "ingredients": ["моцарела", "курка", "цибуля", "бекон", "гриби", "соус барбекю"],
+      "minWeight": 560,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2018/02/22/BBQ-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 560,
+          "medium" : 760,
+          "big" : 800
+        },
+        "price": {
+          "small" : 260,
+          "medium" : 307,
+          "big" : 344
         }
       }
 
@@ -232,6 +170,27 @@
 
     },
     {
+      "id": 1,
+      "title": "Піца Мангеттен",
+      "minPrice": 220,
+      "ingredients": ["гриби", "моцарела","пепероні","соус альфредо"],
+      "minWeight": 570,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2021/07/27/Manhatten_slice_collageweb-min-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 570,
+          "medium" : 765,
+          "big" : 847
+        },
+        "price": {
+          "small" : 220,
+          "medium" : 260,
+          "big" : 290
+        }
+      }
+
+    },
+    {
       "id": 12,
       "title": "Піца Тоскана",
       "minPrice": 290,
@@ -253,22 +212,22 @@
 
     },
     {
-      "id": 13,
-      "title": "Піца Спайсі",
-      "minPrice": 295,
-      "ingredients": ["моцарела", "бекон", "пепероні", "халапеньо", "помідори","соус фірмовий"],
-      "minWeight": 567,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/03/%D0%A1%D0%BF%D0%B0%D0%B9%D1%81%D0%B8_300dpi-min-thumbnail-960x960-70.jpg",
+      "id": 9,
+      "title": "Піца Карбонара",
+      "minPrice": 271,
+      "ingredients": ["моцарела", "шинка", "цибуля", "бекон", "гриби", "соус альфредо"],
+      "minWeight": 525,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9A%D0%B0%D1%80%D0%B1%D0%BE%D0%BD%D0%B0%D1%80%D0%B0_300dpi-min-thumbnail-960x960-70.jpg",
       "params": {
         "weight": {
-          "small" : 567,
-          "medium" : 780,
-          "big" : 839
+          "small" : 525,
+          "medium" : 708,
+          "big" : 755
         },
         "price": {
-          "small" : 295,
-          "medium" : 335,
-          "big" : 365
+          "small" : 271,
+          "medium" : 304,
+          "big" : 342
         }
       }
 
@@ -295,27 +254,6 @@
 
     },
     {
-      "id": 15,
-      "title": "Піца Джамайка",
-      "minPrice": 285,
-      "ingredients": ["моцарела", "курка", "кукурудза", "халапеньо", "ананас", "болгарський перець", "гриби","соус фірмовий"],
-      "minWeight": 614,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2021/12/09/JB-C2rtch_fin-min-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 614,
-          "medium" : 830,
-          "big" : 950
-        },
-        "price": {
-          "small" : 285,
-          "medium" : 325,
-          "big" : 355
-        }
-      }
-
-    },
-    {
       "id": 16,
       "title": "Піца Чікен кебаб",
       "minPrice": 249,
@@ -336,6 +274,27 @@
       }
     },
     {
+      "id": 13,
+      "title": "Піца Спайсі",
+      "minPrice": 295,
+      "ingredients": ["моцарела", "бекон", "пепероні", "халапеньо", "помідори","соус фірмовий"],
+      "minWeight": 567,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/03/%D0%A1%D0%BF%D0%B0%D0%B9%D1%81%D0%B8_300dpi-min-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 567,
+          "medium" : 780,
+          "big" : 839
+        },
+        "price": {
+          "small" : 295,
+          "medium" : 335,
+          "big" : 365
+        }
+      }
+
+    },
+    {
       "id": 17,
       "title": "Піца Мюнхенська Делюкс",
       "minPrice": 294,
@@ -352,6 +311,27 @@
           "small" : 294,
           "medium" : 334,
           "big" : 365
+        }
+      }
+
+    },
+    {
+      "id": 15,
+      "title": "Піца Джамайка",
+      "minPrice": 285,
+      "ingredients": ["моцарела", "курка", "кукурудза", "халапеньо", "ананас", "болгарський перець", "гриби","соус фірмовий"],
+      "minWeight": 614,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2021/12/09/JB-C2rtch_fin-min-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 614,
+          "medium" : 830,
+          "big" : 950
+        },
+        "price": {
+          "small" : 285,
+          "medium" : 325,
+          "big" : 355
         }
       }
 
@@ -378,27 +358,6 @@
 
     },
     {
-      "id": 19,
-      "title": "Піца Мітца",
-      "minPrice": 315,
-      "ingredients": ["моцарела", "бекон", "шинка", "ковбаски баварські", "пармезан", "пепероні", "соус фірмовий"],
-      "minWeight": 606,
-      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9C%D0%B8%D1%86%D1%86%D0%B0_300dpi-min-thumbnail-960x960-70.jpg",
-      "params": {
-        "weight": {
-          "small" : 606,
-          "medium" : 820,
-          "big" : 897
-        },
-        "price": {
-          "small" : 315,
-          "medium" : 346,
-          "big" : 375
-        }
-      }
-
-    },
-    {
       "id": 20,
       "title": "Піца Екстраваганза",
       "minPrice": 310,
@@ -417,6 +376,27 @@
           "big" : 370
         }
       }
+    },
+    {
+      "id": 4,
+      "title": "Піца Техас",
+      "minPrice": 220,
+      "ingredients": ["моцарела", "гриби","кукурудза", "цибуля", "ковбаски баварські","соус барбекю"],
+      "minWeight": 550,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/03/%D0%A2%D0%B5%D1%85%D0%B0%D1%81_300dpi-min-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 550,
+          "medium" : 738,
+          "big" : 807
+        },
+        "price": {
+          "small" : 220,
+          "medium" : 260,
+          "big" : 290
+        }
+      }
+
     },
     {
       "id": 21,
@@ -438,9 +418,28 @@
         }
       }
 
+    },
+    {
+      "id": 19,
+      "title": "Піца Мітца",
+      "minPrice": 315,
+      "ingredients": ["моцарела", "бекон", "шинка", "ковбаски баварські", "пармезан", "пепероні", "соус фірмовий"],
+      "minWeight": 606,
+      "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9C%D0%B8%D1%86%D1%86%D0%B0_300dpi-min-thumbnail-960x960-70.jpg",
+      "params": {
+        "weight": {
+          "small" : 606,
+          "medium" : 820,
+          "big" : 897
+        },
+        "price": {
+          "small" : 315,
+          "medium" : 346,
+          "big" : 375
+        }
+      }
+
     }
-
-
   ],
   "users": [
     {

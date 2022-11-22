@@ -6,6 +6,12 @@
   top: 30vh;
   left: 40vw;
 }
+.product-processing{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
 .filter-not-found{
   padding: 100px 0;
 }

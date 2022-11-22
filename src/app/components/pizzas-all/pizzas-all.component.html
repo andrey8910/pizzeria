@@ -9,21 +9,46 @@
     <p>Зараз піци відсутні !</p>
   </div>
 
-  <div class="product-processing">
+  <div class="product-processing p-fluid">
 
-    <div class="products-filter">
-      <div class="field col-12 md:col-4">
+    <div class="products-filter-block">
+
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input type="text" id="inputtext-left" pInputText [(ngModel)]="searchText">
+            <input
+              type="text"
+              id="inputtext-left"
+              pInputText
+              [(ngModel)]="searchText"
+              [style]="{'width':'280px'}"
+            >
             <label for="inputtext-left">Пошук піци</label>
         </span>
-      </div>
+
       <ng-template #noResults>
         <div class="filter-not-found">
           <p>При пошуку "{{searchText}}" нічого не знайдено !</p>
         </div>
       </ng-template>
+    </div>
+
+    <div class="products-sort-block">
+
+        <span class="p-float-label">
+            <p-dropdown
+              inputId="dropdown"
+              id="pizzaSorting"
+              [autoDisplayFirst]="false"
+              [options]="sortingMethod"
+              [(ngModel)]="valueSortingMethod"
+              [style]="{'width':'280px'}"
+              optionLabel="name"
+              (onChange)="toSortPizzas()"
+            ></p-dropdown>
+
+            <label for="pizzaSorting">Сортування піци</label>
+        </span>
+
     </div>
 
   </div>
