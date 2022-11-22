@@ -6,16 +6,16 @@
   top: 30vh;
   left: 40vw;
 }
-
+.filter-not-found{
+  padding: 100px 0;
+}
 
 .pizzas-list{
-
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 50px;
   margin: 50px 0;
-
 }
 
 .showProductsNotFound{

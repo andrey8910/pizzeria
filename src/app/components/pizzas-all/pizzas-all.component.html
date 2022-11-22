@@ -9,10 +9,33 @@
     <p>Зараз піци відсутні !</p>
   </div>
 
+  <div class="product-processing">
 
-  <div class="pizzas-list">
+    <div class="products-filter">
+      <div class="field col-12 md:col-4">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" id="inputtext-left" pInputText [(ngModel)]="searchText">
+            <label for="inputtext-left">Пошук піци</label>
+        </span>
+      </div>
+      <ng-template #noResults>
+        <div class="filter-not-found">
+          <p>При пошуку "{{searchText}}" нічого не знайдено !</p>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="pizzas-list" *ngIf="(pizzas | productsFilter: searchText).length > 0; else noResults">
+
+
     <app-pizza-card
-      *ngFor="let pizza of pizzas"
+      *ngFor="let pizza of pizzas | productsFilter: searchText"
       [pizzaItem] = pizza
     ></app-pizza-card>
   </div>

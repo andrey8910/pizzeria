@@ -25,6 +25,7 @@ import { AdministrationComponent } from './components/administration/administrat
 import { AdminProductsComponent } from './components/administration/admin-products/admin-products.component';
 import { AdminUsersComponent } from './components/administration/admin-users/admin-users.component';
 import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/pizzas-banner.component';
+import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
 
 
 
@@ -45,7 +46,8 @@ import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/piz
     AdministrationComponent,
     AdminProductsComponent,
     AdminUsersComponent,
-    PizzasBannerComponent
+    PizzasBannerComponent,
+    ProductsFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,7 @@ import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/piz
     PrimengModule
 
   ],
-  providers: [ProductsService, ShoppingCartService],
+  providers: [ProductsService, ShoppingCartService, ProductsFilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

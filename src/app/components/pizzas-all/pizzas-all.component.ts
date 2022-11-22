@@ -11,6 +11,7 @@ import {finalize, tap, catchError} from 'rxjs/operators';
 })
 
 export class PizzasAllComponent implements OnInit {
+  public searchText: string
 
   public pizzas: Pizza[];
   public loader: boolean = false;
