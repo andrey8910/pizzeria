@@ -12,7 +12,6 @@
   <div class="product-processing p-fluid">
 
     <div class="products-filter-block">
-
         <span class="p-float-label p-input-icon-left">
             <i class="pi pi-search"></i>
             <input
@@ -33,7 +32,6 @@
     </div>
 
     <div class="products-sort-block">
-
         <span class="p-float-label">
             <p-dropdown
               inputId="dropdown"
@@ -53,17 +51,13 @@
 
   </div>
 
-
-
-
   <div class="pizzas-list" *ngIf="(pizzas | productsFilter: searchText).length > 0; else noResults">
-
-
     <app-pizza-card
       *ngFor="let pizza of pizzas | productsFilter: searchText"
       [pizzaItem] = pizza
     ></app-pizza-card>
   </div>
 
+  <p-scrollTop [threshold]="900"></p-scrollTop>
 </div>
 
