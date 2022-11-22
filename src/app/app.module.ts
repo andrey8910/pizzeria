@@ -24,6 +24,7 @@ import { AuthorizationDialogComponent } from './components/authorization-dialog/
 import { AdministrationComponent } from './components/administration/administration.component';
 import { AdminProductsComponent } from './components/administration/admin-products/admin-products.component';
 import { AdminUsersComponent } from './components/administration/admin-users/admin-users.component';
+import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/pizzas-banner.component';
 
 
 
@@ -43,7 +44,8 @@ import { AdminUsersComponent } from './components/administration/admin-users/adm
     AuthorizationDialogComponent,
     AdministrationComponent,
     AdminProductsComponent,
-    AdminUsersComponent
+    AdminUsersComponent,
+    PizzasBannerComponent
   ],
   imports: [
     BrowserModule,

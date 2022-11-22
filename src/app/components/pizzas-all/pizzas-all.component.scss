@@ -11,6 +11,7 @@
 .pizzas-list{
 
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 50px;
   margin: 50px 0;

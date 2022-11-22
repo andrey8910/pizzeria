@@ -1,0 +1,16 @@
+<p-galleria
+  [value]="images"
+  [responsiveOptions]="responsiveOptions"
+  [containerStyle]="{'max-width': '100%'}"
+  [numVisible]="4"
+  [showThumbnails]="false"
+  [showIndicators]="true"
+  [autoPlay] = "true"
+  [circular] = "true"
+  [transitionInterval]="3000"
+>
+  <ng-template pTemplate="item" let-item>
+    <img [src]="item.previewImageSrc" [alt]="'pizza_image'" style="width: 100%; display: block;" />
+  </ng-template>
+
+</p-galleria>

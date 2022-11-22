@@ -33,6 +33,7 @@ import { ConfirmationService } from 'primeng/api';
 
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import {RippleModule} from 'primeng/ripple';
+import {GalleriaModule} from 'primeng/galleria';
 @NgModule({
   declarations: [
 
@@ -61,7 +62,8 @@ import {RippleModule} from 'primeng/ripple';
     ToolbarModule,
     ConfirmDialogModule,
     RippleModule,
-    InputTextareaModule
+    InputTextareaModule,
+    GalleriaModule
 
   ],
   exports: [
@@ -87,7 +89,8 @@ import {RippleModule} from 'primeng/ripple';
     ToolbarModule,
     ConfirmDialogModule,
     RippleModule,
-    InputTextareaModule
+    InputTextareaModule,
+    GalleriaModule
   ],
   providers: [MessageService, ConfirmationService]
 })
