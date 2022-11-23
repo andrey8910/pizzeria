@@ -15,12 +15,23 @@ export class ProductsService {
     return this.httpClient.get<Pizza[]>(environment.urlPizzaAll)
   }
 
+
+
   public getPizzaFromPagination(event: PageEvent){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_page=${event.pageIndex + 1}&_limit=${event.pageSize}`)
   }
 
   public findPizza(searchText: string){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?q=${searchText}`)
+  }
+
+  public sortPizza(sortParam: string){
+    if(sortParam == 'LH'){
+    return  this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_sort=minPrice&_order=asc`)
+    }else if(sortParam == 'HL'){
+    return  this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_sort=minPrice&_order=desc`)
+    }
+    return
   }
 
 }

@@ -65,15 +65,13 @@ export class PizzasAllComponent implements OnInit {
   }
 
   public toSortPizzas(){
-    switch (this.valueSortingMethod.code){
-      case 'LH':
-        this.pizzas.sort((a,b) => a.minPrice - b.minPrice);
-        break;
-
-      case 'HL':
-        this.pizzas.sort((a,b) => b.minPrice - a.minPrice)
-    }
-
+    this.productsService.sortPizza(this.valueSortingMethod.code)
+      ?.pipe(
+        tap((data:Pizza[]) => {
+          this.pizzas = data.slice(0, this.pageSizePagination)
+        })
+      )
+      .subscribe()
 
   }
 
