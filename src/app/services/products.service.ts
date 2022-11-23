@@ -19,4 +19,8 @@ export class ProductsService {
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_page=${event.pageIndex + 1}&_limit=${event.pageSize}`)
   }
 
+  public findPizza(searchText: string){
+    return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?q=${searchText}`)
+  }
+
 }

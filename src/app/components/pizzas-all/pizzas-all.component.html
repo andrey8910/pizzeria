@@ -21,15 +21,31 @@
               [(ngModel)]="searchText"
               [style]="{'width':'280px'}"
             >
-            <label for="inputtext-left">Пошук піци</label>
+            <label for="inputtext-left">Пошук піци на сторінці</label>
         </span>
 
       <ng-template #noResults>
         <div class="filter-not-found">
-          <p>При пошуку "{{searchText}}" нічого не знайдено !</p>
+          <p>При пошуку "{{searchText || searchTextBD}}" нічого не знайдено !</p>
         </div>
       </ng-template>
     </div>
+
+    <div class="products-filterDB-block">
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              type="text"
+              id="searchTextDB"
+              #searchTextDB
+              pInputText
+              (input)="searchPizzaDB($event)"
+              [style]="{'width':'280px'}"
+            >
+            <label for="searchTextDB">Пошук піци в базі</label>
+        </span>
+    </div>
+
 
     <div class="products-sort-block">
         <span class="p-float-label">

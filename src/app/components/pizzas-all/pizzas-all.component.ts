@@ -13,6 +13,7 @@ import {PageEvent} from "@angular/material/paginator";
 
 export class PizzasAllComponent implements OnInit {
   public searchText: string
+  public searchTextBD: string = '';
   public sortingMethod = [
     {name: 'Ціна низька - висока', code: 'LH'},
     {name: 'Ціна висока - низька', code: 'HL'},
@@ -23,6 +24,7 @@ export class PizzasAllComponent implements OnInit {
   public loader: boolean = false;
   public showErrorMassage: boolean = false
   public showProductsNotFound: boolean = false
+  public pageSizePagination: number = 6
 
 
   constructor(private productsService: ProductsService) { }
@@ -36,7 +38,7 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.getPizzas()
       .pipe(
         tap((data:Pizza[]) => {
-          this.pizzas = data.slice(0,6)
+          this.pizzas = data.slice(0, this.pageSizePagination)
         }),
         finalize(() => {
           this.loader = false
@@ -48,6 +50,18 @@ export class PizzasAllComponent implements OnInit {
         })
       )
       .subscribe()
+  }
+
+  public searchPizzaDB(event: any){
+    this.productsService.findPizza(event.target.value)
+      .pipe(
+        tap((data:Pizza[]) => {
+          this.pizzas = data.slice(0, this.pageSizePagination)
+          this.searchTextBD = event.target.value
+        })
+      )
+      .subscribe()
+
   }
 
   public toSortPizzas(){
@@ -68,6 +82,7 @@ export class PizzasAllComponent implements OnInit {
       .pipe(
         tap((data: Pizza[]) => {
           this.pizzas = data
+          this.pageSizePagination = event.pageSize
         })
       )
       .subscribe()
