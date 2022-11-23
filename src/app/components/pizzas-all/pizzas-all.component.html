@@ -58,6 +58,14 @@
     ></app-pizza-card>
   </div>
 
+  <mat-paginator [length]="21"
+
+                 (page)="changePaginator($event)"
+                 [pageSizeOptions]="[6,12,18,24]"  >
+
+
+  </mat-paginator>
+
   <p-scrollTop [threshold]="900"></p-scrollTop>
 </div>
 

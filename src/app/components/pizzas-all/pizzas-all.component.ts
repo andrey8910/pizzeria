@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Pizza } from '../../interfaces/pizza';
 import {finalize, tap, catchError} from 'rxjs/operators';
+import {PageEvent} from "@angular/material/paginator";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.getPizzas()
       .pipe(
         tap((data:Pizza[]) => {
-          this.pizzas = data
+          this.pizzas = data.slice(0,6)
         }),
         finalize(() => {
           this.loader = false
@@ -60,5 +61,15 @@ export class PizzasAllComponent implements OnInit {
     }
 
 
+  }
+
+  public changePaginator(event: PageEvent){
+    this.productsService.getPizzaFromPagination(event)
+      .pipe(
+        tap((data: Pizza[]) => {
+          this.pizzas = data
+        })
+      )
+      .subscribe()
   }
 }
