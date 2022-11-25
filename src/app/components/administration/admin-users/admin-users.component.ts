@@ -27,7 +27,7 @@ export class AdminUsersComponent implements OnInit {
 
     public addClient(){
 
-    this.usersService.addUser()
+    this.usersService.addUser({name: 'testName', login: 'testLogin', password: 'testPass'})
       .pipe(
         tap((data) => console.log(data))
       )

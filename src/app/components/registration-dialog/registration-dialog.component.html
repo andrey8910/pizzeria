@@ -10,36 +10,67 @@
   <form [formGroup]="formGroupRegistration"
         (ngSubmit)="onSubmit(formGroupRegistration.value)"
         class="form"
-        #formAuthorization
         id = 'formGroupRegistration'
   >
+    <mat-form-field appearance="fill"  style="width: 100%">
+      <mat-label>Ім'я</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        pTooltip="від 3 до 12 символів"
+        tooltipPosition="right" >
+    </mat-form-field>
+
+    <div
+      class="error-valid-message"
+      *ngIf="formGroupRegistration.controls['name'].invalid && formGroupRegistration.controls['name'].touched"
+    >
+      Помилка! Вкажіть ім'я від 3 до 12 символів.
+    </div>
+
     <mat-form-field appearance="fill"  style="width: 100%">
       <mat-label>Логін</mat-label>
       <input
         matInput
         formControlName="login"
-
         pTooltip="від 3 до 10 символів"
         tooltipPosition="right" >
     </mat-form-field>
+
+    <div
+      class="error-valid-message"
+      *ngIf="formGroupRegistration.controls['login'].invalid && formGroupRegistration.controls['login'].touched"
+    >
+      Помилка! Вкажіть логін від 3 до 10 символів.
+    </div>
 
     <mat-form-field appearance="fill" style="width: 100%">
       <mat-label>Пароль</mat-label>
       <input
         matInput [type]="hidePass ? 'password' : 'text'"
-        formControlName="userPass"
+        formControlName="password"
         width="100%"
         pTooltip="6-10 символів, з них мін. одна цифра та велика літера "
         tooltipPosition="right">
+
       <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
         <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
+
     </mat-form-field>
+
+    <div
+      class="error-valid-message"
+      *ngIf="formGroupRegistration.controls['password'].invalid && formGroupRegistration.controls['password'].touched"
+    >
+      Помилка! Пароль повинен складатися з 6 - 10 символів. З них хочаб одна велика літера та одна цифра.
+    </div>
+
     <mat-form-field appearance="fill" style="width: 100%">
       <mat-label>Поторіть ваш пароль</mat-label>
       <input
         matInput [type]="hidePassConfirm ? 'password' : 'text'"
-        formControlName="confirmUserPassword"
+        formControlName="confirmPassword"
         width="100%"
         pTooltip="паролі повмнні співпадати"
         tooltipPosition="right">
@@ -49,9 +80,9 @@
     </mat-form-field>
     <div
       class="error-valid-message"
-      *ngIf="formGroupRegistration.controls['confirmUserPassword'].invalid && formGroupRegistration.controls['confirmUserPassword'].touched"
+      *ngIf="formGroupRegistration.controls['confirmPassword'].invalid && formGroupRegistration.controls['confirmPassword'].touched"
     >
-      Вказані паролі не співпадають !
+      Помилка! Вказані паролі не співпадають!
     </div>
   </form>
 
