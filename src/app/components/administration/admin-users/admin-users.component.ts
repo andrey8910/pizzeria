@@ -24,4 +24,13 @@ export class AdminUsersComponent implements OnInit {
 
       ).subscribe()
     }
+
+    public addClient(){
+
+    this.usersService.addUser()
+      .pipe(
+        tap((data) => console.log(data))
+      )
+      .subscribe()
+    }
 }

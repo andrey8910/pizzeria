@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
 import { ValidateLogin, ValidatePass } from '../../interfaces/Validators'
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {AuthorizationDialogData} from '../../interfaces/authorization-dialog'
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {AuthorizationDialogData} from '../../interfaces/authorization-dialog';
+import {RegistrationDialogComponent} from '../registration-dialog/registration-dialog.component'
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AuthorizationDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AuthorizationDialogComponent>,
+    private matDialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: AuthorizationDialogData,
   ) { }
 
@@ -35,6 +37,21 @@ export class AuthorizationDialogComponent implements OnInit {
 
   public onSubmit(data: AuthorizationDialogData){
     this.authorizationData = data
+  }
+
+  public openRegistrationDialog(){
+    const dialogRef = this.matDialog.open(RegistrationDialogComponent, {
+      width: '400px',
+      data: {},
+      disableClose: true,
+      panelClass: 'modal-dialog'
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //this.answerCompanionDialogSecond = result;
+
+    });
   }
 
 

@@ -146,9 +146,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   top: 0;
   right: 0;
   padding: 2px;
-
   min-width: auto;
 }
+.error-valid-message{
+  background-color: rgba(252,150,150, 0.3)
+}
+
 
 
 

@@ -5,6 +5,7 @@ import {finalize, tap, catchError} from 'rxjs/operators';
 import {PageEvent} from "@angular/material/paginator";
 
 
+
 @Component({
   selector: 'app-pizzas-all',
   templateUrl: './pizzas-all.component.html',
@@ -85,4 +86,6 @@ export class PizzasAllComponent implements OnInit {
       )
       .subscribe()
   }
+
+
 }

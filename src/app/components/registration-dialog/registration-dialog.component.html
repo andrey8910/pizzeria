@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Реэстрація</h2>
+
+<button mat-button class="close-icon" (click)="onNoClick()">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div mat-dialog-content>
+  <p>Для реєстрації введіть логін та пароль</p>
+
+  <form [formGroup]="formGroupRegistration"
+        (ngSubmit)="onSubmit(formGroupRegistration.value)"
+        class="form"
+        #formAuthorization
+        id = 'formGroupRegistration'
+  >
+    <mat-form-field appearance="fill"  style="width: 100%">
+      <mat-label>Логін</mat-label>
+      <input
+        matInput
+        formControlName="login"
+
+        pTooltip="від 3 до 10 символів"
+        tooltipPosition="right" >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Пароль</mat-label>
+      <input
+        matInput [type]="hidePass ? 'password' : 'text'"
+        formControlName="userPass"
+        width="100%"
+        pTooltip="6-10 символів, з них мін. одна цифра та велика літера "
+        tooltipPosition="right">
+      <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Поторіть ваш пароль</mat-label>
+      <input
+        matInput [type]="hidePassConfirm ? 'password' : 'text'"
+        formControlName="confirmUserPassword"
+        width="100%"
+        pTooltip="паролі повмнні співпадати"
+        tooltipPosition="right">
+      <button mat-icon-button matSuffix (click)="hidePassConfirm = !hidePassConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassConfirm">
+        <mat-icon>{{hidePassConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div
+      class="error-valid-message"
+      *ngIf="formGroupRegistration.controls['confirmUserPassword'].invalid && formGroupRegistration.controls['confirmUserPassword'].touched"
+    >
+      Вказані паролі не співпадають !
+    </div>
+  </form>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Повернутися до входу</button>
+  <button
+          mat-button
+          type="submit"
+          form = "formGroupRegistration"
+          [disabled] = "formGroupRegistration.invalid"
+  >Зареєструватися</button>
+
+</div>
+
+

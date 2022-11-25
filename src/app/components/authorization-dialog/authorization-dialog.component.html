@@ -13,14 +13,23 @@
         #formAuthorization
         id = 'formGroupAuthorization'
   >
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill"  style="width: 100%">
     <mat-label>Логін</mat-label>
-    <input matInput formControlName="login" pTooltip="від 3 до 10 символів" tooltipPosition="right" >
+    <input
+      matInput
+      formControlName="login"
+      pTooltip="від 3 до 10 символів"
+      tooltipPosition="right" >
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" style="width: 100%">
     <mat-label>Пароль</mat-label>
-    <input matInput [type]="hidePass ? 'password' : 'text'" formControlName="password" pTooltip="6-10 символів, з них мін. одна цифра та велика літера " tooltipPosition="right">
+    <input
+      matInput [type]="hidePass ? 'password' : 'text'"
+      formControlName="password"
+      width="100%"
+      pTooltip="6-10 символів, з них мін. одна цифра та велика літера "
+      tooltipPosition="right">
     <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
       <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
@@ -36,5 +45,10 @@
           type="submit"
           form = "formGroupAuthorization"
   >Увійти</button>
+  <button
+    mat-button
+    [disabled] = "!formGroupAuthorization.invalid"
+    (click) = "openRegistrationDialog()"
+  >Реєстрація</button>
 </div>
 

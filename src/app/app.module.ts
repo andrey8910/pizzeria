@@ -26,6 +26,7 @@ import { AdminProductsComponent } from './components/administration/admin-produc
 import { AdminUsersComponent } from './components/administration/admin-users/admin-users.component';
 import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/pizzas-banner.component';
 import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
+import { RegistrationDialogComponent } from './components/registration-dialog/registration-dialog.component';
 
 
 
@@ -47,7 +48,8 @@ import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
     AdminProductsComponent,
     AdminUsersComponent,
     PizzasBannerComponent,
-    ProductsFilterPipe
+    ProductsFilterPipe,
+    RegistrationDialogComponent
   ],
   imports: [
     BrowserModule,

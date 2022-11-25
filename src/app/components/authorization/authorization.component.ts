@@ -32,7 +32,7 @@ export class AuthorizationComponent implements OnInit {
   }
   public openAuthorizationDialog(){
     const dialogRef = this.dialog.open(AuthorizationDialogComponent, {
-      width: '400px',
+      width: '460px',
       data: {},
       disableClose: true,
       panelClass: 'modal-dialog'
