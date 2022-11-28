@@ -6,18 +6,23 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
+    height: 100%;
 
     .pizza-details-header{
       display: flex;
-      justify-content: space-around;
+      justify-content: left;
     }
 
     .pizza-details-body{
       display: flex;
       justify-content: space-between;
+      height: 100%;
 
       .pizza-details-image{
         flex: 1 1 60%;
+        max-height: 75vh;
+        overflow: hidden;
+
         img {
           width: 100%;
           height: 100%;
@@ -27,6 +32,41 @@
       }
       .pizza-details-description{
         flex: 1 1 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+
+
+          .description-header{
+            flex: 0 0 50px;
+            display: flex;
+            justify-content: space-between;
+          }
+          .description-text{
+            flex: 1 1 auto
+          }
+          .pizza-details-ingredients{
+            flex: 1 1 auto
+          }
+          .pizza-details-size{
+            display: flex;
+            flex: 1 1 auto;
+            justify-items: center;
+            justify-content: space-between;
+          }
+          .pizza-details-price{
+            flex: 0 0 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .price{
+              font-size: 22px;
+              font-weight: 500;
+              color: rgba(0,0,0, .6);
+            }
+          }
       }
     }
   }

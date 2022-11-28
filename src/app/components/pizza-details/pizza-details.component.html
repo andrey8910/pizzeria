@@ -9,18 +9,60 @@
         <mat-icon>keyboard_backspace</mat-icon>
         Назад
       </button>
-      <h2>{{itemPizza.title}}</h2>
+
     </div>
     <div class="pizza-details-body">
       <div class="pizza-details-image">
-        <img src="{{itemPizza.imageMain}}" alt="{{itemPizza.title}}">
+        <img src="{{itemPizza.imageBig}}" alt="{{itemPizza.title}}">
       </div>
       <div class="pizza-details-description">
+        <div class="description-header">
+          <h2 class="description-title">{{itemPizza.title}}</h2>
+          <span>{{ selectedPizzaSize ? (selectedPizzaWeight ? selectedPizzaWeight : itemPizza.minWeight) + ' г' : itemPizza.minWeight + ' г'}}</span>
+        </div>
+
+
+        <p class="description-text">{{itemPizza.description}}</p>
+
+        <div class="pizza-details-ingredients">
+          <p>Інгредієнти :</p>
+          <ul>
+            <li *ngFor="let ingredient of itemPizza.ingredients">
+              {{ingredient}}
+            </li>
+          </ul>
+        </div>
+
+        <div class="pizza-details-size" [formGroup]="pizzaDetailsSelectForm">
+          <div *ngFor="let size of pizzaSize" class="field-checkbox">
+            <label>
+              <p-radioButton [inputId]="size.key"
+                             name="pizzaSelectSize"
+                             [value]="size"
+                             formControlName="pizzaSelectSize"
+                             (onClick) = onSelectPizzaSize(size)
+              ></p-radioButton>
+              {{size.name}}
+            </label>
+          </div>
+        </div>
+
+        <div class="pizza-details-price">
+          <span class="price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currencyUa) : (itemPizza.minPrice | currencyUa) ): (itemPizza.minPrice | currencyUa)}}</span>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="toShoppingCart(itemPizza)"
+          >Додати в кошик</button>
+        </div>
+
 
       </div>
+
     </div>
 
   </div>
 
 </div>
+
 
