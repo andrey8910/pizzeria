@@ -8,6 +8,7 @@
   <ul class="pizza-card-ingredients">
     <li class="pizza-ingredient" *ngFor="let ingredient of pizzaItem.ingredients">{{ingredient}}</li>
   </ul>
+
   <div class="pizza-card-params" [formGroup]="pizzaParamsSelectForm" >
     <div *ngFor="let size of pizzaSize" class="field-checkbox">
       <label>
@@ -21,6 +22,14 @@
        {{size.name}}
      </label>
     </div>
+  </div>
+  <div class="pizza-card-details">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="[pizzaItem.id]"
+    >Про піцу</button>
+
   </div>
   <div class="pizza-card-footer">
     <div class="pizza-card-price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currencyUa) : (pizzaItem.minPrice | currencyUa) ): (pizzaItem.minPrice | currencyUa)}}</div>

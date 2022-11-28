@@ -1,0 +1,33 @@
+:host{
+  width: 100%;
+
+  .pizza-details-block{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    .pizza-details-header{
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .pizza-details-body{
+      display: flex;
+      justify-content: space-between;
+
+      .pizza-details-image{
+        flex: 1 1 60%;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+      .pizza-details-description{
+        flex: 1 1 40%;
+      }
+    }
+  }
+}

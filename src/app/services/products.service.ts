@@ -15,7 +15,9 @@ export class ProductsService {
     return this.httpClient.get<Pizza[]>(environment.urlPizzaAll)
   }
 
-
+  public getPizzaById(id:number){
+    return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?id=${id}`)
+  }
 
   public getPizzaFromPagination(event: PageEvent){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_page=${event.pageIndex + 1}&_limit=${event.pageSize}`)

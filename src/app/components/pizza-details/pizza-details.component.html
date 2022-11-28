@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-spinner *ngIf="loader"></mat-spinner>
+  <div class="pizza-details-block" *ngIf="!loader">
+    <div class="pizza-details-header">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="comeBack()">
+        <mat-icon>keyboard_backspace</mat-icon>
+        Назад
+      </button>
+      <h2>{{itemPizza.title}}</h2>
+    </div>
+    <div class="pizza-details-body">
+      <div class="pizza-details-image">
+        <img src="{{itemPizza.imageMain}}" alt="{{itemPizza.title}}">
+      </div>
+      <div class="pizza-details-description">
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
