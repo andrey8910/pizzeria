@@ -1,0 +1,26 @@
+:host{
+
+  .comment-block{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    border: 1px solid rgba(0,0,0, .4);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+
+    .comment-label{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 14px;
+      font-weight: 500;
+
+      .comment-value{
+        font-size: 18px;
+        font-weight: 300;
+      }
+    }
+  }
+}

@@ -40,6 +40,7 @@ export class PizzaDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialization()
+
   }
 
   private initialization(){

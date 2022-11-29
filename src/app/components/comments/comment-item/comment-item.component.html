@@ -1,0 +1,9 @@
+<div class="comment-block">
+  <p class="comment-label">Автор: <span class="comment-value">{{commentItem.author}}</span></p>
+  <p class="comment-label">Оцінка: <span>
+    <p-rating [ngModel]="rating" [readonly]="true" [stars]="5" [cancel]="false"></p-rating>
+  </span></p>
+  <p class="comment-label">Коментар: <span class="comment-value">{{commentItem.text}}</span></p>
+  <p class="comment-label">Переваги: <span class="comment-value">{{commentItem.productAdvantages}}</span></p>
+  <p class="comment-label">Недоліки: <span class="comment-value">{{commentItem.productFlaws}}</span></p>
+</div>

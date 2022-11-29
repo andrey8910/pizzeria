@@ -1,0 +1,10 @@
+:host{
+  width: 100%;
+
+  .comments-block{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+}
