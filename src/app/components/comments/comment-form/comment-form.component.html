@@ -1,0 +1,14 @@
+
+
+<p-accordion>
+  <p-accordionTab header="Написати відгук">
+    <p *ngIf="!resultUserAuthentication.isPassedAuthentication">Для того, щоб залишити відгук, необхідно увійти до системи !</p>
+    <div *ngIf="resultUserAuthentication.isPassedAuthentication">
+      <form id="form-comments">
+        <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
+        <button  type="submit" (click)="addComment()">Додати</button>
+      </form>
+
+    </div>
+  </p-accordionTab>
+</p-accordion>

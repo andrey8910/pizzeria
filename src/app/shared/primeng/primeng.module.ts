@@ -26,6 +26,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import {RippleModule} from 'primeng/ripple';
 import {GalleriaModule} from 'primeng/galleria';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import {AccordionModule} from 'primeng/accordion';
 @NgModule({
   declarations: [
 
@@ -56,7 +57,9 @@ import {ScrollTopModule} from 'primeng/scrolltop';
     RippleModule,
     InputTextareaModule,
     GalleriaModule,
-    ScrollTopModule
+    ScrollTopModule,
+    AccordionModule
+
 
   ],
   exports: [
@@ -84,7 +87,9 @@ import {ScrollTopModule} from 'primeng/scrolltop';
     RippleModule,
     InputTextareaModule,
     GalleriaModule,
-    ScrollTopModule
+    ScrollTopModule,
+    AccordionModule
+
   ],
   providers: [MessageService, ConfirmationService]
 })

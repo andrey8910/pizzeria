@@ -12,8 +12,16 @@ import {AdminGuardService} from "./admin-guard.service";
   providedIn: 'root'
 })
 export class UserAuthenticationCheckService implements OnInit{
-
-  private userAuthSubject = new BehaviorSubject<any>({});
+  private userAuthSubject = new BehaviorSubject<AuthorizationDialogData>({
+    login: '',
+    password: '',
+    isPassedAuthentication: false,
+    resultAuthentication: {
+      name : '',
+      login : '',
+      password : ''
+    }
+  });
   readonly userAuthenticationCheck$ = this.userAuthSubject.asObservable();
   private allUsers: Users[];
 
@@ -64,6 +72,8 @@ export class UserAuthenticationCheckService implements OnInit{
 
 
   }
+
+
 
   public logOutUser(){
     this.userAuthSubject.next(Object.assign({}))

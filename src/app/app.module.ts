@@ -31,6 +31,7 @@ import { PizzaDetailsComponent } from './components/pizza-details/pizza-details.
 import { CommentsComponent } from './components/comments/comments/comments.component';
 import { CommentsListComponent } from './components/comments/comments-list/comments-list.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
+import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
 
 
 
@@ -57,7 +58,8 @@ import { CommentItemComponent } from './components/comments/comment-item/comment
     PizzaDetailsComponent,
     CommentsComponent,
     CommentsListComponent,
-    CommentItemComponent
+    CommentItemComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,
