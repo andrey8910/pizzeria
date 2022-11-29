@@ -28,6 +28,7 @@ import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/piz
 import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
 import { RegistrationDialogComponent } from './components/registration-dialog/registration-dialog.component';
 import { PizzaDetailsComponent } from './components/pizza-details/pizza-details.component';
+import { CommentsComponent } from './components/comments/comments/comments.component';
 
 
 
@@ -51,7 +52,8 @@ import { PizzaDetailsComponent } from './components/pizza-details/pizza-details.
     PizzasBannerComponent,
     ProductsFilterPipe,
     RegistrationDialogComponent,
-    PizzaDetailsComponent
+    PizzaDetailsComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

@@ -51,7 +51,6 @@ export class PizzaCardComponent implements OnInit {
   }
 
   toShoppingCart(item: Pizza): void{
-
     const itemOrder: PizzaOrder = {
       ...item,
       orderId: 0,
@@ -60,14 +59,7 @@ export class PizzaCardComponent implements OnInit {
       price: this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice,
       quantity: 1
     }
-
     this.shoppingService.create(itemOrder)
-
   }
-
-
-
-
-
 
 }

@@ -55,11 +55,20 @@
     }
   }
 
-  .pizza-card-title{
+  .pizza-card-title-block{
     display: flex;
     flex: 0 0 20px;
-    font-size: 18px;
-    font-weight: 500;
+    justify-content: space-between;
+    align-items: center;
+
+    .pizza-card-title{
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .pizza-card-details-btn{
+      font-weight: 600;
+    }
   }
   .pizza-card-ingredients{
     display: flex;
