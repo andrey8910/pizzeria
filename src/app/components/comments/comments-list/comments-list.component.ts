@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommentsService } from '../../../services/comments.service';
 import { Comments } from '../../../interfaces/comments';
-import {catchError, finalize, tap} from "rxjs/operators";
-
-
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-comments-list',
@@ -17,30 +15,19 @@ export class CommentsListComponent implements OnInit {
 
   public comments: Comments[];
 
+  public commentsSub$: Observable<Comments[]> ;
+
   constructor(private commentsService: CommentsService) { }
 
   ngOnInit(): void {
     this.initialization()
-
   }
 
   private initialization(){
-
     this.loader = true
     this.commentsService.getCommentByProductId(this.itemPizzaId)
-      .pipe(
-        tap((comments:Comments[]) => {
-          this.comments = comments
+    this.commentsSub$ = this.commentsService.commentsSub$
 
-        }),
-        finalize(() => {
-          this.loader = false
-        }),
-        catchError((err) =>  {
-          throw 'Помилка сервера. Деталі: ' + err
-        })
-      )
-      .subscribe()
   }
 
 }

@@ -38,7 +38,7 @@
         "соус фірмовий"
       ],
       "minWeight": 530,
-      "imageBig" : "https://media.dominos.ua/__sized__/menu/product_osg_image/2019/10/04/%D0%A2%D0%BE%D0%BD%D0%B8_%D0%9F%D0%B5%D0%BF%D0%BF%D0%B5%D1%80%D0%BE%D0%BD%D0%B8-min-thumbnail-2300x2300-70.jpg",
+      "imageBig": "https://media.dominos.ua/__sized__/menu/product_osg_image/2019/10/04/%D0%A2%D0%BE%D0%BD%D0%B8_%D0%9F%D0%B5%D0%BF%D0%BF%D0%B5%D1%80%D0%BE%D0%BD%D0%B8-min-thumbnail-2300x2300-70.jpg",
       "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9F%D0%B5%D0%BF%D0%BF%D0%B5%D1%80%D0%BE%D0%BD%D0%B8_300dpi-min-thumbnail-960x960-70.jpg",
       "params": {
         "weight": {
@@ -90,7 +90,7 @@
         "соус фірмовий"
       ],
       "minWeight": 552,
-      "imageBig" : "https://media.dominos.ua/__sized__/menu/product_osg_image/2019/10/04/%D0%BC%D0%B0%D1%80%D0%B3%D0%B0%D1%80%D0%B8%D1%82%D0%B0_2_%D0%B1%D0%B5%D0%B7_%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%B2-min-thumbnail-2300x2300-70.jpg",
+      "imageBig": "https://media.dominos.ua/__sized__/menu/product_osg_image/2019/10/04/%D0%BC%D0%B0%D1%80%D0%B3%D0%B0%D1%80%D0%B8%D1%82%D0%B0_2_%D0%B1%D0%B5%D0%B7_%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%B2-min-thumbnail-2300x2300-70.jpg",
       "imageMain": "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2019/10/04/%D0%9C%D0%B0%D1%80%D0%B3%D0%B0%D1%80%D0%B8%D1%82%D0%B0_300dpi-min-thumbnail-960x960-70.jpg",
       "params": {
         "weight": {
@@ -522,7 +522,7 @@
     {
       "id": 4,
       "title": "Піца Техас",
-      "description" : "Нова піца на вершковому соусі, з сирними бортиками і кунжутом, куркою, салямі, маринованої кукурудзою, задекорована руколою і помідором черрі.",
+      "description": "Нова піца на вершковому соусі, з сирними бортиками і кунжутом, куркою, салямі, маринованої кукурудзою, задекорована руколою і помідором черрі.",
       "minPrice": 220,
       "ingredients": [
         "моцарела",
@@ -706,6 +706,30 @@
       "login": "testLogin",
       "password": "testPass",
       "id": 18
+    },
+    {
+      "name": "testName",
+      "login": "testLogin",
+      "password": "testPass",
+      "id": 19
+    },
+    {
+      "name": "testName",
+      "login": "testLogin",
+      "password": "testPass",
+      "id": 20
+    },
+    {
+      "name": "testName",
+      "login": "testLogin",
+      "password": "testPass",
+      "id": 21
+    },
+    {
+      "name": "testName",
+      "login": "testLogin",
+      "password": "testPass",
+      "id": 22
     }
   ],
   "comments": [
@@ -744,6 +768,68 @@
       "text": "Дуже смачна піца, відмінна, завжди гаряча. Чудова упаковка. Суші теж смачні, великі порції, свіжий імбир, доставка завжди раніше ніж обіцяють!))! Зручно, смачно та хочеться повернутися!",
       "productAdvantages": "Смачна піца",
       "productFlaws": "Підгоріле тісто"
+    },
+    {
+      "productId": "5",
+      "author": "customer",
+      "text": "",
+      "productAdvantages": "",
+      "productFlaws": "",
+      "id": 5
+    },
+    {
+      "productId": "5",
+      "author": "customer",
+      "rating": 2,
+      "text": "testtest",
+      "productAdvantages": "test+",
+      "productFlaws": "test-",
+      "id": 6
+    },
+    {
+      "productId": "2",
+      "author": "admin",
+      "rating": 1,
+      "text": "testtest",
+      "productAdvantages": "teee++",
+      "productFlaws": "--",
+      "id": 7
+    },
+    {
+      "productId": "2",
+      "author": "admin",
+      "rating": 4,
+      "text": "wrgwrgwrg",
+      "productAdvantages": "whwheth",
+      "productFlaws": "wrgwrgwrg",
+      "id": 8
+    },
+    {
+      "productId": "6",
+      "author": "customer",
+      "rating": 5,
+      "text": "test",
+      "productAdvantages": "test+",
+      "productFlaws": "test-",
+      "id": 9
+    },
+    {
+      "productId": "8",
+      "author": "customer",
+      "rating": 3,
+      "text": "test",
+      "productAdvantages": "test++",
+      "productFlaws": "test--",
+      "id": 10
+    },
+    {
+      "productId": "8",
+      "author": "admin",
+      "rating": 5,
+      "text": "tetetest",
+      "productAdvantages": "test+",
+      "productFlaws": "test-",
+      "id": 11
     }
   ]
 }

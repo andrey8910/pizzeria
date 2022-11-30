@@ -1,7 +1,8 @@
 <div class="comments-block">
   <app-comment-item
-    *ngFor="let comment of comments"
+    *ngFor="let comment of commentsSub$ | async"
     [commentItem] = "comment"
   ></app-comment-item>
+  <span *ngIf="(commentsSub$ | async)?.length == 0">Для даного товару відгуки відсутні !</span>
 </div>
 

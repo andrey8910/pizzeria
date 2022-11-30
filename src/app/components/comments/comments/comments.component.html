@@ -1,7 +1,9 @@
 <h4>Відгуки</h4>
 <div class="comments-section">
-  <app-comment-form></app-comment-form>
   <app-comments-list
     [itemPizzaId]="itemPizzaId"
   ></app-comments-list>
+  <app-comment-form
+    [itemPizzaId]="itemPizzaId"
+  ></app-comment-form>
 </div>

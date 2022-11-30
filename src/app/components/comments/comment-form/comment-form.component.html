@@ -1,26 +1,57 @@
 
+<div class="no-authorization-block" *ngIf="!resultUserAuthentication.isPassedAuthentication">
+  <p>Для того, щоб залишити відгук, необхідно увійти до системи !</p>
+</div>
 
-<p-accordion [style]="{'width':'100%'}">
-  <p-accordionTab [style]="{'width':'100%'}"  header="Написати відгук">
-    <p *ngIf="!resultUserAuthentication.isPassedAuthentication">Для того, щоб залишити відгук, необхідно увійти до системи !</p>
-    <div *ngIf="resultUserAuthentication.isPassedAuthentication">
-      <form >
-        <span class="p-float-label p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <textarea id="textComment" rows="3" style="resize: none;" cols="30"  pInputTextarea></textarea>
-            <label for="textComment">Коментар</label>
-        </span>
-         <span class="p-float-label p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input type="text" id="inputText-left" pInputText >
-            <label for="inputText-left">Left Icon</label>
-        </span>
+<div *ngIf="resultUserAuthentication.isPassedAuthentication">
 
-        <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
-        <button  type="submit" (click)="addComment()">Додати</button>
+  <form class="add-comment-form" [formGroup]="addCommentForm">
 
-      </form>
-
+    <div class="rating-form">
+      <span>Ваша оцінка: </span>
+      <p-rating [cancel]="false" formControlName="rating"></p-rating>
     </div>
-  </p-accordionTab>
-</p-accordion>
+
+    <span class="p-float-label p-input-icon-left">
+        <i class="pi pi-comment"></i>
+        <textarea id="textComment"
+                  rows="3"
+                  style="resize: none;
+                  width: 100%" cols="30"
+                  pInputTextarea
+                  formControlName="text"
+        ></textarea>
+        <label for="textComment">Коментар</label>
+    </span>
+    <span class="p-float-label p-input-icon-left">
+        <i class="pi pi-thumbs-up"></i>
+        <input type="text"
+               id="inputPlus"
+               pInputText
+               style="width: 100%"
+               formControlName="productAdvantages"
+        >
+        <label for="inputPlus">Переваги</label>
+    </span>
+    <span class="p-float-label p-input-icon-left">
+        <i class="pi pi-thumbs-down"></i>
+        <input type="text"
+               id="inputMinus"
+               pInputText
+               style="width: 100%"
+               formControlName="productFlaws"
+        >
+        <label for="inputPlus">Недоліки</label>
+    </span>
+
+    <button pButton
+            pRipple
+            type="submit"
+            label="Додати відгук"
+            class="p-button-outlined"
+            (click)="addComment()"
+    ></button>
+  </form>
+</div>
+
+

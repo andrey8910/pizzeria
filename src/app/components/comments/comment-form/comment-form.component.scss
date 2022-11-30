@@ -1,4 +1,24 @@
 :host{
+  flex: 1 1 30%;
+  padding: 20px;
 
+  .add-comment-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid rgba(0,0,0, .4);
+    border-radius: 10px;
+    background-color: white;
+
+    .rating-form{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+
+  }
 
 }
