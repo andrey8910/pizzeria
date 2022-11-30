@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import {Users} from "../interfaces/users";
 import {AuthorizationDialogData} from '../interfaces/authorization-dialog';
 import {UsersService} from "./users.service";
+import {LocalStorageService} from "./local-storage.service";
 import {MessageService} from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 import {catchError, finalize, tap} from "rxjs/operators";
@@ -28,6 +29,7 @@ export class UserAuthenticationCheckService implements OnInit{
   constructor(private usersService: UsersService,
               private messageService : MessageService,
               private adminGuard : AdminGuardService,
+              private localStorageService : LocalStorageService
   ) { }
 
   ngOnInit() {
@@ -55,6 +57,7 @@ export class UserAuthenticationCheckService implements OnInit{
                     data.isPassedAuthentication = true
                     data.resultAuthentication = user
                     this.userAuthSubject.next(Object.assign({}, data));
+                    this.localStorageService.setLocalStorage('authorizationData', user);
                     this.showSuccessAuthor(data.resultAuthentication.name)
                   }
                 }
@@ -68,16 +71,14 @@ export class UserAuthenticationCheckService implements OnInit{
     }else{
       this.showErrorAuthor('')
     }
-
-
-
   }
 
 
 
   public logOutUser(){
-    this.userAuthSubject.next(Object.assign({}))
-    this.adminGuard.changeValueAdmin('')
+    this.userAuthSubject.next(Object.assign({}));
+    this.adminGuard.changeValueAdmin('');
+    this.localStorageService.removeLocalStorage('authorizationData')
     this.showWarnLogOut()
   }
 

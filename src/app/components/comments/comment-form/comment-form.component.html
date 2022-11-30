@@ -1,12 +1,24 @@
 
 
-<p-accordion>
-  <p-accordionTab header="Написати відгук">
+<p-accordion [style]="{'width':'100%'}">
+  <p-accordionTab [style]="{'width':'100%'}"  header="Написати відгук">
     <p *ngIf="!resultUserAuthentication.isPassedAuthentication">Для того, щоб залишити відгук, необхідно увійти до системи !</p>
     <div *ngIf="resultUserAuthentication.isPassedAuthentication">
-      <form id="form-comments">
+      <form >
+        <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <textarea id="textComment" rows="3" style="resize: none;" cols="30"  pInputTextarea></textarea>
+            <label for="textComment">Коментар</label>
+        </span>
+         <span class="p-float-label p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" id="inputText-left" pInputText >
+            <label for="inputText-left">Left Icon</label>
+        </span>
+
         <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
         <button  type="submit" (click)="addComment()">Додати</button>
+
       </form>
 
     </div>
