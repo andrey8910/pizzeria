@@ -9,12 +9,12 @@ import { ShoppingCartService } from './services/shopping-cart.service'
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './shared/material/material.module';
 import { AppComponent } from './app.component';
-import { PizzasAllComponent } from './components/pizzas-all/pizzas-all.component';
-import { PizzaCardComponent } from './components/pizza-card/pizza-card.component';
+//import { PizzasAllComponent } from './components/pizzas-all/pizzas-all.component';
+//import { PizzaCardComponent } from './components/pizza-card/pizza-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CurrencyUaPipe } from './shared/pipes/currency-ua.pipe';
 import { HeaderComponent } from './components/header/header.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+//import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {PrimengModule} from "./shared/primeng/primeng.module";
@@ -24,14 +24,15 @@ import { AuthorizationDialogComponent } from './components/authorization-dialog/
 import { AdministrationComponent } from './components/administration/administration.component';
 import { AdminProductsComponent } from './components/administration/admin-products/admin-products.component';
 import { AdminUsersComponent } from './components/administration/admin-users/admin-users.component';
-import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/pizzas-banner.component';
-import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
+//import { PizzasBannerComponent } from './components/pizzas-all/pizzas-banner/pizzas-banner.component';
+//import { ProductsFilterPipe } from './shared/pipes/products-filter.pipe';
 import { RegistrationDialogComponent } from './components/registration-dialog/registration-dialog.component';
 import { PizzaDetailsComponent } from './components/pizza-details/pizza-details.component';
 import { CommentsComponent } from './components/comments/comments/comments.component';
 import { CommentsListComponent } from './components/comments/comments-list/comments-list.component';
 import { CommentItemComponent } from './components/comments/comment-item/comment-item.component';
 import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
+import {RouterModule} from "@angular/router";
 
 
 
@@ -39,11 +40,11 @@ import { CommentFormComponent } from './components/comments/comment-form/comment
 @NgModule({
   declarations: [
     AppComponent,
-    PizzasAllComponent,
-    PizzaCardComponent,
+   // PizzasAllComponent,
+   // PizzaCardComponent,
     CurrencyUaPipe,
     HeaderComponent,
-    NotFoundPageComponent,
+    // NotFoundPageComponent,
     ShoppingCartComponent,
     FooterComponent,
     ShoppingCartItemComponent,
@@ -52,8 +53,8 @@ import { CommentFormComponent } from './components/comments/comment-form/comment
     AdministrationComponent,
     AdminProductsComponent,
     AdminUsersComponent,
-    PizzasBannerComponent,
-    ProductsFilterPipe,
+    //PizzasBannerComponent,
+   // ProductsFilterPipe,
     RegistrationDialogComponent,
     PizzaDetailsComponent,
     CommentsComponent,
@@ -63,6 +64,7 @@ import { CommentFormComponent } from './components/comments/comment-form/comment
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -72,7 +74,7 @@ import { CommentFormComponent } from './components/comments/comment-form/comment
     PrimengModule
 
   ],
-  providers: [ProductsService, ShoppingCartService, ProductsFilterPipe],
+  providers: [ProductsService, ShoppingCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
