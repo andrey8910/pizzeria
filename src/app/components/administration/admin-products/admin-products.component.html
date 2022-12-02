@@ -45,7 +45,7 @@
         </td>
         <td>{{product.title}}</td>
         <td><img [src]="product.imageMain" [alt]="product.title" width="100" class="shadow-4" /></td>
-        <td>{{product.minPrice | currencyUa}}</td>
+        <td>{{product.minPrice }}</td>
 <!--        <td>{{product.category}}</td>-->
         <td><p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating></td>
 <!--        <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>-->

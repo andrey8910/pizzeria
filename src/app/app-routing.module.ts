@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
-import {AdministrationComponent} from "./components/administration/administration.component";
-import {PizzaDetailsComponent} from "./components/pizza-details/pizza-details.component"
 import {AdminGuardService} from "./services/admin-guard.service";
 import {AdminGuard} from "./shared/administration.guard";
+//import {CurrencyUaPipe} from "./shared/pipes/currency-ua.pipe";
 
 
 const routes: Routes = [
@@ -17,9 +15,22 @@ const routes: Routes = [
       .then(module => module.PizzasAllModule)
   },
 
-  { path: 'pizza/:id', component: PizzaDetailsComponent},
-  { path: 'shopping', component: ShoppingCartComponent },
-  { path: 'admin', component: AdministrationComponent, canActivate: [AdminGuard] },
+  { path: 'pizza/:id',
+    loadChildren: () => import('./components/pizza-details/pizza-details.module')
+      .then(module => module.PizzaDetailsModule)
+
+  },
+  { path: 'shopping',
+    loadChildren: () => import('./components/shopping-cart/shopping-cart.module')
+      .then(module => module.ShoppingCartModule)
+
+  },
+  { path: 'admin',
+    loadChildren: () => import('./components/administration/administration.module')
+      .then(module => module.AdministrationModule)
+    //component: AdministrationComponent,
+    //canActivate: [AdminGuard]
+  },
 
   { path: '**',
     loadChildren: () => import('./components/not-found-page/not-found-page.module')
@@ -28,6 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+
   imports: [RouterModule.forChild(routes), CommonModule],
   exports: [RouterModule],
   providers: [AdminGuard, AdminGuardService]

@@ -830,6 +830,15 @@
       "productAdvantages": "test+",
       "productFlaws": "test-",
       "id": 11
+    },
+    {
+      "productId": "10",
+      "author": "customer",
+      "rating": 5,
+      "text": "comment",
+      "productAdvantages": "+",
+      "productFlaws": "-",
+      "id": 12
     }
   ]
 }

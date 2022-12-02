@@ -14,7 +14,7 @@ import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
 
 
 @NgModule({
-  declarations: [PizzasAllComponent, PizzasBannerComponent,PizzaCardComponent,ProductsFilterPipe,CurrencyUaPipe,],
+  declarations: [PizzasAllComponent, PizzasBannerComponent,PizzaCardComponent,ProductsFilterPipe, CurrencyUaPipe],
   imports: [
     CommonModule,
     PrimengModule,
@@ -30,7 +30,7 @@ import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
       }
     ])
   ],
-  providers: [ProductsFilterPipe],
+  providers: [ProductsFilterPipe]
 
 
 })
