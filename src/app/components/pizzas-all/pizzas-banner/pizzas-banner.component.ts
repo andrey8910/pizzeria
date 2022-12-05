@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pizzas-banner.component.scss']
 })
 export class PizzasBannerComponent implements OnInit {
-  images: any[] = [
+
+  private imgList: any[] = [
     {
       "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/16/Panasia_Slider_PC_UKR.jpg",
       "thumbnailImageSrc": "demo/images/galleria/galleria1s.jpg",
@@ -32,6 +33,8 @@ export class PizzasBannerComponent implements OnInit {
       "title": "Title 4"
     }
   ];
+
+  public images = this.imgList
 
   responsiveOptions:any[] = [
     {

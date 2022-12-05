@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { PizzaOrder } from '../interfaces/pizza-order'
 import { LocalStorageService } from './local-storage.service';
 import {MessageService} from 'primeng/api';
+import {LocalStorageKeys} from '../local-storage-keys'
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class ShoppingCartService {
 
   loadAll(){
 
-    if(localStorage.getItem('shoppingList') !== null){
-      this.shoppingList = this.localSService.getLocalStorage('shoppingList');
-      this.totalAmount = this.localSService.getLocalStorage('totalPrice')
+    if(localStorage.getItem(LocalStorageKeys.ShoppingList) !== null){
+      this.shoppingList = this.localSService.getLocalStorage(LocalStorageKeys.ShoppingList);
+      this.totalAmount = this.localSService.getLocalStorage(LocalStorageKeys.TotalPrice)
       this.shoppingSubject.next(this.shoppingList);
     }else {
       this.shoppingList =[];
@@ -47,8 +48,8 @@ export class ShoppingCartService {
       0
     )
     this.shoppingSubject.next(Object.assign([],this.shoppingList));
-    this.localSService.setLocalStorage('shoppingList', this.shoppingList);
-    this.localSService.setLocalStorage('totalPrice', this.totalAmount);
+    this.localSService.setLocalStorage(LocalStorageKeys.ShoppingList, this.shoppingList);
+    this.localSService.setLocalStorage(LocalStorageKeys.TotalPrice, this.totalAmount);
     this.showSuccessAddItem(itemOrder.title)
 
   }
@@ -68,8 +69,8 @@ export class ShoppingCartService {
     })
 
     this.shoppingSubject.next(Object.assign([],this.shoppingList));
-    this.localSService.setLocalStorage('shoppingList', this.shoppingList);
-    this.localSService.setLocalStorage('totalPrice', this.totalAmount);
+    this.localSService.setLocalStorage(LocalStorageKeys.ShoppingList, this.shoppingList);
+    this.localSService.setLocalStorage(LocalStorageKeys.TotalPrice, this.totalAmount);
 
   }
 
@@ -78,7 +79,7 @@ export class ShoppingCartService {
   }
 
   getTotalPrice(){
-    return this.localSService.getLocalStorage('totalPrice')
+    return this.localSService.getLocalStorage(LocalStorageKeys.TotalPrice)
   }
 
   quantityInOneItem(quantity: number, price: number, orderId:number, plusOrMinus: string){
@@ -91,8 +92,8 @@ export class ShoppingCartService {
      }
    })
     this.shoppingSubject.next(Object.assign([],this.shoppingList));
-    this.localSService.setLocalStorage('shoppingList', this.shoppingList);
-    this.localSService.setLocalStorage('totalPrice', this.totalAmount)
+    this.localSService.setLocalStorage(LocalStorageKeys.ShoppingList, this.shoppingList);
+    this.localSService.setLocalStorage(LocalStorageKeys.TotalPrice, this.totalAmount)
 
   }
 }

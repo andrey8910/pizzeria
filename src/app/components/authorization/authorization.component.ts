@@ -6,7 +6,7 @@ import {AuthorizationDialogComponent} from '../authorization-dialog/authorizatio
 import {AuthorizationDialogData} from '../../shared/interfaces/authorization-dialog';
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
 import {LocalStorageService} from '../../shared/services/local-storage.service'
-
+import {LocalStorageKeys} from '../../shared/local-storage-keys'
 import {tap} from "rxjs/operators";
 
 
@@ -35,8 +35,8 @@ export class AuthorizationComponent implements OnInit {
 
   private initialization(){
     this.userAuthenticationCheck$ = this.usersCheckService.userAuthenticationCheck$
-    if(this.localStorageService.getLocalStorage('authorizationData') !== null){
-      const localDataAuthorization = this.localStorageService.getLocalStorage('authorizationData');
+    if(this.localStorageService.getLocalStorage(LocalStorageKeys.AuthorizationData) !== null){
+      const localDataAuthorization = this.localStorageService.getLocalStorage(LocalStorageKeys.AuthorizationData);
       this.usersCheckService.userAuthentication(localDataAuthorization)
 
       this.userAuthenticationCheck$.pipe(

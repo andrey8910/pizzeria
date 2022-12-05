@@ -7,6 +7,7 @@ import {MessageService} from 'primeng/api';
 import { BehaviorSubject } from 'rxjs';
 import {catchError, finalize, tap} from "rxjs/operators";
 import {AdminGuardService} from "./admin-guard.service";
+import {LocalStorageKeys} from "../local-storage-keys"
 
 
 @Injectable({
@@ -57,7 +58,7 @@ export class UserAuthenticationCheckService implements OnInit{
                     data.isPassedAuthentication = true
                     data.resultAuthentication = user
                     this.userAuthSubject.next(Object.assign({}, data));
-                    this.localStorageService.setLocalStorage('authorizationData', user);
+                    this.localStorageService.setLocalStorage(LocalStorageKeys.AuthorizationData, user);
                     this.showSuccessAuthor(data.resultAuthentication.name)
                   }
                 }
@@ -78,7 +79,7 @@ export class UserAuthenticationCheckService implements OnInit{
   public logOutUser(){
     this.userAuthSubject.next(Object.assign({}));
     this.adminGuard.changeValueAdmin('');
-    this.localStorageService.removeLocalStorage('authorizationData')
+    this.localStorageService.removeLocalStorage(LocalStorageKeys.AuthorizationData)
     this.showWarnLogOut()
   }
 

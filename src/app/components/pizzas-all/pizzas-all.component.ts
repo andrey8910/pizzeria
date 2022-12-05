@@ -22,9 +22,9 @@ export class PizzasAllComponent implements OnInit {
   public valueSortingMethod: any
 
   public pizzas: Pizza[];
-  public loader: boolean = false;
-  public showErrorMassage: boolean = false
-  public showProductsNotFound: boolean = false
+  public loader = false;
+  public showErrorMassage = false
+  public showProductsNotFound = false
   public pageSizePagination: number = 6
 
 
