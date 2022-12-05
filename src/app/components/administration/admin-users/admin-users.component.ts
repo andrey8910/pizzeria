@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../../services/users.service';
-import { Users } from '../../../interfaces/users';
+import { UsersService } from '../../../shared/services/users.service';
+import { Users } from '../../../shared/interfaces/users';
 import {tap} from "rxjs/operators";
 
 @Component({

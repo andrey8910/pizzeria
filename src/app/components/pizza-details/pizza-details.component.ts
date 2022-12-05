@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Pizza} from "../../interfaces/pizza";
+import {Pizza} from "../../shared/interfaces/pizza";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
 import {Subscription} from 'rxjs';
-import {ProductsService} from "../../services/products.service";
+import {ProductsService} from "../../shared/services/products.service";
 import {catchError, finalize, tap} from "rxjs/operators";
 import {  FormGroup, FormControl } from '@angular/forms';
-import {SizeParam} from "../../interfaces/size-param";
-import {PizzaOrder} from "../../interfaces/pizza-order";
-import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {SizeParam} from "../../shared/interfaces/size-param";
+import {PizzaOrder} from "../../shared/interfaces/pizza-order";
+import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 
 @Component({
   selector: 'app-pizza-details',

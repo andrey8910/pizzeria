@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Pizza } from '../interfaces/pizza';
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 import {PageEvent} from "@angular/material/paginator";
 
 @Injectable({

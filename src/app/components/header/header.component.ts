@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import { ShoppingCartService } from "../../services/shopping-cart.service";
-import { PizzaOrder } from "../../interfaces/pizza-order";
+import { ShoppingCartService } from "../../shared/services/shopping-cart.service";
+import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 
 @Component({
   selector: 'app-header',

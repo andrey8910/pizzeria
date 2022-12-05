@@ -10,7 +10,7 @@ import {PrimengModule} from "../../shared/primeng/primeng.module";
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "../../shared/material/material.module";
 import {AdminGuard} from "../../shared/administration.guard";
-import {AdminGuardService} from "../../services/admin-guard.service";
+import {AdminGuardService} from "../../shared/services/admin-guard.service";
 
 
 

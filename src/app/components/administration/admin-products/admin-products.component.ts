@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../../services/products.service';
-import { Pizza } from '../../../interfaces/pizza';
+import { ProductsService } from '../../../shared/services/products.service';
+import { Pizza } from '../../../shared/interfaces/pizza';
 import {catchError, finalize, tap} from "rxjs/operators";
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';

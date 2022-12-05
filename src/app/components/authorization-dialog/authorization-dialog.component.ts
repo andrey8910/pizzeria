@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
-import { ValidateLogin, ValidatePass } from '../../interfaces/Validators'
+import { ValidateLogin, ValidatePass } from '../../shared/Validators'
 import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {AuthorizationDialogData} from '../../interfaces/authorization-dialog';
+import {AuthorizationDialogData} from '../../shared/interfaces/authorization-dialog';
 import {RegistrationDialogComponent} from '../registration-dialog/registration-dialog.component'
 
 
@@ -48,10 +48,10 @@ export class AuthorizationDialogComponent implements OnInit {
 
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      //this.answerCompanionDialogSecond = result;
+     dialogRef.afterClosed().subscribe(result => {
+     console.log(result)
 
-    });
+     });
   }
 
 

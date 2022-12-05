@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CommentsService } from '../../../services/comments.service';
-import { Comments } from '../../../interfaces/comments';
+import { CommentsService } from '../../../shared/services/comments.service';
+import { Comments } from '../../../shared/interfaces/comments';
 import {Observable} from "rxjs";
+import {ChangeCommentsSubjectBehaviorService} from "../../../shared/services/change-comments-subject-behavior.service";
 
 @Component({
   selector: 'app-comments-list',
@@ -17,7 +18,8 @@ export class CommentsListComponent implements OnInit {
 
   public commentsSub$: Observable<Comments[]> ;
 
-  constructor(private commentsService: CommentsService) { }
+  constructor(private commentsService: CommentsService,
+              private changeCommentsService: ChangeCommentsSubjectBehaviorService) { }
 
   ngOnInit(): void {
     this.initialization()
@@ -26,7 +28,7 @@ export class CommentsListComponent implements OnInit {
   private initialization(){
     this.loader = true
     this.commentsService.getCommentByProductId(this.itemPizzaId)
-    this.commentsSub$ = this.commentsService.commentsSub$
+    this.commentsSub$ = this.changeCommentsService.commentsSub$
 
   }
 

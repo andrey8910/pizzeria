@@ -3,9 +3,9 @@ import { Observable } from "rxjs";
 import {MatDialog} from '@angular/material/dialog';
 
 import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component';
-import {AuthorizationDialogData} from '../../interfaces/authorization-dialog';
-import {UserAuthenticationCheckService} from "../../services/user-authentication-check.service";
-import {LocalStorageService} from '../../services/local-storage.service'
+import {AuthorizationDialogData} from '../../shared/interfaces/authorization-dialog';
+import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
+import {LocalStorageService} from '../../shared/services/local-storage.service'
 
 import {tap} from "rxjs/operators";
 

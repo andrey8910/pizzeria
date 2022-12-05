@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { AdminGuardService } from '../services/admin-guard.service';
+import { AdminGuardService } from './services/admin-guard.service';
 
 import { Injectable } from '@angular/core';
 

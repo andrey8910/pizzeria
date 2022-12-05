@@ -12,19 +12,22 @@ export class CurrencyUaPipe implements PipeTransform {
 
     if (last === '1') {
       return value + ' гривня';
-    } else if (
+    }
+
+    if (
       lastTwo === '11' ||
       lastTwo === '12' ||
       lastTwo === '13' ||
       lastTwo === '14'
     ) {
       return value + ' гривень';
-    } else if (last === '2' || last === '3' || last === '4') {
-      return value + ' гривні';
-    } else {
-      return value + ' гривень';
     }
-  }
 
+    if (last === '2' || last === '3' || last === '4') {
+      return value + ' гривні';
+    }
+      return value + ' гривень';
+
+  }
 
 }

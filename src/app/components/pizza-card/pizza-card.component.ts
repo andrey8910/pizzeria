@@ -3,10 +3,10 @@ import { Observable } from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
 
 
-import { ShoppingCartService } from "../../services/shopping-cart.service";
-import {Pizza} from "../../interfaces/pizza";
-import {PizzaOrder } from "../../interfaces/pizza-order";
-import { SizeParam } from '../../interfaces/size-param'
+import { ShoppingCartService } from "../../shared/services/shopping-cart.service";
+import {Pizza} from "../../shared/interfaces/pizza";
+import {PizzaOrder } from "../../shared/interfaces/pizza-order";
+import { SizeParam } from '../../shared/interfaces/size-param'
 
 @Component({
   selector: 'app-pizza-card',

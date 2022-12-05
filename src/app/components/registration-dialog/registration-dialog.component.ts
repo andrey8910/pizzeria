@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject  } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {ValidateLogin, ValidatePass, ValidatePassConfirm, passEqual,} from "../../interfaces/Validators";
-import {Users} from "../../interfaces/users";
-import {UsersService} from '../../services/users.service'
+import {ValidateLogin, ValidatePass, ValidatePassConfirm, passEqual,} from "../../shared/Validators";
+import {Users} from "../../shared/interfaces/users";
+import {UsersService} from '../../shared/services/users.service'
 import {MessageService} from 'primeng/api';
 import {tap} from "rxjs/operators";
 

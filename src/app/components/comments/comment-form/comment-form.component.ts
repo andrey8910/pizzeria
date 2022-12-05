@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import {UserAuthenticationCheckService} from '../../../services/user-authentication-check.service';
-import {CommentsService} from '../../../services/comments.service';
+import {UserAuthenticationCheckService} from '../../../shared/services/user-authentication-check.service';
+import {CommentsService} from '../../../shared/services/comments.service';
 import {MessageService} from 'primeng/api';
 import {Observable} from "rxjs";
-import {AuthorizationDialogData} from "../../../interfaces/authorization-dialog";
-import {Comments} from "../../../interfaces/comments";
+import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
+import {Comments} from "../../../shared/interfaces/comments";
 import {tap} from "rxjs/operators";
 
 

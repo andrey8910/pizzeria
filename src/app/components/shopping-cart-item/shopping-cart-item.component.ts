@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
-import { PizzaOrder } from "../../interfaces/pizza-order";
+import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 
 @Component({
   selector: 'app-shopping-cart-item',
