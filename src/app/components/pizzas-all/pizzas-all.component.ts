@@ -16,8 +16,8 @@ export class PizzasAllComponent implements OnInit {
   public searchText: string
   public searchTextBD: string = '';
   public sortingMethod = [
-    {name: 'Ціна низька - висока', code: 'LH'},
-    {name: 'Ціна висока - низька', code: 'HL'},
+    {name: 'Ціна низька - висока', sortBy: 'price', code: 'asc'},
+    {name: 'Ціна висока - низька', sortBy: 'price', code: 'desc'},
   ];
   public valueSortingMethod: any
 
@@ -66,14 +66,13 @@ export class PizzasAllComponent implements OnInit {
   }
 
   public toSortPizzas(){
-    this.productsService.sortPizza(this.valueSortingMethod.code)
-      ?.pipe(
-        tap((data:Pizza[]) => {
-          this.pizzas = data.slice(0, this.pageSizePagination)
-        })
-      )
-      .subscribe()
-
+    if(this.valueSortingMethod.sortBy === 'price'){
+      this.productsService.sortByPrice(this.valueSortingMethod.code)
+        ?.pipe(
+          tap((data:Pizza[]) => {
+            this.pizzas = data.slice(0, this.pageSizePagination)
+          })).subscribe()
+    }
   }
 
   public changePaginator(event: PageEvent){

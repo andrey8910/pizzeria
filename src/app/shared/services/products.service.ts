@@ -27,13 +27,8 @@ export class ProductsService {
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?q=${searchText}`)
   }
 
-  public sortPizza(sortParam: string){
-    if(sortParam == 'LH'){
-    return  this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_sort=minPrice&_order=asc`)
-    }else if(sortParam == 'HL'){
-    return  this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_sort=minPrice&_order=desc`)
-    }
-    return
+  public sortByPrice(sortParam: string){
+    return  this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_sort=minPrice&_order=${sortParam}`)
   }
 
 }

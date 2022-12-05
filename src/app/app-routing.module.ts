@@ -29,7 +29,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/administration/administration.module')
       .then(module => module.AdministrationModule)
     //component: AdministrationComponent,
-    //canActivate: [AdminGuard]
+    //: [AdminGuard]
   },
 
   { path: '**',
