@@ -9,13 +9,10 @@ import {PrimengModule} from "./primeng/primeng.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthorizationDialogComponent} from "../components/authorization-dialog/authorization-dialog.component";
-//import {AdministrationComponent} from "../components/administration/administration.component";
-//import {PizzasBannerComponent} from "../components/pizzas-all/pizzas-banner/pizzas-banner.component";
-//import {AdminProductsComponent} from "../components/administration/admin-products/admin-products.component";
-//import {AdminUsersComponent} from "../components/administration/admin-users/admin-users.component";
 import {RegistrationDialogComponent} from "../components/registration-dialog/registration-dialog.component";
 import {RouterModule} from "@angular/router";
 import {AppRoutingModule} from "../app-routing.module";
+//import {CurrencyUaPipe} from "./pipes/currency-ua.pipe";
 
 
 
@@ -25,10 +22,7 @@ import {AppRoutingModule} from "../app-routing.module";
     AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-   // AdministrationComponent,
-   // AdminProductsComponent,
-   // AdminUsersComponent,
-   // PizzasBannerComponent,
+   // CurrencyUaPipe,
     FooterComponent
   ],
   imports: [
@@ -50,17 +44,14 @@ import {AppRoutingModule} from "../app-routing.module";
     PrimengModule,
     BrowserAnimationsModule,
     HttpClientModule,
+   // CurrencyUaPipe,
     AppRoutingModule,
-
     HeaderComponent,
     AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-   // AdministrationComponent,
-   // AdminProductsComponent,
-   // AdminUsersComponent,
-    //PizzasBannerComponent,
     FooterComponent
   ]
+
 })
 export class SharedModule { }

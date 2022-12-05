@@ -19,7 +19,8 @@
 </button>
 <span *ngIf="successfulAuthorization">ім'я користувача : {{this.checkAuthentication.resultAuthentication.name}}</span>
 <button
-  routerLink="/admin" routerLinkActive="active"
+  routerLink="/admin"
+  routerLinkActive="active"
   *ngIf="showGoToAdmin"
   mat-raised-button
   color="primary"

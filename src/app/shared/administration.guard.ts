@@ -1,7 +1,7 @@
 import {
   CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
+  RouterStateSnapshot
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -21,4 +21,5 @@ export class AdminGuard implements CanActivate {
   ): Observable<boolean> | boolean {
     return this.adminGuardsService.isAdmin;
   }
+
 }
