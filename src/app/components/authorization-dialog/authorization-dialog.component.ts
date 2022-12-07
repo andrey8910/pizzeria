@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject, ChangeDetectionStrategy} from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
 import { ValidateLogin, ValidatePass } from '../../shared/Validators'
 import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
@@ -9,7 +9,8 @@ import {RegistrationDialogComponent} from '../registration-dialog/registration-d
 @Component({
   selector: 'app-authorization-dialog',
   templateUrl: './authorization-dialog.component.html',
-  styleUrls: ['./authorization-dialog.component.scss']
+  styleUrls: ['./authorization-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorizationDialogComponent implements OnInit {
   public hidePass = true

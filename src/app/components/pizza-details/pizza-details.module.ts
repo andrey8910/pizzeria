@@ -10,11 +10,11 @@ import {CommentsComponent} from "../comments/comments/comments.component";
 import {CommentsListComponent} from "../comments/comments-list/comments-list.component";
 import {CommentItemComponent} from "../comments/comment-item/comment-item.component";
 import {CommentFormComponent} from "../comments/comment-form/comment-form.component";
-import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
+
 
 
 @NgModule({
-  declarations: [PizzaDetailsComponent, CommentsComponent, CommentsListComponent, CommentItemComponent, CommentFormComponent, CurrencyUaPipe],
+  declarations: [PizzaDetailsComponent, CommentsComponent, CommentsListComponent, CommentItemComponent, CommentFormComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { Observable } from "rxjs";
 import {MatDialog} from '@angular/material/dialog';
 
@@ -13,7 +13,8 @@ import {tap} from "rxjs/operators";
 @Component({
   selector: 'app-authorization',
   templateUrl: './authorization.component.html',
-  styleUrls: ['./authorization.component.scss']
+  styleUrls: ['./authorization.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorizationComponent implements OnInit {
 

@@ -10,11 +10,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthorizationDialogComponent} from "../components/authorization-dialog/authorization-dialog.component";
 import {RegistrationDialogComponent} from "../components/registration-dialog/registration-dialog.component";
-import {RouterModule} from "@angular/router";
-import {AppRoutingModule} from "../app-routing.module";
-//import {CurrencyUaPipe} from "./pipes/currency-ua.pipe";
-
-
 
 @NgModule({
   declarations: [
@@ -22,7 +17,6 @@ import {AppRoutingModule} from "../app-routing.module";
     AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-   // CurrencyUaPipe,
     FooterComponent
   ],
   imports: [
@@ -33,8 +27,7 @@ import {AppRoutingModule} from "../app-routing.module";
     PrimengModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule,
-    RouterModule.forRoot([])
+
   ],
   exports: [
     CommonModule,
@@ -44,8 +37,6 @@ import {AppRoutingModule} from "../app-routing.module";
     PrimengModule,
     BrowserAnimationsModule,
     HttpClientModule,
-   // CurrencyUaPipe,
-    AppRoutingModule,
     HeaderComponent,
     AuthorizationComponent,
     AuthorizationDialogComponent,

@@ -839,6 +839,15 @@
       "productAdvantages": "+",
       "productFlaws": "-",
       "id": 12
+    },
+    {
+      "productId": "5",
+      "author": "admin",
+      "rating": null,
+      "text": "",
+      "productAdvantages": "",
+      "productFlaws": "",
+      "id": 13
     }
   ]
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-pizzas-banner',
   templateUrl: './pizzas-banner.component.html',
-  styleUrls: ['./pizzas-banner.component.scss']
+  styleUrls: ['./pizzas-banner.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzasBannerComponent implements OnInit {
 

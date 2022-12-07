@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import {AdminGuardService} from "./shared/services/admin-guard.service";
 import {AdminGuard} from "./shared/administration.guard";
-//import {CurrencyUaPipe} from "./shared/pipes/currency-ua.pipe";
+
 
 
 const routes: Routes = [

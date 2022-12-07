@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {AdministrationComponent} from "./administration.component";
-
-import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
 import {AdminProductsComponent} from "./admin-products/admin-products.component";
 import {AdminUsersComponent} from "./admin-users/admin-users.component";
 import {PrimengModule} from "../../shared/primeng/primeng.module";
@@ -14,8 +12,9 @@ import {AdminGuardService} from "../../shared/services/admin-guard.service";
 
 
 
+
 @NgModule({
-  declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent, CurrencyUaPipe],
+  declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent],
   imports: [
     CommonModule,
     PrimengModule,
@@ -31,7 +30,7 @@ import {AdminGuardService} from "../../shared/services/admin-guard.service";
     ])
   ],
   exports: [
-    CurrencyUaPipe
+
   ],
   providers: [AdminGuard, AdminGuardService]
 })

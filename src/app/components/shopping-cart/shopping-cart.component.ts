@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
 import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../shared/services/shopping-cart.service";
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
@@ -6,7 +6,8 @@ import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartComponent implements OnInit {
   public shoppingCart$: Observable<PizzaOrder[]> ;

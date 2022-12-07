@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
 import { Observable } from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
 
@@ -11,7 +11,8 @@ import { SizeParam } from '../../shared/interfaces/size-param'
 @Component({
   selector: 'app-pizza-card',
   templateUrl: './pizza-card.component.html',
-  styleUrls: ['./pizza-card.component.scss']
+  styleUrls: ['./pizza-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzaCardComponent implements OnInit {
 

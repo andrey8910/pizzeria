@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { UsersService } from '../../../shared/services/users.service';
 import { Users } from '../../../shared/interfaces/users';
 import {tap} from "rxjs/operators";
@@ -6,7 +6,8 @@ import {tap} from "rxjs/operators";
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss']
+  styleUrls: ['./admin-users.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminUsersComponent implements OnInit {
   public allUsers: Users[]

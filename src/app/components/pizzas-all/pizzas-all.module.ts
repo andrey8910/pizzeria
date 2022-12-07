@@ -10,11 +10,11 @@ import {PizzaCardComponent} from "../pizza-card/pizza-card.component";
 //import {ProductsService} from "../../services/products.service";
 //import {ShoppingCartService} from "../../services/shopping-cart.service";
 import {ProductsFilterPipe} from "../../shared/pipes/products-filter.pipe";
-import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
+//import {CurrencyUaPipe} from "../../shared/pipes/currency-ua.pipe";
 
 
 @NgModule({
-  declarations: [PizzasAllComponent, PizzasBannerComponent,PizzaCardComponent,ProductsFilterPipe, CurrencyUaPipe],
+  declarations: [PizzasAllComponent, PizzasBannerComponent,PizzaCardComponent,ProductsFilterPipe],
   imports: [
     CommonModule,
     PrimengModule,

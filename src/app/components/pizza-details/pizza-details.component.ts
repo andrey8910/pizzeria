@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Pizza} from "../../shared/interfaces/pizza";
 import {ActivatedRoute} from "@angular/router";
 import { Location } from '@angular/common';
@@ -13,7 +13,8 @@ import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
 @Component({
   selector: 'app-pizza-details',
   templateUrl: './pizza-details.component.html',
-  styleUrls: ['./pizza-details.component.scss']
+  styleUrls: ['./pizza-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzaDetailsComponent implements OnInit {
   public loader = false

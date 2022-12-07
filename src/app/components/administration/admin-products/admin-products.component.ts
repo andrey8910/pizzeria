@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { ProductsService } from '../../../shared/services/products.service';
 import { Pizza } from '../../../shared/interfaces/pizza';
 import {catchError, finalize, tap} from "rxjs/operators";
@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.scss']
+  styleUrls: ['./admin-products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminProductsComponent implements OnInit {
   public loader: boolean = false;

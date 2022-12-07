@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {  FormGroup, FormControl } from '@angular/forms';
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 
 @Component({
   selector: 'app-shopping-cart-item',
   templateUrl: './shopping-cart-item.component.html',
-  styleUrls: ['./shopping-cart-item.component.scss']
+  styleUrls: ['./shopping-cart-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartItemComponent implements OnInit {
 

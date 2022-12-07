@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import {Component, OnInit, Inject, ChangeDetectionStrategy} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {ValidateLogin, ValidatePass, ValidatePassConfirm, passEqual,} from "../../shared/Validators";
@@ -15,7 +15,8 @@ export interface DialogData {
 @Component({
   selector: 'app-registration-dialog',
   templateUrl: './registration-dialog.component.html',
-  styleUrls: ['./registration-dialog.component.scss']
+  styleUrls: ['./registration-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegistrationDialogComponent implements OnInit {
   public hidePass = true

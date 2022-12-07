@@ -8,7 +8,7 @@
     </li>
   </ul>
 
-  <p class="item-price">{{itemShop.price }} <span *ngIf="quantityInOrder"> x  {{quantityInOrder}} = {{sumPriceItem | currencyUa}}</span></p>
+  <p class="item-price">{{itemShop.price }} <span *ngIf="quantityInOrder"> x  {{quantityInOrder}} = {{sumPriceItem | currency}}</span></p>
 
 </div>
 <div class="item-amount" [formGroup]="cartItemForm" >

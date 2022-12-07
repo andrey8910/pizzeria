@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import {UserAuthenticationCheckService} from '../../../shared/services/user-authentication-check.service';
 import {CommentsService} from '../../../shared/services/comments.service';
@@ -12,7 +12,8 @@ import {tap} from "rxjs/operators";
 @Component({
   selector: 'app-comment-form',
   templateUrl: './comment-form.component.html',
-  styleUrls: ['./comment-form.component.scss']
+  styleUrls: ['./comment-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentFormComponent implements OnInit {
   @Input() itemPizzaId: number;

@@ -48,7 +48,7 @@
         </div>
 
         <div class="pizza-details-price">
-          <span class="price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currencyUa) : (itemPizza.minPrice | currencyUa) ): (itemPizza.minPrice | currencyUa)}}</span>
+          <span class="price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currency) : (itemPizza.minPrice | currency) ): (itemPizza.minPrice | currency)}}</span>
           <button
             mat-raised-button
             color="primary"
