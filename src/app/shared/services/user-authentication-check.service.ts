@@ -12,7 +12,7 @@ import {LocalStorageKeys} from "../local-storage-keys"
 
 
 @Injectable(
- // {providedIn: 'root'}
+  {providedIn: 'root'}
 )
 export class UserAuthenticationCheckService implements OnInit{
   private userAuthSubject = new BehaviorSubject<AuthorizationDialogData>({

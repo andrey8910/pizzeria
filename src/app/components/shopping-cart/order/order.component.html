@@ -3,11 +3,39 @@
     <div class="order-title">
       <p>Оформлення замовлення</p>
     </div>
-
+    <div class="order-block">
+      <p class="name-user">Ім'я користувача : {{authenticationData.resultAuthentication.name}}</p>
+      <div class="order-products-list">
+        <div class="card">
+          <p-table [value]="shoppingProductsList" styleClass="p-datatable-lg" [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Назва</th>
+                <th>Розмір</th>
+                <th>Кількість</th>
+                <th>Сума</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+              <tr>
+                <td>{{product.title}}</td>
+                <td>{{product.size}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.price * product.quantity}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+      <div class="order-confirm">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="createOrder()"
+        >Замовлення підтверджую</button>
+      </div>
+    </div>
   </div>
 
-  <ul>
-    <li *ngFor="let prod of shoppingCart$ | async"> {{prod.title}}</li>
-  </ul>
 </div>
 

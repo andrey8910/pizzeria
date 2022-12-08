@@ -1,0 +1,32 @@
+:host{
+  width: 100%;
+}
+
+.order-section{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .order-block{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    gap: 20px;
+
+    .order-products-list{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p-table th, td {
+        text-align: center;
+      }
+    }
+
+    .order-confirm{
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

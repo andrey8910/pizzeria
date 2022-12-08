@@ -8,7 +8,8 @@ import {MaterialModule} from "../../shared/material/material.module";
 import {PrimengModule} from "../../shared/primeng/primeng.module";
 import { OrderComponent } from './order/order.component';
 import {CustomerGuard} from "../../shared/services/customer.guard";
-import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
+
+
 
 
 
@@ -35,6 +36,6 @@ import {UserAuthenticationCheckService} from "../../shared/services/user-authent
 
     ])
   ],
-  providers: [CustomerGuard, UserAuthenticationCheckService]
+  providers: [CustomerGuard]
 })
 export class ShoppingCartModule { }

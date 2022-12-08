@@ -27,6 +27,7 @@ import {RippleModule} from 'primeng/ripple';
 import {GalleriaModule} from 'primeng/galleria';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {AccordionModule} from 'primeng/accordion';
+
 @NgModule({
   declarations: [
 

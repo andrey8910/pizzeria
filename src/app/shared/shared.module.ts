@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthorizationDialogComponent} from "../components/authorization-dialog/authorization-dialog.component";
 import {RegistrationDialogComponent} from "../components/registration-dialog/registration-dialog.component";
+import {UserAuthenticationCheckService} from "./services/user-authentication-check.service";
 
 @NgModule({
   declarations: [
@@ -41,8 +42,10 @@ import {RegistrationDialogComponent} from "../components/registration-dialog/reg
     AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-    FooterComponent
-  ]
+    FooterComponent,
+
+  ],
+  providers: [UserAuthenticationCheckService]
 
 })
 export class SharedModule { }

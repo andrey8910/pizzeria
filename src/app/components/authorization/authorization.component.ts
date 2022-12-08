@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Observable } from "rxjs";
 import {MatDialog} from '@angular/material/dialog';
-
 import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component';
 import {AuthorizationDialogData} from '../../shared/interfaces/authorization-dialog';
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
@@ -43,8 +42,7 @@ export class AuthorizationComponent implements OnInit {
 
       this.userAuthenticationCheck$.pipe(
         tap(res => {
-
-            this.checkAuthentication = res
+          this.checkAuthentication = res
             this.showGoToAdmin = this.checkAuthentication.login == 'admin'
             this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
             this.cdr.markForCheck();
@@ -63,7 +61,6 @@ export class AuthorizationComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
      this.checkDataAuthorization(result)
-
     });
   }
 
@@ -72,7 +69,6 @@ export class AuthorizationComponent implements OnInit {
 
     this.userAuthenticationCheck$.pipe(
       tap(res => {
-        console.log('in authorization component', res)
         this.checkAuthentication = res
         this.showGoToAdmin = this.checkAuthentication.login == 'admin'
         this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
@@ -85,7 +81,4 @@ export class AuthorizationComponent implements OnInit {
   public logOut(){
     this.usersCheckService.logOutUser()
   }
-
-
-
 }

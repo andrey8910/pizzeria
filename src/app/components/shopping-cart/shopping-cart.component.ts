@@ -4,13 +4,13 @@ import { ShoppingCartService } from "../../shared/services/shopping-cart.service
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
 import {AuthorizationDialogData} from "../../shared/interfaces/authorization-dialog";
-import {tap} from "rxjs/operators";
+
+
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
-  providers: [ UserAuthenticationCheckService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartComponent implements OnInit {
@@ -19,23 +19,22 @@ export class ShoppingCartComponent implements OnInit {
   public totalAmount: number;
   public quantityInOrder: number = 1;
 
+
   constructor(private shoppingService: ShoppingCartService,
               private userAuthCheckService: UserAuthenticationCheckService) { }
 
   ngOnInit(): void {
-    //this.shoppingService.loadAll();
+    this.init()
+  }
+  private init(){
     this.userAuthenticationCheck$ = this.userAuthCheckService.userAuthenticationCheck$
-    this.userAuthenticationCheck$.pipe(
-      tap(res => {
-        console.log('in shopping component', res)
-      })
-    ).subscribe()
 
     if(localStorage.getItem("totalPrice") !==null ){
       this.totalAmount = this.shoppingService.getTotalPrice()
     }else{this.totalAmount = this.shoppingService.totalAmount}
 
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
+
   }
 
   public deleteItem(item: {itemId: number, sumPriceItem: number, itemQuantity: number}){
