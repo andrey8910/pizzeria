@@ -11,9 +11,9 @@ import {LocalStorageKeys} from "../local-storage-keys"
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable(
+ // {providedIn: 'root'}
+)
 export class UserAuthenticationCheckService implements OnInit{
   private userAuthSubject = new BehaviorSubject<AuthorizationDialogData>({
     login: '',

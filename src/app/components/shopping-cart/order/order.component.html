@@ -1,5 +1,13 @@
 <div class="container">
-  <h4>Оформлення замовлення</h4>
+  <div class="order-section">
+    <div class="order-title">
+      <p>Оформлення замовлення</p>
+    </div>
 
+  </div>
+
+  <ul>
+    <li *ngFor="let prod of shoppingCart$ | async"> {{prod.title}}</li>
+  </ul>
 </div>
 

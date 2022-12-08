@@ -43,6 +43,7 @@ export class AuthorizationComponent implements OnInit {
 
       this.userAuthenticationCheck$.pipe(
         tap(res => {
+
             this.checkAuthentication = res
             this.showGoToAdmin = this.checkAuthentication.login == 'admin'
             this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
@@ -71,6 +72,7 @@ export class AuthorizationComponent implements OnInit {
 
     this.userAuthenticationCheck$.pipe(
       tap(res => {
+        console.log('in authorization component', res)
         this.checkAuthentication = res
         this.showGoToAdmin = this.checkAuthentication.login == 'admin'
         this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication

@@ -3,6 +3,8 @@ import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../shared/services/shopping-cart.service";
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
+import {AuthorizationDialogData} from "../../shared/interfaces/authorization-dialog";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,13 +15,21 @@ import {UserAuthenticationCheckService} from "../../shared/services/user-authent
 })
 export class ShoppingCartComponent implements OnInit {
   public shoppingCart$: Observable<PizzaOrder[]> ;
+  public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public totalAmount: number;
   public quantityInOrder: number = 1;
 
-  constructor(private shoppingService: ShoppingCartService) { }
+  constructor(private shoppingService: ShoppingCartService,
+              private userAuthCheckService: UserAuthenticationCheckService) { }
 
   ngOnInit(): void {
     //this.shoppingService.loadAll();
+    this.userAuthenticationCheck$ = this.userAuthCheckService.userAuthenticationCheck$
+    this.userAuthenticationCheck$.pipe(
+      tap(res => {
+        console.log('in shopping component', res)
+      })
+    ).subscribe()
 
     if(localStorage.getItem("totalPrice") !==null ){
       this.totalAmount = this.shoppingService.getTotalPrice()

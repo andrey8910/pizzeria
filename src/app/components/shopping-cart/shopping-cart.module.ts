@@ -13,7 +13,7 @@ import {UserAuthenticationCheckService} from "../../shared/services/user-authent
 
 
 @NgModule({
-  declarations: [ShoppingCartComponent, ShoppingCartItemComponent, OrderComponent],
+  declarations: [ShoppingCartComponent, ShoppingCartItemComponent, OrderComponent ],
   imports: [
     CommonModule,
     FormsModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import {AdminGuardService} from "./shared/services/admin-guard.service";
 import {AdminGuard} from "./shared/administration.guard";
+import {UserAuthenticationCheckService} from "./shared/services/user-authentication-check.service";
 
 
 
@@ -41,6 +42,6 @@ const routes: Routes = [
 
   imports: [RouterModule.forChild(routes), CommonModule],
   exports: [RouterModule],
-  providers: [AdminGuard, AdminGuardService]
+  providers: [AdminGuard, AdminGuardService, UserAuthenticationCheckService]
 })
 export class AppRoutingModule { }
