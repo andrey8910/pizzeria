@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Observable } from "rxjs";
 import {MatDialog} from '@angular/material/dialog';
 
@@ -27,6 +27,7 @@ export class AuthorizationComponent implements OnInit {
     public dialog: MatDialog,
     private localStorageService : LocalStorageService,
     private usersCheckService: UserAuthenticationCheckService,
+    private cdr: ChangeDetectorRef
 
   ) { }
 
@@ -45,6 +46,7 @@ export class AuthorizationComponent implements OnInit {
             this.checkAuthentication = res
             this.showGoToAdmin = this.checkAuthentication.login == 'admin'
             this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
+            this.cdr.markForCheck();
           }
         )
       ).subscribe()
@@ -60,6 +62,7 @@ export class AuthorizationComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
      this.checkDataAuthorization(result)
+
     });
   }
 
@@ -71,6 +74,7 @@ export class AuthorizationComponent implements OnInit {
         this.checkAuthentication = res
         this.showGoToAdmin = this.checkAuthentication.login == 'admin'
         this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
+        this.cdr.markForCheck();
         }
       )
     ).subscribe()

@@ -1,5 +1,6 @@
 <div class="container">
   <div class="shopping-orders-block">
+    <p-toast position="bottom-center"></p-toast>
     <p class="orders-block-title">Ваше замовлення : {{totalAmount | currency}}</p>
     <span *ngIf="(shoppingCart$ | async)?.length == 0">Зробіть замовлення!</span>
     <div class="orders-list">
@@ -12,7 +13,12 @@
       >
       </app-shopping-cart-item>
     </div>
-
+    <div class="make-order-block">
+      <button
+        [routerLink]="['order']"
+        mat-raised-button
+        color="primary">Зробити замовлення</button>
+    </div>
   </div>
 </div>
 

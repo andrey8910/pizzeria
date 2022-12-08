@@ -10,6 +10,7 @@ import {AdminGuardService} from "./admin-guard.service";
 import {LocalStorageKeys} from "../local-storage-keys"
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +28,7 @@ export class UserAuthenticationCheckService implements OnInit{
   readonly userAuthenticationCheck$ = this.userAuthSubject.asObservable();
   private allUsers: Users[];
 
+
   constructor(private usersService: UsersService,
               private messageService : MessageService,
               private adminGuard : AdminGuardService,
@@ -38,6 +40,7 @@ export class UserAuthenticationCheckService implements OnInit{
   }
 
   public userAuthentication(data : AuthorizationDialogData){
+
     if(data){
       this.usersService.getUsers()
         .pipe(
@@ -54,11 +57,10 @@ export class UserAuthenticationCheckService implements OnInit{
                     if(user.login == 'admin'){
                       this.adminGuard.changeValueAdmin(data.login)
                     }
-
                     data.isPassedAuthentication = true
                     data.resultAuthentication = user
                     this.userAuthSubject.next(Object.assign({}, data));
-                    this.localStorageService.setLocalStorage(LocalStorageKeys.AuthorizationData, user);
+                    this.localStorageService.setLocalStorage(LocalStorageKeys.AuthorizationData, data);
                     this.showSuccessAuthor(data.resultAuthentication.name)
                   }
                 }

@@ -2,11 +2,13 @@ import {ChangeDetectionStrategy, Component, OnInit,} from '@angular/core';
 import { Observable } from "rxjs";
 import { ShoppingCartService } from "../../shared/services/shopping-cart.service";
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
+import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
+  providers: [ UserAuthenticationCheckService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartComponent implements OnInit {

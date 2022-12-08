@@ -6,11 +6,14 @@ import {ShoppingCartItemComponent} from "../shopping-cart-item/shopping-cart-ite
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../../shared/material/material.module";
 import {PrimengModule} from "../../shared/primeng/primeng.module";
+import { OrderComponent } from './order/order.component';
+import {CustomerGuard} from "../../shared/services/customer.guard";
+import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
 
 
 
 @NgModule({
-  declarations: [ShoppingCartComponent, ShoppingCartItemComponent],
+  declarations: [ShoppingCartComponent, ShoppingCartItemComponent, OrderComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,9 +25,16 @@ import {PrimengModule} from "../../shared/primeng/primeng.module";
         path: '',
         pathMatch: 'full',
         component:  ShoppingCartComponent,
+      },
+      {
+        path: 'order',
+        pathMatch: 'full',
+        canActivate : [CustomerGuard],
+        component:  OrderComponent,
       }
+
     ])
   ],
-  providers: []
+  providers: [CustomerGuard, UserAuthenticationCheckService]
 })
 export class ShoppingCartModule { }
