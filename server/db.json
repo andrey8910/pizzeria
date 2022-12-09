@@ -849,5 +849,55 @@
       "productFlaws": "",
       "id": 13
     }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "creationTime": 0,
+      "orderList": [
+        {
+          "id": 1,
+          "size": {
+            "name": "test",
+            "key": "test"
+          },
+          "quantity": 1
+        }
+      ],
+      "orderStatus": "створено"
+    },
+    {
+      "clientId": 2,
+      "creationTime": 1670583433101,
+      "orderList": [
+        {
+          "productId": 2,
+          "size": {
+            "name": "Мала (22см)",
+            "key": "small"
+          },
+          "quantity": 1
+        },
+        {
+          "productId": 5,
+          "size": {
+            "name": "Середня (30см)",
+            "key": "medium"
+          },
+          "quantity": 1
+        },
+        {
+          "productId": 3,
+          "size": {
+            "name": "Велика (36см)",
+            "key": "big"
+          },
+          "quantity": 1
+        }
+      ],
+      "orderStatus": "створено",
+      "id": 2
+    }
   ]
 }

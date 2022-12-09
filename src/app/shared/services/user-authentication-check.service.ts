@@ -20,6 +20,7 @@ export class UserAuthenticationCheckService implements OnInit{
     password: '',
     isPassedAuthentication: false,
     resultAuthentication: {
+      id: null,
       name : '',
       login : '',
       password : ''
@@ -53,11 +54,11 @@ export class UserAuthenticationCheckService implements OnInit{
 
               this.allUsers.forEach((user: Users) => {
                   if(user.login == data.login && user.password == data.password){
-
                     if(user.login == 'admin'){
                       this.adminGuard.changeValueAdmin(data.login)
                     }
                     data.isPassedAuthentication = true
+                    console.log(user)
                     data.resultAuthentication = user
                     this.userAuthSubject.next(Object.assign({}, data));
                     this.localStorageService.setLocalStorage(LocalStorageKeys.AuthorizationData, data);

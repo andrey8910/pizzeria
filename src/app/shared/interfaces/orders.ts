@@ -2,7 +2,7 @@
 export type statusOrder = "створено" | "в роботі" | "готове" | "видано";
 
 export interface ProductParametersForOrder{
-  id: number,
+  productId: number,
   size: {
     name: string,
     key: string,
@@ -11,7 +11,7 @@ export interface ProductParametersForOrder{
 }
 
   export interface Orders{
-  clientId : number | undefined,
+  clientId : number | null,
   creationTime : number,
   orderList : ProductParametersForOrder[],
   orderStatus : statusOrder,

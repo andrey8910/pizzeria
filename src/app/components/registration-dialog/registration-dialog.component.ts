@@ -42,12 +42,9 @@ export class RegistrationDialogComponent implements OnInit {
     }, passEqual('password', 'confirmPassword'))
   };
 
-
-
-
-
   public onSubmit(data: DialogData){
    this.registrationData = {
+     id: null,
      name: data.name ,
      login: data.login,
      password: data.password

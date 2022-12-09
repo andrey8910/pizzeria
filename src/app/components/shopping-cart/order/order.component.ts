@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserAuthenticationCheckService} from "../../../shared/services/user-authentication-check.service";
 import {ShoppingCartService} from "../../../shared/services/shopping-cart.service";
+import {OrdersService} from "../../../shared/services/orders.service";
 import {Observable} from "rxjs";
 import {PizzaOrder} from "../../../shared/interfaces/pizza-order";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
@@ -24,6 +25,7 @@ export class OrderComponent implements OnInit {
 
   constructor(private shoppingService: ShoppingCartService,
               private userAuthCheckService: UserAuthenticationCheckService,
+              private ordersService : OrdersService,
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -47,7 +49,7 @@ export class OrderComponent implements OnInit {
 
         this.shoppingProductsList.forEach((item: PizzaOrder) => {
           const prodParamOrder : ProductParametersForOrder = {
-            id : item.id,
+            productId : item.id,
             size: {
               name : item.size.name,
               key: item.size.key
@@ -68,7 +70,10 @@ export class OrderComponent implements OnInit {
       orderList : this.productsParametersForOrder,
       orderStatus : "створено"
     }
-    console.log(this.newOrder)
+    this.ordersService.addOrder(this.newOrder)
+      .pipe(
+        tap(res => console.log(res))
+      ).subscribe()
   }
 
 }
