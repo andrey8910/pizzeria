@@ -1,8 +1,19 @@
-import {PizzaOrder} from './pizza-order'
 
-export interface Orders{
+export type statusOrder = "створено" | "в роботі" | "готове" | "видано";
+
+export interface ProductParametersForOrder{
+  id: number,
+  size: {
+    name: string,
+    key: string,
+     },
+  quantity: number
+}
+
+  export interface Orders{
   clientId : number | undefined,
   creationTime : number,
-  orderList : PizzaOrder[]
+  orderList : ProductParametersForOrder[],
+  orderStatus : statusOrder,
 
 }

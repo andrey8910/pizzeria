@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {PizzaOrder} from "../../../shared/interfaces/pizza-order";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
 import {tap} from "rxjs/operators";
-import {Orders} from "../../../shared/interfaces/orders";
+import {Orders, ProductParametersForOrder} from "../../../shared/interfaces/orders";
 
 @Component({
   selector: 'app-order',
@@ -20,6 +20,7 @@ export class OrderComponent implements OnInit {
   public shoppingProductsList : PizzaOrder[]
 
   private newOrder : Orders
+  private productsParametersForOrder : ProductParametersForOrder[] = []
 
   constructor(private shoppingService: ShoppingCartService,
               private userAuthCheckService: UserAuthenticationCheckService,
@@ -43,6 +44,18 @@ export class OrderComponent implements OnInit {
     this.shoppingCart$.pipe(
       tap((res: PizzaOrder[]) => {
         this.shoppingProductsList = res
+
+        this.shoppingProductsList.forEach((item: PizzaOrder) => {
+          const prodParamOrder : ProductParametersForOrder = {
+            id : item.id,
+            size: {
+              name : item.size.name,
+              key: item.size.key
+            },
+            quantity : item.quantity
+          }
+          this.productsParametersForOrder.push(prodParamOrder)
+        })
       })
     ).subscribe()
 
@@ -52,7 +65,8 @@ export class OrderComponent implements OnInit {
     this.newOrder = {
       clientId : this.authenticationData.resultAuthentication.id,
       creationTime : new Date().getTime(),
-      orderList : this.shoppingProductsList
+      orderList : this.productsParametersForOrder,
+      orderStatus : "створено"
     }
     console.log(this.newOrder)
   }
