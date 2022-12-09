@@ -58,11 +58,9 @@ export class UserAuthenticationCheckService implements OnInit{
                       this.adminGuard.changeValueAdmin(data.login)
                     }
                     data.isPassedAuthentication = true
-                    console.log(user)
                     data.resultAuthentication = user
                     this.userAuthSubject.next(Object.assign({}, data));
                     this.localStorageService.setLocalStorage(LocalStorageKeys.AuthorizationData, data);
-                    this.showSuccessAuthor(data.resultAuthentication.name)
                   }
                 }
               )

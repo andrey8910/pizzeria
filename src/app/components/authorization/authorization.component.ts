@@ -20,6 +20,7 @@ export class AuthorizationComponent implements OnInit {
   public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public successfulAuthorization: boolean
   public showGoToAdmin: boolean = false
+  public showGoToOrders = false
   public checkAuthentication: AuthorizationDialogData
 
   constructor(
@@ -36,19 +37,11 @@ export class AuthorizationComponent implements OnInit {
 
   private initialization(){
     this.userAuthenticationCheck$ = this.usersCheckService.userAuthenticationCheck$
+
     if(this.localStorageService.getLocalStorage(LocalStorageKeys.AuthorizationData) !== null){
       const localDataAuthorization = this.localStorageService.getLocalStorage(LocalStorageKeys.AuthorizationData);
       this.usersCheckService.userAuthentication(localDataAuthorization)
-
-      this.userAuthenticationCheck$.pipe(
-        tap(res => {
-          this.checkAuthentication = res
-            this.showGoToAdmin = this.checkAuthentication.login == 'admin'
-            this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
-            this.cdr.markForCheck();
-          }
-        )
-      ).subscribe()
+      this.checkDataAuthorization(localDataAuthorization)
     }
   }
 
@@ -72,6 +65,7 @@ export class AuthorizationComponent implements OnInit {
         this.checkAuthentication = res
         this.showGoToAdmin = this.checkAuthentication.login == 'admin'
         this.successfulAuthorization = this.checkAuthentication.isPassedAuthentication
+        this.showGoToOrders = this.successfulAuthorization && this.checkAuthentication.login !== 'admin'
         this.cdr.markForCheck();
         }
       )

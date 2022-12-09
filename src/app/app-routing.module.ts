@@ -24,12 +24,15 @@ const routes: Routes = [
   { path: 'shopping',
     loadChildren: () => import('./components/shopping-cart/shopping-cart.module')
       .then(module => module.ShoppingCartModule)
-
   },
   { path: 'admin',
     loadChildren: () => import('./components/administration/administration.module')
       .then(module => module.AdministrationModule),
     canActivate: [AdminGuard]
+  },
+  { path: 'user',
+    loadChildren: () => import('./components/user-account/user-account.module')
+      .then(module => module.UserAccountModule)
   },
 
   { path: '**',

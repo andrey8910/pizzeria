@@ -96,4 +96,12 @@ export class ShoppingCartService {
     this.localSService.setLocalStorage(LocalStorageKeys.TotalPrice, this.totalAmount)
 
   }
+
+  clearCart(){
+    this.shoppingList =[];
+    this.totalAmount = 0;
+    this.shoppingSubject.next(Object.assign([],this.shoppingList));
+    this.localSService.setLocalStorage(LocalStorageKeys.ShoppingList, this.shoppingList);
+    this.localSService.setLocalStorage(LocalStorageKeys.TotalPrice, this.totalAmount);
+  }
 }

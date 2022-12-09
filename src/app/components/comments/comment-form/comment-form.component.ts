@@ -35,6 +35,7 @@ export class CommentFormComponent implements OnInit {
       .pipe(
         tap((data:AuthorizationDialogData) => {
           this.resultUserAuthentication = data
+          console.log(data)
         })
       )
       .subscribe()

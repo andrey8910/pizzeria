@@ -1,8 +1,20 @@
 <div class="container">
+
   <div class="shopping-orders-block">
-    <p-toast position="bottom-center"></p-toast>
-    <p class="orders-block-title">Ваше замовлення : {{totalAmount | currency}}</p>
-    <span *ngIf="(shoppingCart$ | async)?.length == 0">Зробіть замовлення!</span>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад</button>
+
+    <p
+      *ngIf="totalAmount !== 0"
+      class="orders-block-title"
+    >Ваше замовлення : {{totalAmount | currency}}</p>
+
+    <p *ngIf="totalAmount == 0">Кошик порожній. Зробіть замовлення !</p>
     <div class="orders-list">
       <app-shopping-cart-item
         class="orders-list-item"
@@ -15,10 +27,13 @@
     </div>
     <div class="make-order-block">
       <button
+        *ngIf="totalAmount !== 0"
         [routerLink]="['order']"
         mat-raised-button
         color="primary">Зробити замовлення</button>
     </div>
   </div>
+
+  <p-toast position="bottom-center"></p-toast>
 </div>
 

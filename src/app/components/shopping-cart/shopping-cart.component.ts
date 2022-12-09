@@ -4,6 +4,7 @@ import { ShoppingCartService } from "../../shared/services/shopping-cart.service
 import { PizzaOrder } from "../../shared/interfaces/pizza-order";
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";
 import {AuthorizationDialogData} from "../../shared/interfaces/authorization-dialog";
+import {Location} from "@angular/common";
 
 
 
@@ -14,6 +15,7 @@ import {AuthorizationDialogData} from "../../shared/interfaces/authorization-dia
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShoppingCartComponent implements OnInit {
+
   public shoppingCart$: Observable<PizzaOrder[]> ;
   public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public totalAmount: number;
@@ -21,14 +23,14 @@ export class ShoppingCartComponent implements OnInit {
 
 
   constructor(private shoppingService: ShoppingCartService,
-              private userAuthCheckService: UserAuthenticationCheckService) { }
+              private userAuthCheckService: UserAuthenticationCheckService,
+              private location: Location,) { }
 
   ngOnInit(): void {
     this.init()
   }
   private init(){
     this.userAuthenticationCheck$ = this.userAuthCheckService.userAuthenticationCheck$
-
     if(localStorage.getItem("totalPrice") !==null ){
       this.totalAmount = this.shoppingService.getTotalPrice()
     }else{this.totalAmount = this.shoppingService.totalAmount}
@@ -47,6 +49,10 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingService.quantityInOneItem(item.quantity, item.price, item.orderId, item.plusOrMinus)
     this.totalAmount = this.shoppingService.totalAmount
 
+  }
+
+  public comeBack(){
+    this.location.back()
   }
 
 }

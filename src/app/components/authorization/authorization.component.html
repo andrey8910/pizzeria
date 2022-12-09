@@ -17,7 +17,18 @@
 ><mat-icon>exit_to_app</mat-icon>
   Вихід
 </button>
+
 <span *ngIf="successfulAuthorization">ім'я користувача : {{this.checkAuthentication.resultAuthentication.name}}</span>
+
+
+<button
+  routerLink="/user"
+  *ngIf="showGoToOrders"
+  mat-raised-button
+  color="primary"
+><mat-icon>dashboard</mat-icon>
+  Мої замовлення</button>
+
 <button
   routerLink="/admin"
   routerLinkActive="active"

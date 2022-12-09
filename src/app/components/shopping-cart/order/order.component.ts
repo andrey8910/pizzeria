@@ -5,8 +5,10 @@ import {OrdersService} from "../../../shared/services/orders.service";
 import {Observable} from "rxjs";
 import {PizzaOrder} from "../../../shared/interfaces/pizza-order";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
-import {tap} from "rxjs/operators";
+import {finalize, tap} from "rxjs/operators";
 import {Orders, ProductParametersForOrder} from "../../../shared/interfaces/orders";
+import {MessageService} from "primeng/api";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-order',
@@ -15,17 +17,22 @@ import {Orders, ProductParametersForOrder} from "../../../shared/interfaces/orde
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderComponent implements OnInit {
+
   public authenticationData: AuthorizationDialogData
   public shoppingCart$: Observable<PizzaOrder[]> ;
   private userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
-  public shoppingProductsList : PizzaOrder[]
+  public shoppingProductsList : PizzaOrder[];
+
 
   private newOrder : Orders
   private productsParametersForOrder : ProductParametersForOrder[] = []
 
+
   constructor(private shoppingService: ShoppingCartService,
               private userAuthCheckService: UserAuthenticationCheckService,
               private ordersService : OrdersService,
+              private messageService : MessageService,
+              private location: Location,
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -45,6 +52,7 @@ export class OrderComponent implements OnInit {
 
     this.shoppingCart$.pipe(
       tap((res: PizzaOrder[]) => {
+
         this.shoppingProductsList = res
 
         this.shoppingProductsList.forEach((item: PizzaOrder) => {
@@ -72,8 +80,20 @@ export class OrderComponent implements OnInit {
     }
     this.ordersService.addOrder(this.newOrder)
       .pipe(
-        tap(res => console.log(res))
+          tap(),
+        finalize(()=>{
+          this.messageService.add({severity:'success', summary: 'Успішно !', detail:`замовлення зроблено`});
+          this.clearShoppingCart()
+        })
       ).subscribe()
+  }
+
+  public clearShoppingCart(){
+    this.shoppingService.clearCart()
+  }
+
+  public comeBack(){
+    this.location.back()
   }
 
 }

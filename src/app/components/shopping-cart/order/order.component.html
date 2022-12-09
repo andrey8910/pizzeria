@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="order-section">
+  <div class="order-section" *ngIf="shoppingProductsList.length !== 0">
     <div class="order-title">
       <p>Оформлення замовлення</p>
     </div>
@@ -19,7 +19,7 @@
             <ng-template pTemplate="body" let-product>
               <tr>
                 <td>{{product.title}}</td>
-                <td>{{product.size}}</td>
+                <td>{{product.size.name}}</td>
                 <td>{{product.quantity}}</td>
                 <td>{{product.price * product.quantity}}</td>
               </tr>
@@ -36,6 +36,19 @@
       </div>
     </div>
   </div>
+
+  <div class="no-order" *ngIf="shoppingProductsList.length == 0">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+    назад</button>
+    <p>Замовлення прийнято</p>
+
+  </div>
+
+  <p-toast position="bottom-center"></p-toast>
 
 </div>
 
