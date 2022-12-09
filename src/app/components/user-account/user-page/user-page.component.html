@@ -1,1 +1,48 @@
-<p>user-page works!</p>
+<div class="container">
+  <div class="user-page">
+    <div class="user-page-header">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="comeBack()">
+        <mat-icon>keyboard_backspace</mat-icon>
+        назад
+      </button>
+
+      <p>Сторінка користувача</p>
+    </div>
+    <div class="user-page-body">
+      <p-tabView>
+
+        <p-tabPanel
+          header="Мої замовлення"
+          [selected]="true"
+          leftIcon="pi pi-shopping-cart">
+          Content 1
+
+        </p-tabPanel>
+
+        <p-tabPanel
+          header="Істория замовлень"
+          leftIcon="pi pi-save">
+          <ul>
+            <li *ngFor="let order of userOrdersAll">
+              {{order.orderStatus}}
+            </li>
+          </ul>
+        </p-tabPanel>
+
+        <p-tabPanel
+          header="Особисті дані"
+          leftIcon="pi pi-user-edit">
+          Content 3
+        </p-tabPanel>
+
+      </p-tabView>
+
+    </div>
+  </div>
+
+</div>
+
+

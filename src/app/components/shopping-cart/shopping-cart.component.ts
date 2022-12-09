@@ -6,8 +6,6 @@ import {UserAuthenticationCheckService} from "../../shared/services/user-authent
 import {AuthorizationDialogData} from "../../shared/interfaces/authorization-dialog";
 import {Location} from "@angular/common";
 
-
-
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',

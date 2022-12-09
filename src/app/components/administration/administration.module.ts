@@ -10,9 +10,6 @@ import {MaterialModule} from "../../shared/material/material.module";
 import {AdminGuard} from "../../shared/administration.guard";
 import {AdminGuardService} from "../../shared/services/admin-guard.service";
 
-
-
-
 @NgModule({
   declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent],
   imports: [

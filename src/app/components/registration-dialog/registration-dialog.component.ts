@@ -44,7 +44,7 @@ export class RegistrationDialogComponent implements OnInit {
 
   public onSubmit(data: DialogData){
    this.registrationData = {
-     id: null,
+     id: 0,
      name: data.name ,
      login: data.login,
      password: data.password

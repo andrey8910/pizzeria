@@ -4,6 +4,7 @@ import {environment} from "../../../environments/environment";
 import {Orders} from "../interfaces/orders"
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,10 @@ export class OrdersService {
 
   getOrdersAll(){
     return this.httpClient.get<Orders[]>(environment.urlOrdersAll)
+  }
+
+  getOrdersByClientId(id: number){
+    return this.httpClient.get<Orders[]>(`${environment.urlOrdersAll}?clientId=${id}`)
   }
 
   addOrder(order: Orders){

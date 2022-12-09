@@ -20,7 +20,7 @@ export class UserAuthenticationCheckService implements OnInit{
     password: '',
     isPassedAuthentication: false,
     resultAuthentication: {
-      id: null,
+      id: 0,
       name : '',
       login : '',
       password : ''

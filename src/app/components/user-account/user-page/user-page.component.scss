@@ -1,0 +1,25 @@
+:host{
+  width: 100%;
+  min-height: 400px;
+
+  .user-page{
+    width: 100%;
+    height: 100%;
+
+    .user-page-header{
+      display: flex;
+      align-items: center;
+      gap: 200px;
+
+
+      p{
+        font-size: 22px;
+
+      }
+    }
+
+    .user-page-body{
+      padding-top: 20px;
+    }
+  }
+}

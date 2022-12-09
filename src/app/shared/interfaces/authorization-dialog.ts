@@ -3,7 +3,7 @@ export interface AuthorizationDialogData {
   password: string;
   isPassedAuthentication: boolean;
   resultAuthentication: {
-    id: number | null,
+    id: number,
     name : string,
     login : string,
     password : string
