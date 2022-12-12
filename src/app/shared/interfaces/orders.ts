@@ -11,6 +11,7 @@ export interface ProductParametersForOrder{
 }
 
   export interface Orders{
+  id? : number,
   clientId : number | null,
   creationTime : number,
   orderList : ProductParametersForOrder[],

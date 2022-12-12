@@ -5,25 +5,30 @@ import {RouterModule} from "@angular/router";
 import {CustomerGuard} from "../../shared/services/customer.guard";
 import {PrimengModule} from "../../shared/primeng/primeng.module";
 import {MaterialModule} from "../../shared/material/material.module";
+import { OrderPendingComponent } from './order-pending/order-pending.component';
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [
-    UserPageComponent
+    UserPageComponent,
+    OrderPendingComponent
   ],
   imports: [
     CommonModule,
     PrimengModule,
     MaterialModule,
+    FormsModule,
     RouterModule.forChild([
       {
-        path: 'account',
+        path: '',
         pathMatch: 'full',
         component: UserPageComponent,
         canActivate : [CustomerGuard],
 
       }
+
     ])
   ],
   providers: [CustomerGuard]

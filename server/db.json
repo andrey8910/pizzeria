@@ -952,7 +952,7 @@
           "quantity": 1
         }
       ],
-      "orderStatus": "створено",
+      "orderStatus": "в роботі",
       "id": 3
     },
     {
@@ -984,7 +984,7 @@
           "quantity": 1
         }
       ],
-      "orderStatus": "створено",
+      "orderStatus": "готове",
       "id": 4
     },
     {
@@ -1205,7 +1205,7 @@
           "quantity": 1
         }
       ],
-      "orderStatus": "створено",
+      "orderStatus": "в роботі",
       "id": 13
     },
     {

@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {OrdersService} from "../../../shared/services/orders.service";
 import {Orders} from "../../../shared/interfaces/orders";
-import {tap} from "rxjs/operators";
 import {UserAuthenticationCheckService} from "../../../shared/services/user-authentication-check.service";
 import {Observable} from "rxjs";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
@@ -29,13 +28,6 @@ export class UserPageComponent implements OnInit {
     this.init()
   }
   private init(){
-    this.userAuthenticationCheck$ = this.userAuthCheckService.userAuthenticationCheck$
-    this.userAuthenticationCheck$.pipe(
-      tap(res => {
-        this.resultAuth = res
-        this.getOrdersById(this.resultAuth.resultAuthentication.id)
-      })
-    ).subscribe()
 
   }
 
@@ -43,13 +35,4 @@ export class UserPageComponent implements OnInit {
     this.location.back()
   }
 
-  private getOrdersById(clientId: number){
-    this.ordersService.getOrdersByClientId(clientId).pipe(
-      tap((res:Orders[]) => {
-        this.userOrdersAll = res
-        this.cdr.markForCheck();
-
-      })
-    ).subscribe()
-  }
 }
