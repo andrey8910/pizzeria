@@ -5,10 +5,11 @@ import {OrdersService} from "../../../shared/services/orders.service";
 import {UserAuthenticationCheckService} from "../../../shared/services/user-authentication-check.service";
 import {tap} from "rxjs/operators";
 import {ProductsService} from "../../../shared/services/products.service";
+import {Location} from "@angular/common";
 
 
 @Component({
-  selector: 'app-order-pending',
+  selector: 'app-orders-pending',
   templateUrl: './order-pending.component.html',
   styleUrls: ['./order-pending.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,10 +23,15 @@ export class OrderPendingComponent implements OnInit {
   constructor( private ordersService: OrdersService,
                private userAuthCheckService: UserAuthenticationCheckService,
                private productsService: ProductsService,
+               private location: Location,
                private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.init()
+  }
+
+  public comeBack(){
+    this.location.back()
   }
 
   private init(){
@@ -34,7 +40,10 @@ export class OrderPendingComponent implements OnInit {
 
       tap(res => {
         this.resultAuth = res
-        this.getOrdersById(this.resultAuth.resultAuthentication.id)
+
+        if(res.isPassedAuthentication){
+          this.getOrdersById(this.resultAuth.resultAuthentication.id)
+        }
       })
     ).subscribe()
   }
@@ -63,11 +72,9 @@ export class OrderPendingComponent implements OnInit {
               ).subscribe()
           })
         })
-
       })
     ).subscribe()
-
-
   }
+
 
 }

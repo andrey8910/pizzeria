@@ -1,0 +1,22 @@
+:host{
+  width: 100%;
+}
+
+.orders-header{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 50px;
+}
+.orders-table{
+  width: 100%;
+  margin-top: 20px;
+
+  th,td{
+    text-align: center;
+  }
+
+  li{
+    list-style: none;
+  }
+}

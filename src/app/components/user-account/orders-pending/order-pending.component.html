@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="orders-header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад
+    </button>
+    <p>Мої замовлення</p>
+  </div>
+
+  <div class="orders-table">
+    <p-table [value]="ordersPending" styleClass="p-datatable-lg" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>№ замовлення</th>
+          <th>Час створення</th>
+          <th>Продукти</th>
+          <th>Статус</th>
+          <th>Сума</th>
+          <th style="width: 4rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td [style]="{'width' : '100px'}">{{product.id}}</td>
+          <td>{{product.creationTime | date: 'MMM d, y, h:mm:ss a'}}</td>
+          <td>
+            <ul>
+              <li *ngFor="let prod of product.orderList">
+                {{prod.title + ", " + prod.quantity + " шт."}}
+              </li>
+            </ul>
+          </td>
+          <td>{{product.orderStatus}}</td>
+          <td>{{product.orderPrice}}</td>
+          <td>
+            <p-button
+              [routerLink]="['/user/order/'+product.id]"
+              type="button"
+              icon="pi pi-search"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
+
+
+
+
+
+

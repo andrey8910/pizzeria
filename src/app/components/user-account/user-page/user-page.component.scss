@@ -7,15 +7,21 @@
     height: 100%;
 
     .user-page-header{
-      display: flex;
-      align-items: center;
-      gap: 200px;
+      margin-top: 20px;
 
+      .user-page-nav{
+        .user-page-nav-list{
+          display: flex;
+          text-align: center;
+          gap: 100px;
+          li{
+            list-style: none;
+          }
+        }
 
-      p{
-        font-size: 22px;
 
       }
+
     }
 
     .user-page-body{
