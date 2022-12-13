@@ -15,6 +15,9 @@ export class OrdersService {
   getOrdersAll(){
     return this.httpClient.get<Orders[]>(environment.urlOrdersAll)
   }
+  getOrderById(id: number){
+    return this.httpClient.get<Orders[]>(`${environment.urlOrdersAll}?id=${id}`)
+  }
 
   getOrdersByClientId(id: number){
     return this.httpClient.get<Orders[]>(`${environment.urlOrdersAll}?clientId=${id}`)

@@ -17,13 +17,13 @@
           </li>
           <li>
             <button
-            label="Особисті дані"
-            mat-stroked-button
-            color="primary"
+              label="Особисті дані"
+              mat-stroked-button
+              color="primary"
             >
-            <mat-icon>person_outline</mat-icon>
+              <mat-icon>person_outline</mat-icon>
               Особисті дані
-          </button></li>
+            </button></li>
           <li>
             <button
               routerLink="/user/orders"
@@ -43,38 +43,40 @@
     <div class="user-page-body">
 
 
-      <p-tabView>
+      <!--      <p-tabView>-->
 
-        <p-tabPanel
-          header="Особисті дані"
-          [selected]="true"
-          leftIcon="pi pi-user-edit">
-          Особисті дані
-        </p-tabPanel>
+      <!--        <p-tabPanel-->
+      <!--          header="Особисті дані"-->
+      <!--          [selected]="true"-->
+      <!--          leftIcon="pi pi-user-edit">-->
+      <!--          Особисті дані-->
+      <!--        </p-tabPanel>-->
 
-        <p-tabPanel
-          header="Мої замовлення"
-          leftIcon="pi pi-shopping-cart">
+      <!--        <p-tabPanel-->
+      <!--          header="Мої замовлення"-->
+      <!--          leftIcon="pi pi-shopping-cart">-->
 
-          <app-orders-pending></app-orders-pending>
+      <!--          <app-orders-pending></app-orders-pending>-->
 
-        </p-tabPanel>
+      <!--        </p-tabPanel>-->
 
-        <p-tabPanel
-          header="Істория замовлень"
-          leftIcon="pi pi-save">
-          Історія замовлень
-          <ul>
-            <li *ngFor="let order of userOrdersAll">
-              {{order.orderStatus}}
-            </li>
-          </ul>
-        </p-tabPanel>
-      </p-tabView>
+      <!--        <p-tabPanel-->
+      <!--          header="Істория замовлень"-->
+      <!--          leftIcon="pi pi-save">-->
+      <!--          Історія замовлень-->
+      <!--          <ul>-->
+      <!--            <li *ngFor="let order of userOrdersAll">-->
+      <!--              {{order.orderStatus}}-->
+      <!--            </li>-->
+      <!--          </ul>-->
+      <!--        </p-tabPanel>-->
+      <!--      </p-tabView>-->
 
     </div>
   </div>
-
 </div>
+
+
+
 
 

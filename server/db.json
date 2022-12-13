@@ -1247,6 +1247,22 @@
       ],
       "orderStatus": "створено",
       "id": 15
+    },
+    {
+      "clientId": 2,
+      "creationTime": 1670930266938,
+      "orderList": [
+        {
+          "productId": 3,
+          "size": {
+            "name": "Велика (36см)",
+            "key": "big"
+          },
+          "quantity": 4
+        }
+      ],
+      "orderStatus": "в роботі",
+      "id": 16
     }
   ]
 }
