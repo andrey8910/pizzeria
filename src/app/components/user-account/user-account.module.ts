@@ -8,6 +8,7 @@ import {MaterialModule} from "../../shared/material/material.module";
 import { OrderPendingComponent } from './orders-pending/order-pending.component';
 import {FormsModule} from "@angular/forms";
 import { OrderPageComponent } from './order-page/order-page.component';
+import { UserPersonalDataComponent } from './user-personal-data/user-personal-data.component';
 
 
 
@@ -15,7 +16,8 @@ import { OrderPageComponent } from './order-page/order-page.component';
   declarations: [
     UserPageComponent,
     OrderPendingComponent,
-    OrderPageComponent
+    OrderPageComponent,
+    UserPersonalDataComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,11 @@ import { OrderPageComponent } from './order-page/order-page.component';
         path: 'order/:id',
         pathMatch: 'full',
         component: OrderPageComponent,
+      },
+      {
+        path: 'info',
+        pathMatch: 'full',
+        component: UserPersonalDataComponent,
       }
 
     ])

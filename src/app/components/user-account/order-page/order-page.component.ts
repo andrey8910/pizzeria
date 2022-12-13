@@ -24,6 +24,8 @@ export class OrderPageComponent implements OnInit {
   }
   public orderList: any[] = []
 
+  public orderTotalPrice = 0
+
   private subscription: Subscription;
 
 
@@ -64,6 +66,7 @@ export class OrderPageComponent implements OnInit {
                 tap((res: any) => {
                   orderListItem.title = res[0].title
                   orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
+                  this.orderTotalPrice += orderListItem.sumPrice
                   orderListItem.weight = res[0].params.weight[orderListItem.size.key]
 
                   this.orderList.push(orderListItem)
@@ -72,6 +75,7 @@ export class OrderPageComponent implements OnInit {
               ).subscribe()
           })
           this.cdr.markForCheck();
+
         })
       ).subscribe()
   }
