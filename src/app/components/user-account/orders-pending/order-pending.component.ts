@@ -56,7 +56,7 @@ export class OrderPendingComponent implements OnInit {
 
         this.ordersPending = res.filter(item => item.orderStatus === "в роботі")
 
-        this.ordersPending.map((item) => {
+        this.ordersPending.map((item: any) => {
           item.orderPrice = 0
           item.orderList.forEach((listItem:any) =>{
             listItem.idOrder = item.id

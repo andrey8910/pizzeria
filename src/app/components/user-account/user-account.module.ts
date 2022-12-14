@@ -9,6 +9,7 @@ import { OrderPendingComponent } from './orders-pending/order-pending.component'
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { OrderPageComponent } from './order-page/order-page.component';
 import { UserPersonalDataComponent } from './user-personal-data/user-personal-data.component';
+import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 
 
 
@@ -17,7 +18,8 @@ import { UserPersonalDataComponent } from './user-personal-data/user-personal-da
     UserPageComponent,
     OrderPendingComponent,
     OrderPageComponent,
-    UserPersonalDataComponent
+    UserPersonalDataComponent,
+    OrdersHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,11 @@ import { UserPersonalDataComponent } from './user-personal-data/user-personal-da
         path: 'info',
         pathMatch: 'full',
         component: UserPersonalDataComponent,
+      },
+      {
+        path: 'history',
+        pathMatch: 'full',
+        component: OrdersHistoryComponent,
       }
 
     ])
