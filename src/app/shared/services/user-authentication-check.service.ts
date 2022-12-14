@@ -50,7 +50,7 @@ export class UserAuthenticationCheckService implements OnInit{
           }),
           finalize(() => {
 
-            if(this.allUsers.some(user => user.login === data.login)){
+            if(this.allUsers.some(user => user.login === data.login && user.password == data.password)){
 
               this.allUsers.forEach((user: Users) => {
                   if(user.login == data.login && user.password == data.password){
@@ -74,8 +74,6 @@ export class UserAuthenticationCheckService implements OnInit{
       this.showErrorAuthor('')
     }
   }
-
-
 
   public logOutUser(){
     this.userAuthSubject.next(Object.assign({}));

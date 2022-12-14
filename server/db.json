@@ -616,10 +616,11 @@
       "password": "adminA1"
     },
     {
-      "id": 2,
       "name": "customer",
       "login": "customer",
-      "password": "customerA1"
+      "password": "customerA1",
+      "confirmPassword": "customerA1",
+      "id": 2
     },
     {
       "id": 3,
@@ -754,6 +755,13 @@
       "name": "testName",
       "login": "testLogin",
       "password": "testPass"
+    },
+    {
+      "name": "customName",
+      "login": "custLogin",
+      "password": "customA11",
+      "confirmPassword": "customA11",
+      "id": 27
     }
   ],
   "comments": [

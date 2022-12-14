@@ -6,12 +6,8 @@ import {Users} from "../../shared/interfaces/users";
 import {UsersService} from '../../shared/services/users.service'
 import {MessageService} from 'primeng/api';
 import {tap} from "rxjs/operators";
+import {RegistrationData} from "../../shared/interfaces/registration-data";
 
-export interface DialogData {
-  name: string;
-  login: string;
-  password: string
-}
 @Component({
   selector: 'app-registration-dialog',
   templateUrl: './registration-dialog.component.html',
@@ -25,7 +21,7 @@ export class RegistrationDialogComponent implements OnInit {
   private registrationData : Users
 
   constructor( public dialogRef: MatDialogRef<RegistrationDialogComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: DialogData,
+               @Inject(MAT_DIALOG_DATA) public data: RegistrationData,
                private usersService: UsersService,
                private messageService: MessageService) { }
 
@@ -42,12 +38,13 @@ export class RegistrationDialogComponent implements OnInit {
     }, passEqual('password', 'confirmPassword'))
   };
 
-  public onSubmit(data: DialogData){
+  public onSubmit(data: RegistrationData){
    this.registrationData = {
      id: 0,
      name: data.name ,
      login: data.login,
-     password: data.password
+     password: data.password,
+
    }
 
     this.usersService.addUser(this.registrationData)

@@ -6,7 +6,7 @@ import {CustomerGuard} from "../../shared/services/customer.guard";
 import {PrimengModule} from "../../shared/primeng/primeng.module";
 import {MaterialModule} from "../../shared/material/material.module";
 import { OrderPendingComponent } from './orders-pending/order-pending.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { OrderPageComponent } from './order-page/order-page.component';
 import { UserPersonalDataComponent } from './user-personal-data/user-personal-data.component';
 
@@ -24,6 +24,7 @@ import { UserPersonalDataComponent } from './user-personal-data/user-personal-da
     PrimengModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',

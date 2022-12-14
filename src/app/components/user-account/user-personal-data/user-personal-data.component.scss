@@ -9,4 +9,48 @@
     gap: 100px;
     align-items: center;
   }
+
+  .personal-data-page{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+
+    .personal-data-item{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      span{
+        font-size: 18px;
+        padding: 6px;
+        background-color: rgba(0,0,0, .1);
+        border-radius: 6px;
+      }
+    }
+    .personal-data-editor{
+      width: 400px;
+      border: 1px solid red;
+      border-radius: 20px;
+
+      .data-editor-form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 30px;
+
+        input{
+          width: 100%;
+        }
+        .personal-data-editor-button{
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+        }
+      }
+
+
+    }
+  }
 }

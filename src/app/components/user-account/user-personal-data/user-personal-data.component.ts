@@ -3,7 +3,12 @@ import {Location} from "@angular/common";
 import {UserAuthenticationCheckService} from "../../../shared/services/user-authentication-check.service";
 import {Observable} from "rxjs";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
-import {tap} from "rxjs/operators";
+import {finalize, tap} from "rxjs/operators";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Users} from "../../../shared/interfaces/users";
+import {passEqual, ValidateLogin, ValidatePass, ValidatePassConfirm} from "../../../shared/Validators";
+import {RegistrationData} from "../../../shared/interfaces/registration-data";
+import {UsersService} from "../../../shared/services/users.service";
 
 @Component({
   selector: 'app-user-personal-data',
@@ -11,13 +16,20 @@ import {tap} from "rxjs/operators";
   styleUrls: ['./user-personal-data.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class UserPersonalDataComponent implements OnInit {
 
   public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public resultAuth: AuthorizationDialogData;
 
+  public showEditor = false
+  public isEditedData = false
+
+  public formGroupEditorPersonalData: FormGroup;
+
   constructor( private location: Location,
                private userAuthCheckService: UserAuthenticationCheckService,
+               private usersService: UsersService,
                private cdr: ChangeDetectorRef,) { }
 
   ngOnInit(): void {
@@ -32,13 +44,38 @@ export class UserPersonalDataComponent implements OnInit {
           this.resultAuth = res
           this.cdr.markForCheck();
         }
-
       })
     ).subscribe()
+
+    this.createFormEditPersonalData()
   }
 
+  private createFormEditPersonalData(){
+    this.formGroupEditorPersonalData = new FormGroup<any>({
+      name: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(12)]),
+      login: new FormControl('', [Validators.required, ValidateLogin]),
+      password: new FormControl('', [Validators.required, ValidatePass]),
+      confirmPassword: new FormControl('', [Validators.required, ValidatePassConfirm])
+    }, passEqual('password', 'confirmPassword'))
+  }
 
   public comeBack(){
     this.location.back()
+  }
+
+  public onSubmitEditorForm(value: RegistrationData){
+    this.usersService.editUser(value, this.resultAuth.resultAuthentication.id)
+      .pipe(
+        tap((res:Users) => {
+          this.resultAuth.resultAuthentication.name = res.name
+          this.resultAuth.resultAuthentication.login = res.login
+          this.resultAuth.resultAuthentication.password = res.password
+          this.cdr.markForCheck();
+        }),
+        finalize(() => {
+          this.isEditedData = true
+          this.userAuthCheckService.logOutUser()
+        })
+      ).subscribe()
   }
 }

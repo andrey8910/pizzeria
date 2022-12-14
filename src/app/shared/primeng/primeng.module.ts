@@ -27,7 +27,8 @@ import {RippleModule} from 'primeng/ripple';
 import {GalleriaModule} from 'primeng/galleria';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {AccordionModule} from 'primeng/accordion';
-
+import {PasswordModule} from 'primeng/password';
+import {DividerModule} from 'primeng/divider';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,10 @@ import {AccordionModule} from 'primeng/accordion';
     InputTextareaModule,
     GalleriaModule,
     ScrollTopModule,
-    AccordionModule
+    AccordionModule,
+    PasswordModule,
+    DividerModule
+
 
 
   ],
@@ -90,7 +94,9 @@ import {AccordionModule} from 'primeng/accordion';
     InputTextareaModule,
     GalleriaModule,
     ScrollTopModule,
-    AccordionModule
+    AccordionModule,
+    PasswordModule,
+    DividerModule
 
   ],
   providers: [MessageService, ConfirmationService]
