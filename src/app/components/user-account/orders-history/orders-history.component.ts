@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {AuthorizationDialogData} from "../../../shared/interfaces/authorization-dialog";
 import {tap} from "rxjs/operators";
 import {ProductsService} from "../../../shared/services/products.service";
+import {SortEvent} from "primeng/api";
 
 @Component({
   selector: 'app-orders-history',
@@ -16,7 +17,7 @@ import {ProductsService} from "../../../shared/services/products.service";
 })
 export class OrdersHistoryComponent implements OnInit {
 
-  public ordersAll: any[]
+  public ordersIssued: any[]
   public readyOrdersList = false
   public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
   public resultAuth: AuthorizationDialogData;
@@ -48,28 +49,30 @@ export class OrdersHistoryComponent implements OnInit {
   public getOrderByClientId(clientId: number){
     this.ordersService.getOrdersByClientId(clientId).pipe(
       tap((res:Orders[]) => {
-        if(res.length > 0){
-          this.ordersAll = res
-          this.ordersAll.map((item) => {
-            item.orderPrice = 0
-            item.orderList.forEach((listItem:any) =>{
-              listItem.idOrder = item.id
 
-              this.productsService.getPizzaById(listItem.productId)
-                .pipe(
-                  tap((product: any) => {
-                    listItem.title = product[0].title
-                    listItem.price = product[0].params.price[listItem.size.key]
-                    item.orderPrice += listItem.price * listItem.quantity
-                    this.cdr.markForCheck();
-                  })
-                ).subscribe()
+          this.ordersIssued = res.filter(item => item.orderStatus === "видано")
+          if(this.ordersIssued.length > 0){
+            this.ordersIssued.map((item) => {
+              item.orderPrice = 0
+              item.orderList.forEach((listItem:any) =>{
+                listItem.idOrder = item.id
+
+                this.productsService.getPizzaById(listItem.productId)
+                  .pipe(
+                    tap((product: any) => {
+                      listItem.title = product[0].title
+                      listItem.price = product[0].params.price[listItem.size.key]
+                      item.orderPrice += listItem.price * listItem.quantity
+                      this.cdr.markForCheck();
+                    })
+                  ).subscribe()
+              })
             })
-          })
-          this.readyOrdersList = true
-        }else{
-          this.readyOrdersList = false
-        }
+            this.readyOrdersList = true
+          }else{
+            this.readyOrdersList = false
+          }
+
       })
     ).subscribe()
   }
@@ -78,8 +81,23 @@ export class OrdersHistoryComponent implements OnInit {
     this.location.back()
   }
 
-  public test(){
 
+  customSort(event: SortEvent) {
+
+    if(event.data && event.order){
+      const order = event.order
+      const field: any = event.field
+
+      event.data.sort((data1: any,data2: any) => {
+        if(data1[field] > data2[field]){
+          return order * 1
+        }
+        if(data1[field] < data2[field]){
+          return order * -1
+        }
+       return 0
+      })
+    }
     this.cdr.markForCheck();
   }
 }

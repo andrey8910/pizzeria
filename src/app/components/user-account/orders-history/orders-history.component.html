@@ -7,23 +7,26 @@
       <mat-icon>keyboard_backspace</mat-icon>
       назад
     </button>
-    <p>Історія моїх замовлень</p>
+    <p>Історія виданих замовлень</p>
   </div>
 
+  <p class="not-found-orders-text" *ngIf="!readyOrdersList">Ви ще не отримали жодного замовленя</p>
+
   <div class="orders-table" *ngIf="readyOrdersList">
-    <p-table [value]="ordersAll" styleClass="p-datatable-lg" [tableStyle]="{'min-width': '50rem'}">
+    <p-table
+      [value]="ordersIssued"
+      styleClass="p-datatable-lg"
+      (sortFunction)="customSort($event)"
+      [customSort]="true"
+      [tableStyle]="{'min-width': '50rem'}">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="code" style="width:20%">№ замовлення <p-sortIcon (click)="test()" field="code"></p-sortIcon></th>
-          <th pSortableColumn="name" style="width:20%">Час створення <p-sortIcon field="name"></p-sortIcon></th>
-          <th pSortableColumn="category" style="width:20%">Продукти <p-sortIcon field="category"></p-sortIcon></th>
-          <th pSortableColumn="quantity" style="width:20%">Статус <p-sortIcon field="quantity"></p-sortIcon></th>
-          <th pSortableColumn="price" style="width:20%">Сума <p-sortIcon field="price"></p-sortIcon></th>
-<!--          <th>№ замовлення</th>-->
-<!--          <th>Час створення</th>-->
-<!--          <th>Продукти</th>-->
-<!--          <th>Статус</th>-->
-<!--          <th>Сума</th>-->
+          <th pSortableColumn="id" style="width:20%">№ замовлення <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="creationTime" style="width:20%">Час створення <p-sortIcon field="creationTime"></p-sortIcon></th>
+          <th style="width:20%">Продукти </th>
+          <th pSortableColumn="orderStatus" style="width:20%">Статус <p-sortIcon field="orderStatus"></p-sortIcon></th>
+          <th pSortableColumn="orderPrice" style="width:20%">Сума<p-sortIcon field="orderPrice"></p-sortIcon></th>
+
           <th style="width: 4rem"></th>
         </tr>
       </ng-template>

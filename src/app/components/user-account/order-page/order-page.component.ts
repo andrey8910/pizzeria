@@ -22,6 +22,7 @@ export class OrderPageComponent implements OnInit {
      orderList: [],
      orderStatus: "в роботі"
   }
+  public orderNotFound = false
   public orderList: any[] = []
 
   public orderTotalPrice = 0
@@ -45,37 +46,43 @@ export class OrderPageComponent implements OnInit {
 
   private init(){
     this.subscription = this.activateRoute.params.subscribe(params => this.orderId = params['id']);
+
     this.ordersService.getOrderById(this.orderId)
       .pipe(
         tap((order:Orders[]) => {
-          this.order = order[0]
-          order[0].orderList.forEach(item =>{
+          if(order.length > 0){
+            this.orderNotFound = false
+            this.order = order[0]
+            order[0].orderList.forEach(item =>{
 
-            let orderListItem: any = {
-              productId: item.productId,
-              title: '',
-              quantity: item.quantity,
-              size: item.size,
-              weight: 0,
-              sumPrice: 0
+              let orderListItem: any = {
+                productId: item.productId,
+                title: '',
+                quantity: item.quantity,
+                size: item.size,
+                weight: 0,
+                sumPrice: 0
 
-            }
+              }
 
-            this.productsService.getPizzaById(item.productId)
-              .pipe(
-                tap((res: any) => {
-                  orderListItem.title = res[0].title
-                  orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
-                  this.orderTotalPrice += orderListItem.sumPrice
-                  orderListItem.weight = res[0].params.weight[orderListItem.size.key]
+              this.productsService.getPizzaById(item.productId)
+                .pipe(
+                  tap((res: any) => {
+                    orderListItem.title = res[0].title
+                    orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
+                    this.orderTotalPrice += orderListItem.sumPrice
+                    orderListItem.weight = res[0].params.weight[orderListItem.size.key]
 
-                  this.orderList.push(orderListItem)
-                  this.cdr.markForCheck();
-                })
-              ).subscribe()
-          })
-          this.cdr.markForCheck();
-
+                    this.orderList.push(orderListItem)
+                    this.cdr.markForCheck();
+                  })
+                ).subscribe()
+            })
+            this.cdr.markForCheck();
+          }else{
+            this.orderNotFound = true
+            this.cdr.markForCheck();
+          }
         })
       ).subscribe()
   }

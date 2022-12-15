@@ -9,7 +9,10 @@
     </button>
     <p>Сторінка замовлення № {{orderId}}</p>
   </div>
-  <div class="order-page-body">
+
+  <p class="order-not-found" *ngIf="orderNotFound">Замовлення не знайдено</p>
+
+  <div class="order-page-body" *ngIf="!orderNotFound">
     <div class="order-list-table">
 
       <p-table [value]="orderList" styleClass="p-datatable-lg" [tableStyle]="{'min-width': '50rem'}">
