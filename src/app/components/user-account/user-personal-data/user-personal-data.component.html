@@ -15,7 +15,17 @@
     <div class="personal-data-item">
       <p>Name : <span>{{resultAuth.resultAuthentication.name}}</span></p>
       <p>Login : <span>{{resultAuth.resultAuthentication.login}}</span></p>
-      <p>Password : <span>{{resultAuth.resultAuthentication.password}}</span></p>
+      <p>Password :
+        <span *ngIf="hidePassValue">
+          {{resultAuth.resultAuthentication.password}}
+        </span>
+        <span  *ngIf="!hidePassValue">
+          *************
+        </span>
+        <button mat-icon-button matSuffix (click)="hidePassValue = !hidePassValue" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassValue">
+          <mat-icon>{{hidePassValue ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </p>
 
       <button
         *ngIf="!showEditor"
@@ -36,7 +46,7 @@
         id="formGroupEditorPersonalData"
         class="data-editor-form"
         [formGroup]="formGroupEditorPersonalData"
-        (ngSubmit)="onSubmitEditorForm(formGroupEditorPersonalData.value)"
+
       >
         <div class="p-float-label">
             <input
@@ -58,7 +68,7 @@
 
         <div class="p-float-label">
             <input
-              type="text"
+             type="text"
               id="data-login"
               formControlName="login"
               pTooltip="від 3 до 10 символів"
@@ -102,24 +112,25 @@
           </span>
         </div>
 
-        <div class="p-float-label">
-            <input
-              type="text"
-              id="data-confirm-pass"
-              formControlName="confirmPassword"
-              width="100%"
-              pTooltip="паролі повмнні співпадати"
-              tooltipPosition="right"
-              pInputText>
-            <label for="data-confirm-pass">Повторіть пароль</label>
-
-          <span
-            class="error-valid-message"
-            *ngIf="formGroupEditorPersonalData.controls['confirmPassword'].invalid && formGroupEditorPersonalData.controls['confirmPassword'].touched"
-          >
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Поторіть ваш пароль</mat-label>
+          <input
+            matInput [type]="hidePassConfirm ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            width="100%"
+            pTooltip="паролі повмнні співпадати"
+            tooltipPosition="right">
+          <button mat-icon-button matSuffix (click)="hidePassConfirm = !hidePassConfirm" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassConfirm">
+            <mat-icon>{{hidePassConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <span
+          class="error-valid-message"
+          *ngIf="formGroupEditorPersonalData.controls['confirmPassword'].invalid && formGroupEditorPersonalData.controls['confirmPassword'].touched"
+        >
             Помилка! Вказані паролі не співпадають!
           </span>
-        </div>
+
         <div class="personal-data-editor-button" *ngIf="!isEditedData">
           <button
             mat-stroked-button
@@ -132,6 +143,7 @@
             type="submit"
             form = "formGroupEditorPersonalData"
             [disabled] = "formGroupEditorPersonalData.invalid"
+            (click)="onSubmitEditorForm(formGroupEditorPersonalData.value)"
           >Зберегти зміни</button>
         </div>
 

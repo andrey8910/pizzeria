@@ -10,7 +10,6 @@ import {AdminGuardService} from "./admin-guard.service";
 import {LocalStorageKeys} from "../local-storage-keys"
 
 
-
 @Injectable(
   {providedIn: 'root'}
 )
@@ -74,6 +73,7 @@ export class UserAuthenticationCheckService implements OnInit{
       this.showErrorAuthor('')
     }
   }
+
 
   public logOutUser(){
     this.userAuthSubject.next(Object.assign({}));

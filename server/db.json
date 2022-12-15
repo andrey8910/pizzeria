@@ -616,10 +616,9 @@
       "password": "adminA1"
     },
     {
-      "name": "customer",
-      "login": "customer",
+      "name": "cus",
+      "login": "cus",
       "password": "customerA1",
-      "confirmPassword": "customerA1",
       "id": 2
     },
     {

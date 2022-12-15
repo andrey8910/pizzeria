@@ -26,10 +26,13 @@ export class UserPersonalDataComponent implements OnInit {
   public isEditedData = false
 
   public formGroupEditorPersonalData: FormGroup;
+  public hidePassValue = false
+  public hidePassConfirm = false
 
   constructor( private location: Location,
                private userAuthCheckService: UserAuthenticationCheckService,
                private usersService: UsersService,
+               private usersCheckService: UserAuthenticationCheckService,
                private cdr: ChangeDetectorRef,) { }
 
   ngOnInit(): void {
@@ -64,17 +67,37 @@ export class UserPersonalDataComponent implements OnInit {
   }
 
   public onSubmitEditorForm(value: RegistrationData){
-    this.usersService.editUser(value, this.resultAuth.resultAuthentication.id)
+
+    const editUserData: RegistrationData = {
+      name: value.name,
+      login: value.login,
+      password: value.password
+    }
+    const userNewData: AuthorizationDialogData = {
+      isPassedAuthentication: this.resultAuth.isPassedAuthentication,
+      login: value.login,
+      password: value.password,
+
+      resultAuthentication: {
+        id: this.resultAuth.resultAuthentication.id,
+        name: value.name,
+        login: value.login,
+        password: value.password
+      }
+
+    }
+
+    this.usersService.editUser(editUserData, this.resultAuth.resultAuthentication.id)
       .pipe(
         tap((res:Users) => {
           this.resultAuth.resultAuthentication.name = res.name
           this.resultAuth.resultAuthentication.login = res.login
           this.resultAuth.resultAuthentication.password = res.password
+          this.usersCheckService.userAuthentication(userNewData)
           this.cdr.markForCheck();
         }),
         finalize(() => {
           this.isEditedData = true
-          this.userAuthCheckService.logOutUser()
         })
       ).subscribe()
   }
