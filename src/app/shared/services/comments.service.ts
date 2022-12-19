@@ -9,6 +9,7 @@ import {ChangeCommentsSubjectBehaviorService} from "./change-comments-subject-be
 @Injectable({
   providedIn: 'root'
 })
+
 export class CommentsService {
   constructor(private httpClient: HttpClient,
               private changeCommentsService: ChangeCommentsSubjectBehaviorService) { }

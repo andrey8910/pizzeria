@@ -1,5 +1,5 @@
-import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {UserAuthenticationCheckService} from '../../../shared/services/user-authentication-check.service';
 import {CommentsService} from '../../../shared/services/comments.service';
 import {MessageService} from 'primeng/api';
@@ -23,6 +23,7 @@ export class CommentFormComponent implements OnInit {
 
   constructor(private userAuthenticationCheckService : UserAuthenticationCheckService,
               private messageService: MessageService,
+              private cdr: ChangeDetectorRef,
               private commentsService : CommentsService) { }
 
   ngOnInit(): void {
@@ -35,21 +36,23 @@ export class CommentFormComponent implements OnInit {
       .pipe(
         tap((data:AuthorizationDialogData) => {
           this.resultUserAuthentication = data
-          console.log(data)
+          this.cdr.markForCheck();
+
         })
       )
       .subscribe()
 
     this.addCommentForm = new FormGroup({
-        rating: new FormControl(null),
-        text:   new FormControl(''),
-        productAdvantages: new FormControl(''),
-        productFlaws: new FormControl('')
+        rating: new FormControl(null, [Validators.required]),
+        text:   new FormControl('', [Validators.required]),
+        productAdvantages: new FormControl('', [Validators.required]),
+        productFlaws: new FormControl('', [Validators.required])
     })
   }
 
   public addComment(){
-    if(this.resultUserAuthentication.isPassedAuthentication){
+
+    if(this.resultUserAuthentication.isPassedAuthentication && !this.addCommentForm.invalid){
       let newComment: Comments ={
         productId: this.itemPizzaId,
         author: this.resultUserAuthentication.login,

@@ -23,6 +23,14 @@
         ></textarea>
         <label for="textComment">Коментар</label>
     </span>
+
+    <div
+      class="error-valid-message"
+      *ngIf="addCommentForm.controls['text'].invalid && addCommentForm.controls['text'].touched"
+    >
+       Необхідно вказати коментар.
+    </div>
+
     <span class="p-float-label p-input-icon-left">
         <i class="pi pi-thumbs-up"></i>
         <input type="text"
@@ -33,6 +41,14 @@
         >
         <label for="inputPlus">Переваги</label>
     </span>
+
+    <div
+      class="error-valid-message"
+      *ngIf="addCommentForm.controls['productAdvantages'].invalid && addCommentForm.controls['productAdvantages'].touched"
+    >
+      Необхідно вказати переваги.
+    </div>
+
     <span class="p-float-label p-input-icon-left">
         <i class="pi pi-thumbs-down"></i>
         <input type="text"
@@ -44,11 +60,19 @@
         <label for="inputPlus">Недоліки</label>
     </span>
 
+    <div
+      class="error-valid-message"
+      *ngIf="addCommentForm.controls['productFlaws'].invalid && addCommentForm.controls['productFlaws'].touched"
+    >
+      Необхідно вказати недоліки.
+    </div>
+
     <button pButton
             pRipple
             type="submit"
             label="Додати відгук"
             class="p-button-outlined"
+            [disabled] = "addCommentForm.invalid"
             (click)="addComment()"
     ></button>
   </form>
