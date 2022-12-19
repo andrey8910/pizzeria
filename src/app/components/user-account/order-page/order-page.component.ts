@@ -68,13 +68,16 @@ export class OrderPageComponent implements OnInit {
               this.productsService.getPizzaById(item.productId)
                 .pipe(
                   tap((res: any) => {
-                    orderListItem.title = res[0].title
-                    orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
-                    this.orderTotalPrice += orderListItem.sumPrice
-                    orderListItem.weight = res[0].params.weight[orderListItem.size.key]
+                    if(res.length > 0){
+                      orderListItem.title = res[0].title
+                      orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
+                      this.orderTotalPrice += orderListItem.sumPrice
+                      orderListItem.weight = res[0].params.weight[orderListItem.size.key]
 
-                    this.orderList.push(orderListItem)
-                    this.cdr.markForCheck();
+                      this.orderList.push(orderListItem)
+                      this.cdr.markForCheck();
+                    }
+
                   })
                 ).subscribe()
             })

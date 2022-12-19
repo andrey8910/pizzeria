@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { OrderPageComponent } from './order-page/order-page.component';
 import { UserPersonalDataComponent } from './user-personal-data/user-personal-data.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
+import {OrdersGuardGuard} from "../../shared/services/orders-guard.guard";
 
 
 
@@ -43,6 +44,7 @@ import { OrdersHistoryComponent } from './orders-history/orders-history.componen
         path: 'order/:id',
         pathMatch: 'full',
         component: OrderPageComponent,
+        canActivate : [OrdersGuardGuard]
       },
       {
         path: 'info',
@@ -57,6 +59,6 @@ import { OrdersHistoryComponent } from './orders-history/orders-history.componen
 
     ])
   ],
-  providers: [CustomerGuard]
+  providers: [CustomerGuard, OrdersGuardGuard]
 })
 export class UserAccountModule { }
