@@ -22,7 +22,6 @@ import {AdminGuardService} from "../../shared/services/admin-guard.service";
         path: '',
         pathMatch: 'full',
         component: AdministrationComponent,
-        canActivate: []
       }
     ])
   ],

@@ -26,7 +26,11 @@ import {CommentFormComponent} from "../comments/comment-form/comment-form.compon
         path: '',
         pathMatch: 'full',
         component: PizzaDetailsComponent
-      }
+      },
+      { path: '**',
+        loadChildren: () => import('../../components/not-found-page/not-found-page.module')
+          .then(module => module.NotFoundPageModule)
+      },
     ])
   ],
   providers: []

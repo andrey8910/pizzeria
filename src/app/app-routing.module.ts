@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AdminGuardService} from "./shared/services/admin-guard.service";
 import {AdminGuard} from "./shared/administration.guard";
 import {UserAuthenticationCheckService} from "./shared/services/user-authentication-check.service";
+import {AdminAuthenticationGuard} from "./shared/services/admin-authentication.guard";
 
 
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'admin',
     loadChildren: () => import('./components/administration/administration.module')
       .then(module => module.AdministrationModule),
-    canActivate: [AdminGuard]
+    canLoad: [AdminAuthenticationGuard],
+    canActivate: [AdminAuthenticationGuard]
   },
   { path: 'user',
     loadChildren: () => import('./components/user-account/user-account.module')
@@ -45,6 +47,6 @@ const routes: Routes = [
 
   imports: [RouterModule.forChild(routes), CommonModule],
   exports: [RouterModule],
-  providers: [AdminGuard, AdminGuardService, UserAuthenticationCheckService]
+  providers: [AdminGuard, AdminGuardService,AdminAuthenticationGuard, UserAuthenticationCheckService]
 })
 export class AppRoutingModule { }
