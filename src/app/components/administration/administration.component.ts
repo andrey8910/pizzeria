@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-administration',
@@ -8,9 +9,13 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class AdministrationComponent implements OnInit {
 
-  constructor() { }
+  constructor( private location: Location) { }
 
   ngOnInit(): void {
+  }
+
+  public comeBack(){
+    this.location.back()
   }
 
 }

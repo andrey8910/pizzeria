@@ -22,6 +22,11 @@ import {AdminGuardService} from "../../shared/services/admin-guard.service";
         path: '',
         pathMatch: 'full',
         component: AdministrationComponent,
+      },
+      {
+        path: 'users',
+        pathMatch: 'full',
+        component: AdminUsersComponent,
       }
     ])
   ],

@@ -1,26 +1,82 @@
 <div class="container">
-  <p-tabView>
 
-    <p-tabPanel
-      header="Продукти"
-      [selected]="true"
-      leftIcon="pi pi-database">
+  <div class="admin-page">
 
-<!--      <app-admin-products></app-admin-products>-->
-    </p-tabPanel>
 
-    <p-tabPanel
-      header="Замовлення"
-      leftIcon="pi pi-cart-plus">
-      Content 2
-    </p-tabPanel>
+    <div class="admin-page-header">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="comeBack()">
+        <mat-icon>keyboard_backspace</mat-icon>
+        назад
+      </button>
+      <p>Сторінка адміністратора</p>
+    </div>
 
-    <p-tabPanel
-      header="Користувачі"
-      leftIcon="pi pi-users">
+    <nav class="admin-page-nav">
+      <ul class="admin-page-nav-list">
+        <li>
+          <button
+            routerLink=""
+            routerLinkActive="active"
+            mat-stroked-button
+            color="primary"
+          >
+            <mat-icon>storage</mat-icon>
+            Продукти
+          </button></li>
+        <li>
+          <button
+            routerLink=""
+            routerLinkActive="active"
+            mat-stroked-button
+            color="primary"
+          >
+            <mat-icon>shopping_basket</mat-icon>
+            Замовлення
+          </button>
+        </li>
+        <li>
+          <button
+            routerLink="/admin/users"
+            routerLinkActive="active"
+            mat-stroked-button
+            color="primary"
+          >
+            <mat-icon>supervisor_account</mat-icon>
+            Користувачі
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="admin-page-body">
+
+    </div>
+  </div>
+<!--  <p-tabView>-->
+
+<!--    <p-tabPanel-->
+<!--      header="Продукти"-->
+<!--      [selected]="true"-->
+<!--      leftIcon="pi pi-database">-->
+
+<!--&lt;!&ndash;      <app-admin-products></app-admin-products>&ndash;&gt;-->
+<!--    </p-tabPanel>-->
+
+<!--    <p-tabPanel-->
+<!--      header="Замовлення"-->
+<!--      leftIcon="pi pi-cart-plus">-->
+<!--      Content 2-->
+<!--    </p-tabPanel>-->
+
+<!--    <p-tabPanel-->
+<!--      header="Користувачі"-->
+<!--      leftIcon="pi pi-users">-->
 <!--      <app-admin-users></app-admin-users>-->
-    </p-tabPanel>
+<!--    </p-tabPanel>-->
 
-  </p-tabView>
+<!--  </p-tabView>-->
 </div>
 

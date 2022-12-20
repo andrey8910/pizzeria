@@ -1,5 +1,52 @@
-<ul>
-  <li *ngFor="let user of allUsers">{{user.name}}</li>
-</ul>
+<div class="container">
+  <div class="users-data-header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад
+    </button>
+    <p>Користувачі</p>
+  </div>
+
+  <div class="user-data-table">
+    <p-table [value]="allUsers" styleClass="p-datatable-lg" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Ім'я</th>
+          <th>Логін</th>
+          <th>Пароль</th>
+          <th style="width: 4rem"></th>
+          <th style="width: 4rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td [style]="{'width' : '100px'}">{{user.id}}</td>
+          <td>{{user.name}}</td>
+          <td>{{user.login}}</td>
+          <td>{{user.password}}</td>
+          <td>
+            <p-button
+              type="button"
+              icon="pi pi-pencil"
+            ></p-button>
+          </td>
+          <td>
+            <p-button
+              type="button"
+              icon="pi pi-times"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+
 <button (click)="addClient()">add Client</button>
 
