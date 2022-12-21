@@ -23,4 +23,8 @@ export class UsersService {
   editUser(userData: RegistrationData, id: number){
     return this.httpClient.put<Users>(`http://localhost:3001/users/${id}`, userData)
   }
+
+  deleteUser(id: number){
+    return this.httpClient.delete<Users>(`http://localhost:3001/users/${id}`)
+  }
 }

@@ -30,9 +30,9 @@ import {AccordionModule} from 'primeng/accordion';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
 
+
 @NgModule({
   declarations: [
-
   ],
   imports: [
     CommonModule,

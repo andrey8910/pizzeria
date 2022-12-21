@@ -23,22 +23,35 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
-        <tr>
-          <td [style]="{'width' : '100px'}">{{user.id}}</td>
+        <tr [ngClass]="user.id == 1 ? 'admin-data-item' : 'user-data-item'">
+          <td
+            [style]="{'width' : '100px'}"
+
+          >{{user.id}}</td>
           <td>{{user.name}}</td>
           <td>{{user.login}}</td>
           <td>{{user.password}}</td>
           <td>
-            <p-button
+            <button
+              pButton
+              pRipple
               type="button"
-              icon="pi pi-pencil"
-            ></p-button>
+              icon="pi pi-user-edit"
+              class="p-button-rounded p-button-success p-button-outlined"
+              pTooltip="редагувати" tooltipPosition="top"
+            ></button>
           </td>
-          <td>
-            <p-button
+          <td *ngIf="user.id !== 1">
+            <button
+              pButton
+              pRipple
               type="button"
               icon="pi pi-times"
-            ></p-button>
+              class="p-button-rounded p-button-danger p-button-outlined"
+              pTooltip="видалити" tooltipPosition="top"
+              (click)="deleteUser(user)"
+            ></button>
+
           </td>
         </tr>
       </ng-template>
@@ -46,7 +59,12 @@
   </div>
 </div>
 
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+
 
 
 <button (click)="addClient()">add Client</button>
+
+
+<p-toast></p-toast>
 
