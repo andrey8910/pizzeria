@@ -1,0 +1,176 @@
+<div class="container">
+  <div class="user-data-header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад
+    </button>
+
+    <p>Особисті дані користувача</p>
+
+
+  </div>
+  <div class="user-data-body">
+    <div class="user-registration-data">
+      <div class="user-registration-data-header">
+        <p>Дані реєстрації</p>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-user-edit"
+          class="p-button-rounded p-button-success p-button-outlined"
+          pTooltip="редагувати"
+          tooltipPosition="right"
+          (click)="isEdit = !isEdit"
+        ></button>
+      </div>
+
+      <div class="user-data" *ngIf="userData">
+        <p>Ім'я : <span>{{userData.name}}</span></p>
+        <p>Логін : <span>{{userData.login}}</span></p>
+        <p>Пароль :
+          <span *ngIf="hidePass">*******</span>
+          <span *ngIf="!hidePass">{{userData.password}}</span>
+          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </p>
+      </div>
+
+
+
+      <form
+        *ngIf="isEdit"
+        [formGroup]="formEditUserData"
+            class="form-user-data"
+            id = 'formEditUserData'
+      >
+        <mat-form-field appearance="fill"  style="width: 100%">
+          <mat-label>Ім'я</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            pTooltip="від 3 до 12 символів"
+            tooltipPosition="right" >
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formEditUserData.controls['name'].invalid && formEditUserData.controls['name'].touched"
+        >
+          Помилка! Вкажіть ім'я від 3 до 12 символів.
+        </div>
+
+        <mat-form-field appearance="fill"  style="width: 100%">
+          <mat-label>Логін</mat-label>
+          <input
+            matInput
+            formControlName="login"
+            pTooltip="від 3 до 10 символів"
+            tooltipPosition="right" >
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formEditUserData.controls['login'].invalid && formEditUserData.controls['login'].touched"
+        >
+          Помилка! Вкажіть логін від 3 до 10 символів.
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Пароль</mat-label>
+          <input
+            matInput [type]="hidePass ? 'password' : 'text'"
+            formControlName="password"
+            width="100%"
+            pTooltip="6-10 символів, з них мін. одна цифра та велика літера "
+            tooltipPosition="right">
+
+          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formEditUserData.controls['password'].invalid && formEditUserData.controls['password'].touched"
+        >
+          Помилка! Пароль повинен складатися з 6 - 10 символів. З них хочаб одна велика літера та одна цифра.
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Поторіть ваш пароль</mat-label>
+          <input
+            matInput [type]="hideConfirmPass ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            width="100%"
+            pTooltip="паролі повмнні співпадати"
+            tooltipPosition="right">
+          <button mat-icon-button matSuffix (click)="hideConfirmPass = !hideConfirmPass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPass">
+            <mat-icon>{{hideConfirmPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div
+          class="error-valid-message"
+          *ngIf="formEditUserData.controls['confirmPassword'].invalid && formEditUserData.controls['confirmPassword'].touched"
+        >
+          Помилка! Вказані паролі не співпадають!
+        </div>
+
+        <div class="form-controls-btn">
+          <button mat-button (click)="onNoClick()">Скасувати</button>
+          <button
+            mat-button
+            type="submit"
+            (click)="saveChangeUserData()"
+            [disabled] = "formEditUserData.invalid"
+          >Зберегти зміни</button>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="user-orders">
+      <p>Замовлення користувача</p>
+      <p class="not-found-orders-text" *ngIf="!readyOrdersList">Ви ще не зробили жодного замовленя</p>
+
+      <div class="orders-table" *ngIf="readyOrdersList">
+        <p-table
+          [value]="userOrdersUnitedProducts"
+          styleClass="p-datatable-lg"
+          [tableStyle]="{'width': '100%'}">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>№ замовлення</th>
+              <th>Час створення</th>
+              <th>Продукти </th>
+              <th>Статус</th>
+              <th>Сума</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-order>
+            <tr>
+              <td [style]="{'width' : '100px'}">{{order.orderNumber}}</td>
+              <td>{{order.createTime | date: 'MMM d, y, h:mm:ss a'}}</td>
+              <td>
+                <ul>
+                  <li *ngFor="let prod of order.productList">
+                    {{prod.title + ", " + prod.quantity + " шт."}}
+                  </li>
+                </ul>
+              </td>
+              <td>{{order.status}}</td>
+              <td>{{order.orderPrice}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+
+</div>

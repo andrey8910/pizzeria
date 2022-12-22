@@ -39,6 +39,7 @@
               icon="pi pi-user-edit"
               class="p-button-rounded p-button-success p-button-outlined"
               pTooltip="редагувати" tooltipPosition="top"
+              [routerLink]="['/admin/user/'+user.id]"
             ></button>
           </td>
           <td *ngIf="user.id !== 1">

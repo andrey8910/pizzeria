@@ -1,7 +1,7 @@
 import { AbstractControl, FormGroup} from '@angular/forms';
 
 export function ValidateLogin(control: AbstractControl) {
-  if (control.value.length < 3 || control.value.length > 10) {
+  if (control.value == null || control.value.length < 3 || control.value.length > 10) {
     return { invalid: true };
   }
   return null;

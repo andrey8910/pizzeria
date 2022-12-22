@@ -16,6 +16,10 @@ export class UsersService {
     return this.httpClient.get<Users[]>(environment.urlUsersAll)
   }
 
+  getUserById(id: number){
+    return this.httpClient.get<Users>(`${environment.urlUsersAll}/${id}`)
+  }
+
   addUser(user: Users){
     return this.httpClient.post<Users>('http://localhost:3001/users', user)
   }
