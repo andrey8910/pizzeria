@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {
+  AfterContentChecked, AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit, Renderer2
+} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {Subscription} from "rxjs";
@@ -18,19 +27,35 @@ import {ProductsService} from "../../../shared/services/products.service";
   styleUrls: ['./admin-user-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdminUserPageComponent implements OnInit {
+
+export class AdminUserPageComponent implements OnInit, AfterViewInit, AfterViewChecked , AfterContentChecked, AfterContentInit{
   public isEdit = false
   public hidePass = true
   public hideConfirmPass = true
   public readyOrdersList = false
   public userId: number
   public userData: Users
-  public userOrders: Orders[]
+  public userOrders: Orders[] = []
   public userOrdersUnitedProducts: any[] = []
   public loader = false
+  private nextPage = 2
   private subscription: Subscription;
 
   public formEditUserData: FormGroup;
+
+  public infiniteObserver = new IntersectionObserver(
+    ([entry], observer) =>{
+      if(entry.isIntersecting){
+        observer.unobserve(entry.target)
+        this.getUserOrders(this.nextPage++)
+        this.cdr.markForCheck()
+      }
+    },
+    {
+      threshold: 0.5
+    }
+  )
+
 
   constructor(
               private activateRoute: ActivatedRoute,
@@ -38,11 +63,26 @@ export class AdminUserPageComponent implements OnInit {
               private usersService: UsersService,
               private ordersService: OrdersService,
               private productsService: ProductsService,
-              private cdr: ChangeDetectorRef
+              private elementRef: ElementRef,
+              private cdr: ChangeDetectorRef,
+              private renderer: Renderer2
     ) { }
 
   ngOnInit(): void {
     this.initialization()
+  }
+  ngAfterContentChecked(){
+
+  }
+  ngAfterViewInit() {
+
+  }
+
+  ngAfterContentInit(){
+
+  }
+  ngAfterViewChecked(){
+
   }
 
   private initialization(){
@@ -52,6 +92,20 @@ export class AdminUserPageComponent implements OnInit {
       this.createFormEditUserData()
       this.getUserOrders()
     }
+
+      // const lastOrder: any = this.elementRef.nativeElement.querySelector('p-table tr.table-order:last-child')
+      // const observer = new MutationObserver((mutations:any) => {
+      //   mutations.forEach((mutation:any) => console.log(mutation));
+      // });
+      // observer.observe(lastOrder, {
+      //   attributes: true,
+      // });
+      //
+      // if(lastOrder){
+      //
+      //   this.infiniteObserver.observe(lastOrder)
+      //   this.cdr.markForCheck();
+      // }
 
   }
 
@@ -72,23 +126,33 @@ export class AdminUserPageComponent implements OnInit {
       password: new FormControl('', [Validators.required, ValidatePass]),
       confirmPassword: new FormControl('', [Validators.required, ValidatePassConfirm])
     }, passEqual('password', 'confirmPassword'))
-
     this.cdr.markForCheck();
-
   }
 
 
 
-  private getUserOrders(){
-    this.ordersService.getOrdersByClientId(this.userId).pipe(
+  private getUserOrders(page = 1){
+    this.ordersService.getOrdersByClientIdPageByPage(3, page, this.userId).pipe(
       tap((res:Orders[]) => {
         this.readyOrdersList = false
         if(res.length > 0){
-          this.userOrders = res
+          this.userOrders.push(...res)
+          this.cdr.markForCheck();
           this.getProductDataForOrderList()
+
+          console.log(res, 'res')
+          setTimeout(() => {
+            const lastOrder: any = this.elementRef.nativeElement.querySelectorAll('p-table tr.table-order:last-child').item(0)
+            if(lastOrder){
+              this.infiniteObserver.observe(lastOrder)
+              //this.cdr.markForCheck();
+            }
+          }, 1000);
         }
       })
     ).subscribe()
+    console.log(this.userOrders, 'userOrders')
+
   }
 
   private getProductDataForOrderList(){
@@ -100,7 +164,6 @@ export class AdminUserPageComponent implements OnInit {
           status : order.orderStatus,
           productList: [],
           orderPrice: 0
-
         }
         order.orderList.map(listItem => {
           let productListItem: any = {
@@ -119,16 +182,22 @@ export class AdminUserPageComponent implements OnInit {
               productListItem.params = res[0].params
               orderChange.orderPrice += productListItem.price
               this.cdr.markForCheck();
+
             })
           ).subscribe()
           orderChange.productList.push(productListItem)
         })
         this.userOrdersUnitedProducts.push(orderChange)
       })
+
     }
+
     this.readyOrdersList = true
-    this.cdr.markForCheck();
+
+
   }
+
+
 
   public onNoClick(){
     this.formEditUserData.reset()

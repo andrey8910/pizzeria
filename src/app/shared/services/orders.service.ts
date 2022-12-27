@@ -23,6 +23,10 @@ export class OrdersService {
     return this.httpClient.get<Orders[]>(`${environment.urlOrdersAll}?clientId=${id}`)
   }
 
+  getOrdersByClientIdPageByPage(limit: number, page: number,  clientId: number){
+    return this.httpClient.get<Orders[]>(`${environment.urlOrdersAll}?clientId=${clientId}&_limit=${limit}&_page=${page}`)
+  }
+
   addOrder(order: Orders){
     return this.httpClient.post<Orders>('http://localhost:3001/orders', order)
   }
