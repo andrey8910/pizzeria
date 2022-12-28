@@ -154,8 +154,8 @@
               <th>Сума</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-order >
-            <tr class="table-order">
+          <ng-template pTemplate="body" let-order  >
+            <tr class="table-order" #tableOrder>
               <td [style]="{'width' : '100px'}">{{order.orderNumber}}</td>
               <td>{{order.createTime | date: 'MMM d, y, h:mm:ss a'}}</td>
               <td>
@@ -173,6 +173,5 @@
       </div>
     </div>
   </div>
-
-
 </div>
+
