@@ -1,9 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { UsersService } from '../../../shared/services/users.service';
 import { Users } from '../../../shared/interfaces/users';
-import {finalize, tap} from "rxjs/operators";
+import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Location} from "@angular/common";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {passEqual, ValidateLogin, ValidatePass, ValidatePassConfirm} from "../../../shared/Validators";
+import {Subject} from "rxjs";
 
 
 @Component({
@@ -13,9 +16,15 @@ import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AdminUsersComponent implements OnInit {
+export class AdminUsersComponent implements OnInit, OnDestroy {
 
-  public allUsers: Users[]
+  public allUsers: Users[];
+  public displayModal = false;
+  public formAddNewUser: FormGroup;
+  public hidePass = true;
+  public hideConfirmPass = true;
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private usersService: UsersService,
               private confirmationService: ConfirmationService,
@@ -28,15 +37,31 @@ export class AdminUsersComponent implements OnInit {
 
   }
 
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
     private initialize(){
       this.usersService.getUsers().pipe(
+        takeUntil(this.destroy$),
         tap((users) => {
           this.allUsers = users
           this.cdr.markForCheck();
         }),
-
       ).subscribe()
+      this.createFormAddNewUser()
     }
+
+  private createFormAddNewUser(){
+    this.formAddNewUser = new FormGroup<any>({
+      name: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(12)]),
+      login: new FormControl('', [Validators.required, ValidateLogin]),
+      password: new FormControl('', [Validators.required, ValidatePass]),
+      confirmPassword: new FormControl('', [Validators.required, ValidatePassConfirm])
+    }, passEqual('password', 'confirmPassword'))
+
+  }
 
     public deleteUser(user: Users){
 
@@ -46,6 +71,7 @@ export class AdminUsersComponent implements OnInit {
         icon: 'pi pi-info-circle',
         accept: () => {
           this.usersService.deleteUser(user.id).pipe(
+            takeUntil(this.destroy$),
             tap(res => {
               this.cdr.markForCheck();
               if(res){
@@ -65,15 +91,23 @@ export class AdminUsersComponent implements OnInit {
               break;
           }
         }
-
       });
+  }
 
+    public addClient(formValue: any){
+    this.formAddNewUser.reset()
+    this.displayModal = false
+
+    const newUser = {
+      id: 0,
+      name : formValue.name,
+      login : formValue.login,
+      password : formValue.password,
     }
 
-    public addClient(){
-
-    this.usersService.addUser({id: 0, name: 'testName', login: 'testLogin', password: 'testPass'})
+    this.usersService.addUser(newUser)
       .pipe(
+        takeUntil(this.destroy$),
         tap((data) => console.log(data)),
         finalize(() =>  this.initialize())
       )

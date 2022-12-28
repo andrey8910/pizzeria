@@ -8,6 +8,109 @@
       назад
     </button>
     <p>Користувачі</p>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-user-plus"
+      class="p-button-rounded p-button-success p-button-outlined"
+      pTooltip="додати користувача"
+      tooltipPosition="right"
+      (click)="displayModal = !displayModal"
+    ></button>
+
+    <p-dialog header="Введіть дані нового користувача" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+              [draggable]="true" [resizable]="false">
+      <form
+        [formGroup]="formAddNewUser"
+        class="form-user-data"
+        id = 'formAddNewUser'
+      >
+        <mat-form-field appearance="fill"  style="width: 100%">
+          <mat-label>Ім'я</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            pTooltip="від 3 до 12 символів"
+            tooltipPosition="right" >
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formAddNewUser.controls['name'].invalid && formAddNewUser.controls['name'].touched"
+        >
+          Помилка! Вкажіть ім'я від 3 до 12 символів.
+        </div>
+
+        <mat-form-field appearance="fill"  style="width: 100%">
+          <mat-label>Логін</mat-label>
+          <input
+            matInput
+            formControlName="login"
+            pTooltip="від 3 до 10 символів"
+            tooltipPosition="right" >
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formAddNewUser.controls['login'].invalid && formAddNewUser.controls['login'].touched"
+        >
+          Помилка! Вкажіть логін від 3 до 10 символів.
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Пароль</mat-label>
+          <input
+            matInput [type]="hidePass ? 'password' : 'text'"
+            formControlName="password"
+            width="100%"
+            pTooltip="6-10 символів, з них мін. одна цифра та велика літера "
+            tooltipPosition="right">
+
+          <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+            <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+
+        <div
+          class="error-valid-message"
+          *ngIf="formAddNewUser.controls['password'].invalid && formAddNewUser.controls['password'].touched"
+        >
+          Помилка! Пароль повинен складатися з 6 - 10 символів. З них хочаб одна велика літера та одна цифра.
+        </div>
+
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Поторіть ваш пароль</mat-label>
+          <input
+            matInput [type]="hideConfirmPass ? 'password' : 'text'"
+            formControlName="confirmPassword"
+            width="100%"
+            pTooltip="паролі повмнні співпадати"
+            tooltipPosition="right">
+          <button mat-icon-button matSuffix (click)="hideConfirmPass = !hideConfirmPass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPass">
+            <mat-icon>{{hideConfirmPass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div
+          class="error-valid-message"
+          *ngIf="formAddNewUser.controls['confirmPassword'].invalid && formAddNewUser.controls['confirmPassword'].touched"
+        >
+          Помилка! Вказані паролі не співпадають!
+        </div>
+
+
+      </form>
+      <ng-template pTemplate="footer">
+        <button
+          mat-stroked-button
+          (click)="addClient(formAddNewUser.value)"
+          [disabled] = "formAddNewUser.invalid"
+          color="primary"
+        >Додати
+        </button>
+      </ng-template>
+    </p-dialog>
   </div>
 
   <div class="user-data-table">
@@ -62,9 +165,6 @@
 
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
 
-
-
-<button (click)="addClient()">add Client</button>
 
 
 <p-toast></p-toast>

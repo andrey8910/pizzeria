@@ -46,6 +46,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
       if(entry.isIntersecting){
         observer.unobserve(entry.target)
         this.getUserOrders(this.nextPage++)
+        console.log(this.userOrdersUnitedProducts)
       }
     },
     {
@@ -74,7 +75,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
         tap(() => {
           if(this.tableOrder.last.nativeElement){
             this.infiniteObserver.observe(this.tableOrder.last.nativeElement)
-            console.log(this.tableOrder)
+            console.log(this.tableOrder.changes)
           }
         }),
       ).subscribe()
