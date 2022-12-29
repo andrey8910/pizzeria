@@ -1,4 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {SliderService} from "../../../shared/services/slider.service";
+import {takeUntil, tap} from "rxjs/operators";
+import {SliderData} from "../../../shared/interfaces/slider-data";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-pizzas-banner',
@@ -7,53 +11,30 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzasBannerComponent implements OnInit {
+  public sliderData: SliderData[] = [];
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  private imgList: any[] = [
-    {
-      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/16/Panasia_Slider_PC_UKR.jpg",
-      "thumbnailImageSrc": "demo/images/galleria/galleria1s.jpg",
-      "alt": "Description for Image 1",
-      "title": "Title 1"
-    },
-    {
-      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/10/SLIDER-PANASIA_PIZZAS-02.11.22-UKR_1280x488_pix.jpg",
-      "thumbnailImageSrc": "demo/images/galleria/galleria2s.jpg",
-      "alt": "Description for Image 2",
-      "title": "Title 2"
-    },
-    {
-      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/09/01/slider_ukr.jpg",
-      "thumbnailImageSrc": "demo/images/galleria/galleria3s.jpg",
-      "alt": "Description for Image 3",
-      "title": "Title 3"
-    },
-    {
-      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/09/01/SLIDER-NEW_LARGE_POTATO_BOX-29.08.22-UKR_1280x488_pix.jpg",
-      "thumbnailImageSrc": "demo/images/galleria/galleria4s.jpg",
-      "alt": "Description for Image 4",
-      "title": "Title 4"
-    }
-  ];
-
-  public images = this.imgList
-
-  responsiveOptions:any[] = [
-    {
-      breakpoint: '1024px',
-      numVisible: 5
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 3
-    },
-    {
-      breakpoint: '560px',
-      numVisible: 1
-    }
-  ];
-  constructor() { }
+  constructor(private sliderService:SliderService,
+              private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.init()
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  private init(){
+    this.sliderService.getSliderData().pipe(
+      tap(res => {
+        this.sliderData = res
+        this.cdr.markForCheck();
+
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe()
   }
 
 }

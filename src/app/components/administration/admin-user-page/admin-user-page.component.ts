@@ -41,12 +41,12 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
   public loader = false;
   private nextPage = 2;
   public formEditUserData: FormGroup;
+
   public infiniteObserver = new IntersectionObserver(
     ([entry], observer) =>{
       if(entry.isIntersecting){
-        observer.unobserve(entry.target)
-        this.getUserOrders(this.nextPage++)
-        console.log(this.userOrdersUnitedProducts)
+        observer.unobserve(entry.target);
+        this.getUserOrders(this.nextPage++);
       }
     },
     {
@@ -65,22 +65,21 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     ) { }
 
   ngOnInit(): void {
-    this.initialization()
+    this.initialization();
   }
 
   ngAfterViewInit() {
+
     if(this.tableOrder){
       this.tableOrder.changes.pipe(
-        takeUntil(this.destroy$),
         tap(() => {
-          if(this.tableOrder.last.nativeElement){
-            this.infiniteObserver.observe(this.tableOrder.last.nativeElement)
-            console.log(this.tableOrder.changes)
+          if(this.tableOrder.last){
+            this.infiniteObserver.observe(this.tableOrder.last?.nativeElement)
           }
         }),
+        takeUntil(this.destroy$),
       ).subscribe()
     }
-
   }
 
   ngOnDestroy(){
@@ -92,19 +91,21 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
   private initialization(){
+
     this.activateRoute.params.pipe(
 
       tap(params => this.userId = params['id']),
       tap(() => {
         if(this.userId){
-          this.getUserData()
-          this.createFormEditUserData()
-          this.getUserOrders()
+          this.getUserData();
+          this.createFormEditUserData();
+          this.getUserOrders();
         }
       }),
       takeUntil(this.destroy$)
 
     ).subscribe();
+
 
   }
 
@@ -112,7 +113,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     this.usersService.getUserById(this.userId).pipe(
 
       tap( (res:Users) => {
-        this.userData = res
+        this.userData = res;
         this.loader = true;
         this.cdr.markForCheck();
       }),
@@ -139,6 +140,8 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
           this.userOrders.push(...res);
           this.getProductDataForOrderList(res);
           this.cdr.markForCheck();
+
+
         }
       }),
       takeUntil(this.destroy$)
@@ -190,8 +193,8 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
 
   public onNoClick(){
-    this.formEditUserData.reset()
-    this.isEdit = false
+    this.formEditUserData.reset();
+    this.isEdit = false;
     this.cdr.markForCheck();
   }
 
@@ -204,17 +207,17 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     this.usersService.editUser(newDataUser, this.userId).pipe(
 
       tap(res => {
-        this.userData = res
+        this.userData = res;
         this.cdr.markForCheck();
       }),
       takeUntil(this.destroy$)
     ).subscribe()
-    this.formEditUserData.reset()
+    this.formEditUserData.reset();
     this.cdr.markForCheck();
   }
 
   public comeBack(){
-    this.location.back()
+    this.location.back();
   }
 
 }

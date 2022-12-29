@@ -1,6 +1,6 @@
 <p-galleria
-  [value]="images"
-  [responsiveOptions]="responsiveOptions"
+  *ngIf="sliderData.length > 0"
+  [value]="sliderData"
   [containerStyle]="{'width': '100%'}"
   [numVisible]="4"
   [showThumbnails]="false"
@@ -11,6 +11,10 @@
 >
   <ng-template pTemplate="item" let-item>
     <img [src]="item.previewImageSrc" [alt]="'pizza_image'" style="width: 100%; display: block;" />
+  </ng-template>
+  <ng-template pTemplate="caption" let-item>
+    <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item.title}}</h4>
+    <p>{{item.alt}}</p>
   </ng-template>
 
 </p-galleria>
