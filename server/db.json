@@ -1163,21 +1163,21 @@
     },
     {
       "id": 2,
-      "order": 2,
+      "order": 3,
       "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/10/SLIDER-PANASIA_PIZZAS-02.11.22-UKR_1280x488_pix.jpg",
       "alt": "Description for Image 2",
       "title": "Title 2"
     },
     {
       "id": 3,
-      "order": 3,
+      "order": 4,
       "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/09/01/slider_ukr.jpg",
       "alt": "Description for Image 3",
       "title": "Title 3"
     },
     {
       "id": 4,
-      "order": 4,
+      "order": 2,
       "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/09/01/SLIDER-NEW_LARGE_POTATO_BOX-29.08.22-UKR_1280x488_pix.jpg",
       "alt": "Description for Image 4",
       "title": "Title 4"

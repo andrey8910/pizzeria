@@ -12,4 +12,12 @@ export class SliderService {
   getSliderData(){
     return this.httpClient.get<SliderData[]>(environment.urlSliderData)
   }
+
+  getSliderDataSortByOrder(){
+    return this.httpClient.get<SliderData[]>(`${environment.urlSliderData}?_sort=order&_order=asc`)
+  }
+
+  editSlideData(slideId: number, slideData: SliderData){
+    return this.httpClient.put<SliderData>(`${environment.urlSliderData}/${slideId}`, slideData)
+  }
 }

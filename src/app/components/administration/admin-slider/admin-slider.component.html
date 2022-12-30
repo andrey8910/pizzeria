@@ -1,1 +1,105 @@
-<p>admin-slider works!</p>
+<div class="container">
+  <div class="slider-data-header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад
+    </button>
+    <p>Дані для слайдера</p>
+
+
+  </div>
+
+
+  <div class="slider-data-body">
+
+    <div class="changeSliderItemsOrder-block">
+      <p>Перемістіть слайди для зміни їх порядку в слайдері</p>
+      <button
+        mat-stroked-button
+        color="primary"
+        matTooltip="Зберегти новий порядок слайдів"
+        matTooltipPosition = "right"
+        *ngIf="isChangedSliderDataOrder"
+        (click)="saveToReorder()"
+      >
+        <mat-icon>check_circle_outline</mat-icon>
+        Зберегти
+      </button>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="dropSlide($event)">
+        <div class="example-box" *ngFor="let slide of sliderData" cdkDrag>
+          <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <div class="slide-order">{{slide.order}} {{'id : '+ slide.id}}</div>
+         <img class="slider-img" [src]= slide.previewImageSrc alt="slider-img">
+
+            <div class="controls-slide-btn" (mouseenter)="onHovering($event)" (mouseleave)="onUnovering($event)">
+              <button
+                mat-mini-fab
+                color="warn"
+                matTooltipPosition = "right"
+                matTooltip="Видалити слайд"
+              >
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+              <button
+                mat-mini-fab
+                color="accent"
+                matTooltipPosition = "right"
+                matTooltip="Редагувати слайд"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="changeSliderItemData-block"></div>
+
+
+<!--    <div class="example-container">-->
+<!--      <h3>Елементи слайдера</h3>-->
+<!--      <div-->
+<!--        cdkDropList-->
+<!--        #todoList="cdkDropList"-->
+<!--        [cdkDropListData]="sliderData"-->
+<!--        [cdkDropListConnectedTo]="[doneList]"-->
+<!--        class="example-list"-->
+<!--        (cdkDropListDropped)="dropItemSlider($event)">-->
+
+<!--        <div class="example-box" *ngFor="let item of sliderData" cdkDrag>-->
+<!--          <div class="slide-order">{{item.order}}</div>-->
+<!--          <img-->
+<!--            class="slider-img"-->
+<!--            [src]= item.previewImageSrc-->
+<!--            alt="slider-img">-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="example-container">-->
+<!--      <h3>Змінити порядок елементів слайдера</h3>-->
+<!--      <div-->
+<!--        cdkDropList-->
+<!--        #doneList="cdkDropList"-->
+<!--        [cdkDropListData]="sliderChangeItemOrder"-->
+<!--        [cdkDropListConnectedTo]="[todoList]"-->
+<!--        class="example-list"-->
+<!--        (cdkDropListDropped)="dropItemSlider($event)">-->
+<!--        <span *ngIf="sliderChangeItemOrder.length == 0"-->
+<!--           class="example-list-comment"-->
+<!--          >Перетягніть елементи в необхідному порядку</span>-->
+<!--        <div class="example-box" *ngFor="let item of sliderChangeItemOrder" cdkDrag>-->
+<!--          <div class="slide-order">{{item.order}}</div>-->
+<!--          <img-->
+<!--            class="slider-img"-->
+<!--            [src]= item.previewImageSrc-->
+<!--            alt="slider-img">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>

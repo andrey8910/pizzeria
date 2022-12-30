@@ -7,6 +7,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -18,7 +20,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DragDropModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -27,7 +31,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     MatDialogModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    DragDropModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

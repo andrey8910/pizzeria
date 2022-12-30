@@ -27,7 +27,7 @@ export class PizzasBannerComponent implements OnInit {
   }
 
   private init(){
-    this.sliderService.getSliderData().pipe(
+    this.sliderService.getSliderDataSortByOrder().pipe(
       tap(res => {
         this.sliderData = res
         this.cdr.markForCheck();
