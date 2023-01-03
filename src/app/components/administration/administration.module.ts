@@ -13,10 +13,11 @@ import {AdminGuardService} from "../../shared/services/admin-guard.service";
 import { AdminUserPageComponent } from './admin-user-page/admin-user-page.component';
 import { AdminSliderComponent } from './admin-slider/admin-slider.component';
 import { AdminSliderItemComponent } from './admin-slider-item/admin-slider-item.component';
+import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-editor.component';
 
 
 @NgModule({
-  declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent, AdminUserPageComponent, AdminSliderComponent, AdminSliderItemComponent],
+  declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent, AdminUserPageComponent, AdminSliderComponent, AdminSliderItemComponent, AdminSliderEditorComponent],
   imports: [
     CommonModule,
     PrimengModule,

@@ -9,6 +9,15 @@
     </button>
     <p>Дані для слайдера</p>
 
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="showAddNewSlide"
+    (click)="showAddNewSlide = true ; showSlideEditor = false">
+    <mat-icon>add_photo_alternate</mat-icon>
+      додати слайд
+    </button>
+
 
   </div>
 
@@ -45,28 +54,24 @@
 
       </div>
     </div>
+
     <div class="changeSliderItemData-block">
-      <div class="slide-data-editor" *ngIf="showSlideEditor && editSlideData">
-        <p class="editor-title">Редагування інформації слайду</p>
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
-            <mat-label>Slide Title</mat-label>
-            <input matInput placeholder="slide title" value= "{{editSlideData.title}}">
-          </mat-form-field>
+      <div class="slide-data-editor" *ngIf="showSlideEditor">
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Slide Alt Image</mat-label>
-            <input matInput placeholder="slide alt image" value= "{{editSlideData.alt}}">
-          </mat-form-field>
+        <p class="editor-title" *ngIf="showSlideEditor && editSlideData">Редагування інформації слайду</p>
+        <app-admin-slider-editor
+          *ngIf="showSlideEditor"
+          [slideData] = "editSlideData"
+          (cancelEdit)="cancelEdit()"
+        ></app-admin-slider-editor>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Image link</mat-label>
-            <textarea matInput placeholder="image src">{{editSlideData.previewImageSrc}}</textarea>
-          </mat-form-field>
-
-            <img src="{{editSlideData.previewImageSrc}}" alt="{{editSlideData.alt}}">
-
-        </form>
+      </div>
+      <div class="slide-add-new" *ngIf="showAddNewSlide">
+        <p class="editor-title">Додати новый слайд</p>
+        <app-admin-slider-editor
+          (cancelEdit)="cancelAddSlide()"
+          (saveNewSlideData) = "addNewSlide($event)"
+        ></app-admin-slider-editor>
       </div>
     </div>
   </div>

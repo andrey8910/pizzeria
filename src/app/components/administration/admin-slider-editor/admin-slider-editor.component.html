@@ -1,0 +1,69 @@
+<form class="example-form" [formGroup]="formEditorSlideData">
+  <mat-form-field class="example-full-width">
+    <mat-label>Slide Title</mat-label>
+    <input
+      matInput
+      placeholder="slide title"
+      value= "{{slideData? slideData.title : ''}}"
+      formControlName="title"
+    >
+  </mat-form-field>
+
+  <div
+    class="error-valid-message"
+    *ngIf="formEditorSlideData.controls['title'].invalid && formEditorSlideData.controls['title'].touched"
+  >
+    Помилка! Вкажіть title від 3 до 12 символів.
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Slide Alt Image</mat-label>
+    <input
+      matInput
+      placeholder="slide alt image"
+      value= "{{slideData? slideData.alt : ''}}"
+      formControlName="alt"
+    >
+  </mat-form-field>
+
+  <div
+    class="error-valid-message"
+    *ngIf="formEditorSlideData.controls['alt'].invalid && formEditorSlideData.controls['alt'].touched"
+  >
+    Помилка! Вкажіть alt від 3 до 12 символів.
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Image link</mat-label>
+    <textarea
+      matInput
+      placeholder="image src"
+      formControlName="imgSrc"
+    >{{slideData? slideData.previewImageSrc : ''}}</textarea>
+  </mat-form-field>
+
+  <div
+    class="error-valid-message"
+    *ngIf="formEditorSlideData.controls['imgSrc'].invalid && formEditorSlideData.controls['imgSrc'].touched"
+  >
+    Помилка! link для зображення слайду.
+  </div>
+
+  <img *ngIf="slideData" src="{{slideData? slideData.previewImageSrc : ''}}" alt="{{slideData.alt}}">
+
+  <div class="editor-control-btn">
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="cancel()"
+    >Скасувати</button>
+    <button
+      mat-stroked-button
+      color="accent"
+      [disabled]="formEditorSlideData.invalid"
+      (click)="saveNewSlide(formEditorSlideData.value)"
+    >Зберегти</button>
+  </div>
+
+
+</form>

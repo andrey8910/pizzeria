@@ -19,6 +19,7 @@ export class AdminSliderComponent implements OnInit {
   public sliderData: SliderData[] = [];
   public isChangedSliderDataOrder = false;
   public showSlideEditor = false;
+  public showAddNewSlide = false;
   public editSlideData: SliderData
 
 
@@ -64,7 +65,8 @@ export class AdminSliderComponent implements OnInit {
           this.sliderService.editSlideData(slide.id, slide).pipe(
             tap(res => {
               console.log(res)
-            })
+            }),
+            takeUntil(this.destroy$)
           ).subscribe()
         },timeout)
 
@@ -78,13 +80,39 @@ export class AdminSliderComponent implements OnInit {
   }
 
   public editSlide(slideId: any){
-    this.showSlideEditor = true
+    this.showSlideEditor = true;
+    this.showAddNewSlide = false;
 
     this.sliderService.getSlideById(slideId).pipe(
       tap((res: SliderData) => {
         this.editSlideData = res
         this.cdr.markForCheck();
-      })
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe()
+  }
+
+  public cancelEdit(){
+    this.showSlideEditor = false
+  }
+  public cancelAddSlide(){
+    this.showAddNewSlide = false
+  }
+
+  public addNewSlide(data: any){
+    const newSlideData : SliderData = {
+      id: 0,
+      order: this.sliderData.length + 1,
+      title: data.title,
+      alt: data.alt,
+      previewImageSrc: data.imgSrc
+    }
+
+    this.sliderService.addSlideData(newSlideData).pipe(
+      tap(() => {
+        this.init()
+      }),
+      takeUntil(this.destroy$)
     ).subscribe()
   }
 

@@ -1181,6 +1181,34 @@
       "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/09/01/SLIDER-NEW_LARGE_POTATO_BOX-29.08.22-UKR_1280x488_pix.jpg",
       "alt": "Description for Image 4",
       "title": "Title 4"
+    },
+    {
+      "id": 5,
+      "order": 5,
+      "title": "Google",
+      "alt": "google logo image",
+      "previewImageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/640px-Google_Images_2015_logo.svg.png"
+    },
+    {
+      "id": 6,
+      "order": 6,
+      "title": "test title",
+      "alt": "test alt image",
+      "previewImageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png"
+    },
+    {
+      "id": 7,
+      "order": 7,
+      "title": "teeest title",
+      "alt": "alt",
+      "previewImageSrc": "https://www.shutterstock.com/shutterstock/photos/1519934609/display_1500/stock-vector-pepperoni-cheese-pizza-banner-ads-with-rich-ingredients-in-d-illustration-flat-lay-angle-1519934609.jpg"
+    },
+    {
+      "id": 8,
+      "order": 8,
+      "title": "title slide",
+      "alt": "alt slide",
+      "previewImageSrc": "https://thumbs.dreamstime.com/z/pieces-pizza-different-various-types-banner-old-retro-boards-still-life-concept-closeup-129819511.jpg"
     }
   ]
 }
