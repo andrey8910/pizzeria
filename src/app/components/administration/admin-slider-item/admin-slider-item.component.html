@@ -1,0 +1,37 @@
+<div (mouseenter)="onHovering()"
+     (mouseleave)="onUnovering()">
+
+  <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+  <div class="slide-order">{{sliderItem.order}} {{'id : '+ sliderItem.id}}</div>
+  <img
+    class="slider-img"
+    [src]= sliderItem.previewImageSrc
+    alt="slider-img"
+
+  >
+
+  <div class="controls-slide-btn" >
+    <button
+      *ngIf="showSlideControlsBtn"
+      mat-mini-fab
+      color="warn"
+      matTooltipPosition = "right"
+      matTooltip="Видалити слайд"
+      (click)="deleteSlide()"
+    >
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+    <button
+      *ngIf="showSlideControlsBtn"
+      mat-mini-fab
+      color="accent"
+      matTooltipPosition = "right"
+      matTooltip="Редагувати слайд"
+      (click)="editSlide()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+
+</div>
+

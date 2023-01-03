@@ -18,6 +18,9 @@ export class AdminSliderComponent implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public sliderData: SliderData[] = [];
   public isChangedSliderDataOrder = false;
+  public showSlideEditor = false;
+  public editSlideData: SliderData
+
 
   constructor(private sliderService: SliderService,
               private location: Location,
@@ -70,12 +73,19 @@ export class AdminSliderComponent implements OnInit {
     }
   }
 
-  public onHovering(event: Event){
-    console.log(event)
+  public deleteSlide(slide: any){
+    console.log(slide)
   }
 
-  public onUnovering(event: Event){
-    console.log(event)
+  public editSlide(slideId: any){
+    this.showSlideEditor = true
+
+    this.sliderService.getSlideById(slideId).pipe(
+      tap((res: SliderData) => {
+        this.editSlideData = res
+        this.cdr.markForCheck();
+      })
+    ).subscribe()
   }
 
 
