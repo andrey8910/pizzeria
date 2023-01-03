@@ -3,8 +3,9 @@ import {Location} from "@angular/common";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {SliderData} from "../../../shared/interfaces/slider-data";
 import {SliderService} from "../../../shared/services/slider.service";
-import {takeUntil, tap} from "rxjs/operators";
+import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 
 
 @Component({
@@ -25,7 +26,9 @@ export class AdminSliderComponent implements OnInit {
 
   constructor(private sliderService: SliderService,
               private location: Location,
-              private cdr: ChangeDetectorRef,) { }
+              private cdr: ChangeDetectorRef,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService,) { }
 
   ngOnInit(): void {
     this.init()
@@ -63,9 +66,6 @@ export class AdminSliderComponent implements OnInit {
         const timeout = slide.order * 1000;
         setTimeout(() => {
           this.sliderService.editSlideData(slide.id, slide).pipe(
-            tap(res => {
-              console.log(res)
-            }),
             takeUntil(this.destroy$)
           ).subscribe()
         },timeout)
@@ -75,8 +75,36 @@ export class AdminSliderComponent implements OnInit {
     }
   }
 
-  public deleteSlide(slide: any){
-    console.log(slide)
+  public deleteSlide(slideId: number){
+    this.confirmationService.confirm({
+      message: `Ви впевнені, що хочете видалити слайд з переліку зображень слайдера?`,
+      header: 'Видалення слайду',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.sliderService.deleteSlide(slideId).pipe(
+          takeUntil(this.destroy$),
+          tap(res => {
+            this.cdr.markForCheck();
+            if(res){
+              this.messageService.add({severity:'info', summary:'Підтверджено', detail:`Дані слайду видалено `});
+            }
+          }),
+          finalize(() =>   {
+            this.init();
+          })
+        ).subscribe()
+      },
+      reject: (type: any) => {
+        switch(type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({severity:'error', summary:'Відміна', detail:'Видалення відмінено'});
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({severity:'warn', summary:'Скасування', detail:'Операція скасована'});
+            break;
+        }
+      }
+    });
   }
 
   public editSlide(slideId: any){
@@ -111,6 +139,10 @@ export class AdminSliderComponent implements OnInit {
     this.sliderService.addSlideData(newSlideData).pipe(
       tap(() => {
         this.init()
+      }),
+      finalize(() => {
+        this.messageService.add({severity:'success', summary:'Успішно!', detail:'Створено новій слайд !'});
+        this.cdr.markForCheck();
       }),
       takeUntil(this.destroy$)
     ).subscribe()

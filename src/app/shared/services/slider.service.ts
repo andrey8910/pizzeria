@@ -29,4 +29,8 @@ export class SliderService {
   addSlideData(slideData: SliderData){
     return this.httpClient.post<Users>(`${environment.urlSliderData}`, slideData)
   }
+
+  deleteSlide(slideId: number){
+    return this.httpClient.delete<Users>(`${environment.urlSliderData}/${slideId}`)
+  }
 }
