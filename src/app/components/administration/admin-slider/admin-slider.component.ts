@@ -107,13 +107,24 @@ export class AdminSliderComponent implements OnInit {
     });
   }
 
-  public editSlide(slideId: any){
+  public editSlide(slideId: number){
     this.showSlideEditor = true;
     this.showAddNewSlide = false;
 
     this.sliderService.getSlideById(slideId).pipe(
       tap((res: SliderData) => {
         this.editSlideData = res
+        this.cdr.markForCheck();
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe()
+  }
+
+  public saveEditSlideData(slideData: SliderData){
+    this.sliderService.editSlideData(slideData.id, slideData).pipe(
+      tap(() => this.init()),
+      finalize(() => {
+        this.messageService.add({severity:'success', summary:'Успішно!', detail:'Дані слайду змінені !'});
         this.cdr.markForCheck();
       }),
       takeUntil(this.destroy$)

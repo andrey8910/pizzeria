@@ -3,9 +3,9 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Input,
+  Input, OnChanges,
   OnInit,
-  Output
+  Output, SimpleChanges
 } from '@angular/core';
 import {SliderData} from "../../../shared/interfaces/slider-data";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -19,11 +19,12 @@ import {ValidateUrl} from "../../../shared/Validators";
   styleUrls: ['./admin-slider-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AdminSliderEditorComponent implements OnInit {
+export class AdminSliderEditorComponent implements OnInit, OnChanges {
 
   @Input() slideData: SliderData | null;
   @Output() cancelEdit = new EventEmitter();
   @Output() saveNewSlideData = new EventEmitter();
+  @Output() saveEditSlideData = new EventEmitter();
   public formEditorSlideData: FormGroup;
 
   constructor( private cdr: ChangeDetectorRef) { }
@@ -32,13 +33,21 @@ export class AdminSliderEditorComponent implements OnInit {
     this.init();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if(this.slideData){
+      this.formEditorSlideData.controls['title'].setValue(this.slideData.title);
+      this.formEditorSlideData.controls['alt'].setValue(this.slideData.alt);
+      this.formEditorSlideData.controls['imgSrc'].setValue(this.slideData.previewImageSrc);
+    }
+  }
+
+
   private init(){
     this.formEditorSlideData = new FormGroup<any>({
-      title: new FormControl('', [Validators.required,Validators.minLength(1), Validators.maxLength(12)]),
-      alt: new FormControl('', [Validators.required,Validators.minLength(1), Validators.maxLength(22)]),
+      title: new FormControl('', [Validators.required,Validators.minLength(1), Validators.maxLength(22)]),
+      alt: new FormControl('', [Validators.required,Validators.minLength(1), Validators.maxLength(32)]),
       imgSrc: new FormControl('',[Validators.required, ValidateUrl])
     })
-    this.cdr.markForCheck();
   }
 
   public cancel(){
@@ -50,6 +59,20 @@ export class AdminSliderEditorComponent implements OnInit {
   public saveNewSlide(formValue: any){
     this.saveNewSlideData.emit(formValue);
     this.formEditorSlideData.reset();
+  }
+
+  public saveEditSlide(formData: any){
+    if(this.slideData){
+      const editDataSlide : SliderData = {
+        id: this.slideData.id,
+        order: this.slideData.order,
+        title: formData.title,
+        alt: formData.alt,
+        previewImageSrc: formData.imgSrc
+      }
+      this.saveEditSlideData.emit(editDataSlide)
+    }
+
   }
 
 }

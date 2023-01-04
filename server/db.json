@@ -1164,9 +1164,9 @@
     {
       "id": 2,
       "order": 1,
-      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/10/SLIDER-PANASIA_PIZZAS-02.11.22-UKR_1280x488_pix.jpg",
-      "alt": "Description for Image 2",
-      "title": "Title 2"
+      "title": "Title id2",
+      "alt": "Description for Image id2",
+      "previewImageSrc": "https://media.dominos.ua/slider/slide_image/2022/11/10/SLIDER-PANASIA_PIZZAS-02.11.22-UKR_1280x488_pix.jpg"
     },
     {
       "id": 3,
@@ -1192,8 +1192,8 @@
     {
       "id": 8,
       "order": 6,
-      "title": "title slide",
-      "alt": "alt slide",
+      "title": "title slide 8",
+      "alt": "alt slide 8",
       "previewImageSrc": "https://thumbs.dreamstime.com/z/pieces-pizza-different-various-types-banner-old-retro-boards-still-life-concept-closeup-129819511.jpg"
     },
     {

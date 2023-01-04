@@ -65,6 +65,7 @@
           *ngIf="showSlideEditor"
           [slideData] = "editSlideData"
           (cancelEdit)="cancelEdit()"
+          (saveEditSlideData)="saveEditSlideData($event)"
         ></app-admin-slider-editor>
 
       </div>

@@ -13,7 +13,7 @@
     class="error-valid-message"
     *ngIf="formEditorSlideData.controls['title'].invalid && formEditorSlideData.controls['title'].touched"
   >
-    Помилка! Вкажіть title від 3 до 12 символів.
+    Помилка! Вкажіть title від 1 до 22 символів.
   </div>
 
   <mat-form-field class="example-full-width">
@@ -30,7 +30,7 @@
     class="error-valid-message"
     *ngIf="formEditorSlideData.controls['alt'].invalid && formEditorSlideData.controls['alt'].touched"
   >
-    Помилка! Вкажіть alt від 3 до 12 символів.
+    Помилка! Вкажіть alt від 1 до 32 символів.
   </div>
 
   <mat-form-field class="example-full-width">
@@ -59,11 +59,19 @@
       (click)="cancel()"
     >Скасувати</button>
     <button
+      *ngIf="!slideData"
       mat-stroked-button
       color="accent"
       [disabled]="formEditorSlideData.invalid"
       (click)="saveNewSlide(formEditorSlideData.value)"
-    >Зберегти</button>
+    >Зберегти слайд</button>
+    <button
+      *ngIf="slideData"
+      mat-stroked-button
+      color="accent"
+      [disabled]="formEditorSlideData.invalid"
+      (click)="saveEditSlide(formEditorSlideData.value)"
+    >Зберегти зміни</button>
   </div>
 
 
