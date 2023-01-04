@@ -138,10 +138,11 @@
       <p>Замовлення користувача</p>
       <p class="not-found-orders-text" *ngIf="!readyOrdersList && userData">Користувач {{userData.name}} ще не зробив жодного замовленя</p>
 
-      <div class="orders-table" *ngIf="readyOrdersList">
+      <div class="orders-table" *ngIf="readyOrdersList"  >
         <p-table
+          #tableOrder
           [scrollable]="true"
-          scrollHeight="flex"
+          scrollHeight="400px"
           [value]="userOrdersUnitedProducts"
           styleClass="p-datatable-lg"
           >
@@ -155,7 +156,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-order  >
-            <tr class="table-order" #tableOrder>
+            <tr class="table-order" #tableOrderTr>
               <td [style]="{'width' : '100px'}">{{order.orderNumber}}</td>
               <td>{{order.createTime | date: 'MMM d, y, h:mm:ss a'}}</td>
               <td>
@@ -171,6 +172,15 @@
           </ng-template>
         </p-table>
       </div>
+      <button
+        (click)="toTop()"
+        *ngIf="showToTopBtn"
+        class="to-top-btn"
+        mat-mini-fab
+        color="accent"
+      >
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
     </div>
   </div>
 </div>

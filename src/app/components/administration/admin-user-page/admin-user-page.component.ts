@@ -4,7 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef, OnDestroy,
-  OnInit, QueryList, ViewChildren
+  OnInit, QueryList, ViewChild, ViewChildren
 } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
@@ -17,6 +17,7 @@ import {OrdersService} from "../../../shared/services/orders.service";
 import {Orders} from "../../../shared/interfaces/orders";
 import {ProductsService} from "../../../shared/services/products.service";
 import {Subject} from "rxjs";
+import {Table} from "primeng/table";
 
 @Component({
   selector: 'app-admin-user-page',
@@ -25,15 +26,17 @@ import {Subject} from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
+export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChildren('tableOrder') tableOrder: QueryList<any>;
+  @ViewChildren('tableOrderTr') tableOrderTr: QueryList<any>;
+  @ViewChild('tableOrder', {static: false}) tableOrder: Table;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public isEdit = false;
   public hidePass = true;
   public hideConfirmPass = true;
   public readyOrdersList = false;
+  public showToTopBtn = false;
   public userId: number;
   public userData: Users;
   public userOrders: Orders[] = [];
@@ -43,26 +46,29 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
   public formEditUserData: FormGroup;
 
   public infiniteObserver = new IntersectionObserver(
-    ([entry], observer) =>{
-      if(entry.isIntersecting){
+    ([entry], observer) => {
+
+      if (entry.isIntersecting) {
         observer.unobserve(entry.target);
         this.getUserOrders(this.nextPage++);
+        this.showToTopBtn = true;
       }
     },
     {
       threshold: 0.9
     }
   )
-  constructor(
-              private activateRoute: ActivatedRoute,
-              private location: Location,
-              private usersService: UsersService,
-              private ordersService: OrdersService,
-              private productsService: ProductsService,
-              private elementRef: ElementRef,
-              private cdr: ChangeDetectorRef,
 
-    ) { }
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private location: Location,
+    private usersService: UsersService,
+    private ordersService: OrdersService,
+    private productsService: ProductsService,
+    private elementRef: ElementRef,
+    private cdr: ChangeDetectorRef,
+  ) {
+  }
 
   ngOnInit(): void {
     this.initialization();
@@ -70,11 +76,11 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngAfterViewInit() {
 
-    if(this.tableOrder){
-      this.tableOrder.changes.pipe(
+    if (this.tableOrderTr) {
+      this.tableOrderTr.changes.pipe(
         tap(() => {
-          if(this.tableOrder.last){
-            this.infiniteObserver.observe(this.tableOrder.last?.nativeElement)
+          if (this.tableOrderTr.last) {
+            this.infiniteObserver.observe(this.tableOrderTr.last.nativeElement)
           }
         }),
         takeUntil(this.destroy$),
@@ -82,7 +88,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
 
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
@@ -90,29 +96,26 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
 
-  private initialization(){
+  private initialization() {
 
     this.activateRoute.params.pipe(
-
       tap(params => this.userId = params['id']),
       tap(() => {
-        if(this.userId){
+        if (this.userId) {
           this.getUserData();
           this.createFormEditUserData();
           this.getUserOrders();
         }
       }),
       takeUntil(this.destroy$)
-
     ).subscribe();
 
 
   }
 
-  private getUserData(){
+  private getUserData() {
     this.usersService.getUserById(this.userId).pipe(
-
-      tap( (res:Users) => {
+      tap((res: Users) => {
         this.userData = res;
         this.loader = true;
         this.cdr.markForCheck();
@@ -121,9 +124,9 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     ).subscribe()
   }
 
-  private createFormEditUserData(){
+  private createFormEditUserData() {
     this.formEditUserData = new FormGroup<any>({
-      name: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(12)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
       login: new FormControl('', [Validators.required, ValidateLogin]),
       password: new FormControl('', [Validators.required, ValidatePass]),
       confirmPassword: new FormControl('', [Validators.required, ValidatePassConfirm])
@@ -131,30 +134,26 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
 
   }
 
-  private getUserOrders(page = 1){
+  private getUserOrders(page = 1) {
     this.ordersService.getOrdersByClientIdPageByPage(3, page, this.userId).pipe(
-
-      tap((res:Orders[]) => {
-        this.readyOrdersList = false;
-        if(res.length > 0){
+      tap((res: Orders[]) => {
+        if (res.length > 0) {
           this.userOrders.push(...res);
           this.getProductDataForOrderList(res);
           this.cdr.markForCheck();
-
-
         }
       }),
       takeUntil(this.destroy$)
     ).subscribe()
   }
 
-  private getProductDataForOrderList(ordersPage: Orders[]){
-    if(ordersPage.length > 0){
-      ordersPage.forEach((order : Orders) => {
+  private getProductDataForOrderList(ordersPage: Orders[]) {
+    if (ordersPage.length > 0) {
+      ordersPage.forEach((order: Orders) => {
         let orderChange: any = {
-          orderNumber : order.id,
+          orderNumber: order.id,
           createTime: order.creationTime,
-          status : order.orderStatus,
+          status: order.orderStatus,
           productList: [],
           orderPrice: 0
         }
@@ -168,8 +167,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
             params: {}
           }
           this.productsService.getPizzaById(listItem.productId).pipe(
-
-            tap((res:any[]) => {
+            tap((res: any[]) => {
               productListItem.title = res[0].title
               productListItem.price = res[0].params.price[productListItem.size.key] * productListItem.quantity
               productListItem.params = res[0].params
@@ -189,23 +187,19 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
 
-
-
-
-  public onNoClick(){
+  public onNoClick() {
     this.formEditUserData.reset();
     this.isEdit = false;
     this.cdr.markForCheck();
   }
 
-  public saveChangeUserData(){
+  public saveChangeUserData() {
     let newDataUser = {
       name: this.formEditUserData.controls['name'].value,
       login: this.formEditUserData.controls['login'].value,
       password: this.formEditUserData.controls['password'].value
     }
     this.usersService.editUser(newDataUser, this.userId).pipe(
-
       tap(res => {
         this.userData = res;
         this.cdr.markForCheck();
@@ -216,8 +210,17 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy{
     this.cdr.markForCheck();
   }
 
-  public comeBack(){
+  public comeBack() {
     this.location.back();
   }
 
+  public toTop() {
+    if (this.tableOrder != null) {
+      this.tableOrder.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      this.cdr.markForCheck();
+    }
+  }
 }
