@@ -14,7 +14,14 @@ import {CommentFormComponent} from "../comments/comment-form/comment-form.compon
 
 
 @NgModule({
-  declarations: [PizzaDetailsComponent, CommentsComponent, CommentsListComponent, CommentItemComponent, CommentFormComponent],
+  declarations: [
+    PizzaDetailsComponent,
+    CommentsComponent,
+    CommentsListComponent,
+    CommentItemComponent,
+    CommentFormComponent,
+
+  ],
   imports: [
     CommonModule,
     MaterialModule,

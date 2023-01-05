@@ -12,6 +12,7 @@ import {AuthorizationDialogComponent} from "../components/authorization-dialog/a
 import {RegistrationDialogComponent} from "../components/registration-dialog/registration-dialog.component";
 import {UserAuthenticationCheckService} from "./services/user-authentication-check.service";
 
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -43,6 +44,7 @@ import {UserAuthenticationCheckService} from "./services/user-authentication-che
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
     FooterComponent,
+
 
   ],
   providers: [UserAuthenticationCheckService]

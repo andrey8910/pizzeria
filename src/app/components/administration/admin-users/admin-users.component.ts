@@ -2,11 +2,12 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import { UsersService } from '../../../shared/services/users.service';
 import { Users } from '../../../shared/interfaces/users';
 import {finalize, takeUntil, tap} from "rxjs/operators";
-import {Location} from "@angular/common";
+import {Location, ViewportScroller} from "@angular/common";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {passEqual, ValidateLogin, ValidatePass, ValidatePassConfirm} from "../../../shared/Validators";
 import {Subject} from "rxjs";
+import {ScrollTopService} from "../../../shared/services/scroll-top.service";
 
 
 @Component({
@@ -30,7 +31,9 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
               private confirmationService: ConfirmationService,
               private messageService: MessageService,
               private cdr: ChangeDetectorRef,
-              private location: Location) { }
+              private location: Location,
+              private scrollTopService: ScrollTopService,
+              private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     this.initialize()
@@ -50,9 +53,18 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
           this.cdr.markForCheck();
         }),
       ).subscribe()
-      this.createFormAddNewUser()
+      this.createFormAddNewUser();
+      this.handleScroll();
     }
 
+  private handleScroll() {
+    this.scrollTopService.handleScroll()?.pipe(
+      tap(() => {
+        (this.viewportScroller.getScrollPosition()[1] > 300) ? this.scrollTopService.visible = true : this.scrollTopService.visible = false
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe()
+  }
   private createFormAddNewUser(){
     this.formAddNewUser = new FormGroup<any>({
       name: new FormControl('', [Validators.required,Validators.minLength(3), Validators.maxLength(12)]),

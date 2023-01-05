@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ScrollTopService} from "./shared/services/scroll-top.service";
 
 
 @Component({
@@ -8,10 +9,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pizzeria';
-  constructor() {
+
+  constructor(private scrollTopService: ScrollTopService) {
+
   }
 
   ngOnInit() {
 
   }
+
+  public hasScrollTop(){
+    return this.scrollTopService.visible
+  }
+
 }

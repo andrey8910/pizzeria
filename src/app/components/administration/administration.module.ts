@@ -16,14 +16,30 @@ import { AdminSliderItemComponent } from './admin-slider-item/admin-slider-item.
 import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-editor.component';
 
 
+
+
+
+
 @NgModule({
-  declarations: [AdministrationComponent, AdminProductsComponent, AdminUsersComponent, AdminUserPageComponent, AdminSliderComponent, AdminSliderItemComponent, AdminSliderEditorComponent],
+  declarations: [
+    AdministrationComponent,
+    AdminProductsComponent,
+    AdminUsersComponent,
+    AdminUserPageComponent,
+    AdminSliderComponent,
+    AdminSliderItemComponent,
+    AdminSliderEditorComponent,
+
+
+
+  ],
   imports: [
     CommonModule,
     PrimengModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+
     RouterModule.forChild([
       {
         path: '',

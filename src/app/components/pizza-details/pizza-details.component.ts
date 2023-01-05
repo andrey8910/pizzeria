@@ -1,14 +1,16 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Pizza} from "../../shared/interfaces/pizza";
 import {ActivatedRoute} from "@angular/router";
-import { Location } from '@angular/common';
-import {Subscription} from 'rxjs';
+import {Location, ViewportScroller} from '@angular/common';
+import { Subject, Subscription} from 'rxjs';
 import {ProductsService} from "../../shared/services/products.service";
-import {catchError, finalize, tap} from "rxjs/operators";
+import {catchError, finalize, takeUntil, tap} from "rxjs/operators";
 import {  FormGroup, FormControl } from '@angular/forms';
 import {SizeParam} from "../../shared/interfaces/size-param";
 import {PizzaOrder} from "../../shared/interfaces/pizza-order";
 import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
+import {ScrollTopService} from "../../shared/services/scroll-top.service";
+import {WINDOW} from "../../core/window";
 
 @Component({
   selector: 'app-pizza-details',
@@ -16,7 +18,10 @@ import {ShoppingCartService} from "../../shared/services/shopping-cart.service";
   styleUrls: ['./pizza-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PizzaDetailsComponent implements OnInit {
+export class PizzaDetailsComponent implements OnInit, OnDestroy {
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
   public loader = false
   public itemPizza: Pizza
   public pizzaId: number
@@ -37,14 +42,25 @@ export class PizzaDetailsComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
               private location: Location,
               private productsService : ProductsService,
-              private shoppingService: ShoppingCartService,) { }
+              private shoppingService: ShoppingCartService,
+              private scrollTopService: ScrollTopService,
+              @Inject(WINDOW) private window: Window,
+              private viewportScroller: ViewportScroller,
+              ) { }
 
   ngOnInit(): void {
     this.initialization()
 
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+    this.scrollTopService.visible = false
+  }
+
   private initialization(){
+
     this.subscription = this.activateRoute.params.subscribe(params => this.pizzaId = params['id']);
     this.loader = true;
 
@@ -58,7 +74,8 @@ export class PizzaDetailsComponent implements OnInit {
         }),
         catchError((err) =>  {
           throw 'Помилка сервера. Деталі: ' + err
-        })
+        }),
+        takeUntil(this.destroy$),
       )
       .subscribe()
 
@@ -66,6 +83,17 @@ export class PizzaDetailsComponent implements OnInit {
     this.pizzaDetailsSelectForm = new FormGroup({
       pizzaSelectSize: new FormControl(this.pizzaSize[0])
     })
+
+    this.handleScroll()
+  }
+
+  private handleScroll(){
+    this.scrollTopService.handleScroll()?.pipe(
+      tap(() => {
+        (this.viewportScroller.getScrollPosition()[1] > 300) ? this.scrollTopService.visible = true : this.scrollTopService.visible = false
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe()
   }
 
   public comeBack(){

@@ -34,10 +34,10 @@ export class AdminSliderEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(this.slideData){
+    if(this.slideData && this.formEditorSlideData){
       this.formEditorSlideData.controls['title'].setValue(this.slideData.title);
-      this.formEditorSlideData.controls['alt'].setValue(this.slideData.alt);
-      this.formEditorSlideData.controls['imgSrc'].setValue(this.slideData.previewImageSrc);
+      this.formEditorSlideData.controls['alt']?.setValue(this.slideData.alt);
+      this.formEditorSlideData.controls['imgSrc']?.setValue(this.slideData.previewImageSrc);
     }
   }
 
