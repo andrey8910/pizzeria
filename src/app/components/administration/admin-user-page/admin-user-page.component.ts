@@ -47,16 +47,22 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
   public infiniteObserver = new IntersectionObserver(
     ([entry], observer) => {
-
       if (entry.isIntersecting) {
         observer.unobserve(entry.target);
         this.getUserOrders(this.nextPage++);
-        this.showToTopBtn = true;
       }
     },
     {
       threshold: 0.9
     }
+  )
+
+  public scrollTableObserver = new IntersectionObserver(
+    (entries) => {
+      (entries[0].target == this.tableOrderTr.first.nativeElement) ? this.showToTopBtn = false : this.showToTopBtn = true;
+      this.cdr.markForCheck()
+    },
+    { threshold: 0.9}
   )
 
   constructor(
@@ -77,11 +83,17 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
   ngAfterViewInit() {
 
     if (this.tableOrderTr) {
+
       this.tableOrderTr.changes.pipe(
         tap(() => {
           if (this.tableOrderTr.last) {
-            this.infiniteObserver.observe(this.tableOrderTr.last.nativeElement)
+            this.infiniteObserver.observe(this.tableOrderTr.last.nativeElement);
+
           }
+         this.tableOrderTr.forEach((tr) => {
+           this.scrollTableObserver.observe(tr.nativeElement)
+         })
+
         }),
         takeUntil(this.destroy$),
       ).subscribe()
@@ -89,10 +101,8 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngOnDestroy() {
-
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
-
   }
 
 
