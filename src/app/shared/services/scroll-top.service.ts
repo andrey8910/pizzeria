@@ -1,6 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
 import {fromEvent} from "rxjs";
 import {WINDOW} from "../../core/window";
+import {ViewportScroller} from "@angular/common";
+import {tap} from "rxjs/operators";
 
 
 @Injectable({
@@ -9,14 +11,15 @@ import {WINDOW} from "../../core/window";
 export class ScrollTopService {
 
   constructor(
-    @Inject(WINDOW) private window: Window
+    @Inject(WINDOW) private window: Window,
+    private viewportScroller: ViewportScroller,
   ) { }
 
   public visible = false
-  private  observable = fromEvent(this.window, 'scroll');
+  private  observable = fromEvent(this.window, 'scroll')
 
    handleScroll(){
     if(!this.window) return;
-    return this.observable;
+   return this.observable
   }
 }

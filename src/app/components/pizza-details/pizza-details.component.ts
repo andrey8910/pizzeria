@@ -89,7 +89,7 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
 
   private handleScroll(){
     this.scrollTopService.handleScroll()?.pipe(
-      tap(() => {
+      tap(res => {
         (this.viewportScroller.getScrollPosition()[1] > 300) ? this.scrollTopService.visible = true : this.scrollTopService.visible = false
       }),
       takeUntil(this.destroy$)
