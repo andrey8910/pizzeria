@@ -665,9 +665,9 @@
     },
     {
       "id": 17,
-      "name": "test",
-      "login": "testlogin",
-      "password": "wwwA111"
+      "name": "new client",
+      "login": "client",
+      "password": "clientA1"
     }
   ],
   "comments": [
@@ -1151,6 +1151,46 @@
       ],
       "orderStatus": "в роботі",
       "id": 16
+    },
+    {
+      "clientId": 17,
+      "creationTime": 1673436211296,
+      "orderList": [
+        {
+          "productId": 2,
+          "size": {
+            "name": "Мала (22см)",
+            "key": "small"
+          },
+          "quantity": 4
+        },
+        {
+          "productId": 2,
+          "size": {
+            "name": "Мала (22см)",
+            "key": "small"
+          },
+          "quantity": 5
+        }
+      ],
+      "orderStatus": "створено",
+      "id": 17
+    },
+    {
+      "clientId": 17,
+      "creationTime": 1673436277918,
+      "orderList": [
+        {
+          "productId": 5,
+          "size": {
+            "name": "Велика (36см)",
+            "key": "big"
+          },
+          "quantity": 1
+        }
+      ],
+      "orderStatus": "створено",
+      "id": 18
     }
   ],
   "slider": [
@@ -1191,14 +1231,14 @@
     },
     {
       "id": 8,
-      "order": 6,
+      "order": 7,
       "title": "title slide 8",
       "alt": "alt slide 8",
       "previewImageSrc": "https://thumbs.dreamstime.com/z/pieces-pizza-different-various-types-banner-old-retro-boards-still-life-concept-closeup-129819511.jpg"
     },
     {
       "id": 9,
-      "order": 7,
+      "order": 6,
       "title": "test title",
       "alt": "test",
       "previewImageSrc": "https://i.pinimg.com/originals/c7/a1/e6/c7a1e61260efd24870eb43d557bdedbe.jpg"

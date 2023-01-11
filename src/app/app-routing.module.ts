@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {AdminGuardService} from "./shared/services/admin-guard.service";
-import {AdminGuard} from "./shared/administration.guard";
-import {UserAuthenticationCheckService} from "./shared/services/user-authentication-check.service";
-import {AdminAuthenticationGuard} from "./shared/services/admin-authentication.guard";
+import {AdminGuardService} from "./core/guards/admin-guard.service";
+import {AdminGuard} from "./core/guards/administration.guard";
+import {UserAuthenticationCheckService} from "./core/services/user-authentication-check.service";
+import {AdminAuthenticationGuard} from "./core/guards/admin-authentication.guard";
 
 
 
@@ -13,32 +13,32 @@ const routes: Routes = [
 
   { path: 'pizza',
     pathMatch: 'full',
-    loadChildren: () => import('./components/pizzas-all/pizzas-all.module')
+    loadChildren: () => import('./pizzas-all/pizzas-all.module')
       .then(module => module.PizzasAllModule)
   },
 
   { path: 'pizza/:id',
-    loadChildren: () => import('./components/pizza-details/pizza-details.module')
+    loadChildren: () => import('./pizza-details/pizza-details.module')
       .then(module => module.PizzaDetailsModule)
 
   },
   { path: 'shopping',
-    loadChildren: () => import('./components/shopping-cart/shopping-cart.module')
+    loadChildren: () => import('./shopping-cart/shopping-cart.module')
       .then(module => module.ShoppingCartModule)
   },
   { path: 'admin',
-    loadChildren: () => import('./components/administration/administration.module')
+    loadChildren: () => import('./administration/administration.module')
       .then(module => module.AdministrationModule),
     canLoad: [AdminAuthenticationGuard],
     canActivate: [AdminAuthenticationGuard]
   },
   { path: 'user',
-    loadChildren: () => import('./components/user-account/user-account.module')
+    loadChildren: () => import('./user-account/user-account.module')
       .then(module => module.UserAccountModule)
   },
 
   { path: '**',
-    loadChildren: () => import('./components/not-found-page/not-found-page.module')
+    loadChildren: () => import('./layout/not-found-page/not-found-page.module')
       .then(module => module.NotFoundPageModule)
   },
 ];

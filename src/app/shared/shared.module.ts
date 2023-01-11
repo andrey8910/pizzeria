@@ -1,25 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {HeaderComponent} from "../components/header/header.component";
-import {FooterComponent} from "../components/footer/footer.component";
 import {MaterialModule} from "./material/material.module";
-import {AuthorizationComponent} from "../components/authorization/authorization.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PrimengModule} from "./primeng/primeng.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
-import {AuthorizationDialogComponent} from "../components/authorization-dialog/authorization-dialog.component";
-import {RegistrationDialogComponent} from "../components/registration-dialog/registration-dialog.component";
-import {UserAuthenticationCheckService} from "./services/user-authentication-check.service";
+import {AuthorizationDialogComponent} from "../authorization-dialog/authorization-dialog.component";
+import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
+import {UserAuthenticationCheckService} from "../core/services/user-authentication-check.service";
+import {CurrencyUaPipe} from "../core/pipes/currency-ua.pipe";
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-    FooterComponent
+    CurrencyUaPipe
+
   ],
   imports: [
     CommonModule,
@@ -39,11 +36,9 @@ import {UserAuthenticationCheckService} from "./services/user-authentication-che
     PrimengModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HeaderComponent,
-    AuthorizationComponent,
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-    FooterComponent,
+
 
 
   ],

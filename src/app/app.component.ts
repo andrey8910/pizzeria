@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ScrollTopService} from "./shared/services/scroll-top.service";
+import {ScrollTopService} from "./core/services/scroll-top.service";
 
 
 @Component({
