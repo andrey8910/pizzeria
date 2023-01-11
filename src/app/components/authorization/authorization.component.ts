@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Observable } from "rxjs";
-import {MatDialog} from '@angular/material/dialog';
+import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
 import {AuthorizationDialogComponent} from '../authorization-dialog/authorization-dialog.component';
 import {AuthorizationDialogData} from '../../shared/interfaces/authorization-dialog';
 import {UserAuthenticationCheckService} from "../../shared/services/user-authentication-check.service";

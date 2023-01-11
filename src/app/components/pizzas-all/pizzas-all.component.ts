@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { Pizza } from '../../shared/interfaces/pizza';
 import {finalize, tap, catchError} from 'rxjs/operators';
-import {PageEvent} from "@angular/material/paginator";
+import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
 
 
 

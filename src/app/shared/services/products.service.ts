@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Pizza } from '../interfaces/pizza';
 import {environment} from "../../../environments/environment";
-import {PageEvent} from "@angular/material/paginator";
+import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
 
 @Injectable({
   providedIn: 'root'
