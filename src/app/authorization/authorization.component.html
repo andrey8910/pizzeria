@@ -18,9 +18,6 @@
   Вихід
 </button>
 
-<span *ngIf="successfulAuthorization">користувач: {{this.checkAuthentication.resultAuthentication.name}}</span>
-
-
 <button
   routerLink="/user"
   *ngIf="showGoToOrders"
@@ -36,6 +33,7 @@
   mat-raised-button
   color="primary"
 ><mat-icon>dashboard</mat-icon>
-  Go To Admin
+  Go to Admin
 </button>
 
+<p class="user-name" *ngIf="successfulAuthorization">користувач: <span class="user-name-text">{{this.checkAuthentication.resultAuthentication.name}}</span></p>

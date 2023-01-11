@@ -664,10 +664,10 @@
       "password": "wwwA111"
     },
     {
-      "id": 17,
-      "name": "new client",
+      "name": "client",
       "login": "client",
-      "password": "clientA1"
+      "password": "clientA1",
+      "id": 17
     }
   ],
   "comments": [
@@ -1173,7 +1173,7 @@
           "quantity": 5
         }
       ],
-      "orderStatus": "створено",
+      "orderStatus": "в роботі",
       "id": 17
     },
     {
@@ -1189,7 +1189,7 @@
           "quantity": 1
         }
       ],
-      "orderStatus": "створено",
+      "orderStatus": "в роботі",
       "id": 18
     }
   ],

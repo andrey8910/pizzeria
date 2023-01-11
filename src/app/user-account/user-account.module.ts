@@ -33,7 +33,7 @@ import {OrdersGuardGuard} from "../core/guards/orders-guard.guard";
         path: '',
         pathMatch: 'full',
         component: UserPageComponent,
-        canActivate : [CustomerGuard],
+        canActivate: [CustomerGuard],
       },
       {
         path: 'orders',
@@ -44,7 +44,7 @@ import {OrdersGuardGuard} from "../core/guards/orders-guard.guard";
         path: 'order/:id',
         pathMatch: 'full',
         component: OrderPageComponent,
-        canActivate : [OrdersGuardGuard]
+        canActivate: [OrdersGuardGuard]
       },
       {
         path: 'info',
@@ -57,7 +57,9 @@ import {OrdersGuardGuard} from "../core/guards/orders-guard.guard";
         component: OrdersHistoryComponent,
       }
 
-    ])
+    ]),
+
+
   ],
   providers: [CustomerGuard, OrdersGuardGuard]
 })

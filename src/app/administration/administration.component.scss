@@ -16,6 +16,11 @@
       display: flex;
       align-items: center;
       gap: 100px;
+
+      @media only screen and (max-width: 640px){
+        gap: 10px;
+        justify-content:space-between;
+      }
     }
 
     .admin-page-nav{
@@ -23,7 +28,14 @@
       .admin-page-nav-list{
         display: flex;
         text-align: center;
-        gap: 100px;
+        justify-content: space-around;
+
+        @media only screen and (max-width: 640px){
+          flex-direction: column;
+          justify-content: center;
+          gap: 20px;
+        }
+
         li{
           list-style: none;
         }

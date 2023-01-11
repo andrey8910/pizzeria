@@ -8,14 +8,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthorizationDialogComponent} from "../authorization-dialog/authorization-dialog.component";
 import {RegistrationDialogComponent} from "../registration-dialog/registration-dialog.component";
 import {UserAuthenticationCheckService} from "../core/services/user-authentication-check.service";
-import {CurrencyUaPipe} from "../core/pipes/currency-ua.pipe";
+
 
 
 @NgModule({
   declarations: [
     AuthorizationDialogComponent,
     RegistrationDialogComponent,
-    CurrencyUaPipe
+
 
   ],
   imports: [
@@ -28,20 +28,20 @@ import {CurrencyUaPipe} from "../core/pipes/currency-ua.pipe";
     HttpClientModule,
 
   ],
-  exports: [
-    CommonModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    PrimengModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    AuthorizationDialogComponent,
-    RegistrationDialogComponent,
+    exports: [
+      // CommonModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PrimengModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        AuthorizationDialogComponent,
+        RegistrationDialogComponent,
 
 
 
-  ],
+    ],
   providers: [UserAuthenticationCheckService]
 
 })

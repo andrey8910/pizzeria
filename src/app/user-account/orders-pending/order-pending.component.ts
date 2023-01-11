@@ -52,7 +52,7 @@ export class OrderPendingComponent implements OnInit {
     this.ordersService.getOrdersByClientId(clientId).pipe(
       tap(res => {
 
-        this.ordersPending = []
+        this.ordersPending = [];
 
         this.ordersPending = res.filter(item => item.orderStatus === "в роботі")
 
