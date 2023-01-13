@@ -30,7 +30,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,10 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     AccordionModule,
     PasswordModule,
     DividerModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputSwitchModule
+
+
 
 
 
@@ -99,7 +102,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     AccordionModule,
     PasswordModule,
     DividerModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputSwitchModule
 
   ],
   providers: [MessageService, ConfirmationService]

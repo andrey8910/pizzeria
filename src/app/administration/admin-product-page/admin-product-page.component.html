@@ -7,7 +7,20 @@
       <mat-icon>keyboard_backspace</mat-icon>
       назад
     </button>
-    <p>Інформація про продукт <span *ngIf="productId">ID {{productId}}</span></p>
+    <p>Редагувати данні продукта <span *ngIf="productId">ID {{productId}}</span></p>
+
+    <p-inputSwitch [(ngModel)]="canEdit"></p-inputSwitch>
+    <button
+      *ngIf="canEdit"
+      pButton
+      pRipple
+      type="button"
+      label="Зберегти зміни"
+      class="p-button-outlined"
+      (click)="editProductData()"
+      [disabled]="formProductData.invalid"
+    ></button>
+
   </div>
   <div class="product-spinner" *ngIf="isLoader">
     <p-progressSpinner  ></p-progressSpinner>
@@ -15,32 +28,147 @@
   <div class="not-found-product" *ngIf="!isLoader && !isReadyProductData">
     <p> Продукт не знайдено</p>
   </div>
-  <div class="product-data-body" *ngIf="isReadyProductData">
-    <form class="form-product-data">
+  <div class="product-data-body" *ngIf="isReadyProductData && productData">
+
+    <form class="form-product-data" [formGroup]="formProductData">
 
       <div class="form-product-item">
-        <label for="product-title" class="block">Заголовок</label>
+        <label for="product-title" class="product-item-label">Заголовок</label>
         <input
           id="product-title"
+          class="product-item-value"
           pInputText
           [readonly]="!canEdit"
-          value="{{productData.title}}"
+          formControlName = "title"
         />
       </div>
 
       <div class="form-product-item">
-        <label for="product-description" class="block">Опис</label>
+        <label for="product-description" class="product-item-label">Опис</label>
         <textarea
           id="product-description"
+          class="product-item-value"
           rows="5"
           cols="30"
           pInputTextarea
           [autoResize]="true"
           [readonly]="!canEdit"
-          value="{{productData.description}}"
+          formControlName = "description"
         ></textarea>
 
       </div>
+
+      <div class="form-product-item" formArrayName="ingredients" >
+        <span class="product-item-label ingredients" >
+          Інгридієнти
+
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-plus"
+            class="p-button-rounded p-button-success p-button-outlined"
+            (click)="addIngredient()"
+            *ngIf="canEdit"
+          ></button>
+        </span>
+
+        <div class="product-item-value ingredients" >
+
+          <div *ngFor="let ingredientForm of ingredients.controls; let i = index">
+            <div class="ingredient-form" [formGroupName]="i">
+              <div class="add-ingredient" *ngIf="ingredientForm.value.name.length == 0">
+                <input
+                  #newIngredient
+                  pInputText
+                  placeholder="напишіть назву інгридієнта"
+                />
+                <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-check"
+                  class="p-button-rounded p-button-outlined"
+                  (click)="saveIngredientName(i, newIngredient.value)"
+                ></button>
+
+              </div>
+
+              <div class="ingredient" *ngIf="ingredientForm.value.name.length !== 0">
+                <span >{{ingredientForm.value.name}}</span>
+                <button
+                  *ngIf="canEdit"
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-times"
+                  class="p-button-rounded p-button-danger p-button-outlined"
+                  (click)="deleteIngredient(i)"
+                ></button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-product-item">
+        <label for="product-minPrice" class="product-item-label">Мінімальна ціна, грн.</label>
+        <div class="product-item-value">
+          <p-inputNumber
+            id="product-minPrice"
+            formControlName = "minPrice"
+            mode="decimal"
+            [readonly]="!canEdit"
+            [showButtons]="true"
+            [min]="0"
+            [max]="500">
+          </p-inputNumber>
+        </div>
+
+      </div>
+
+      <div class="form-product-item">
+        <label for="product-minWeight" class="product-item-label">Мінімальна вага, гр.</label>
+        <div class="product-item-value">
+          <p-inputNumber
+            id="product-minWeight"
+            formControlName = "minWeight"
+            mode="decimal"
+            [readonly]="!canEdit"
+            [showButtons]="true"
+            [min]="0"
+            [max]="1000">
+          </p-inputNumber>
+        </div>
+      </div>
+
+      <div class="form-product-item">
+        <label for="product-minWeight" class="product-item-label">Параметри</label>
+      </div>
+
+      <div class="form-product-item">
+        <label for="product-minWeight" class="product-item-label">Зображення</label>
+        <div class="product-item-value">
+          <div class="product-image-section">
+            <div class="section-title">
+              <p>Основне зображення</p>
+            </div>
+
+            <img src="{{productData.imageBig}}" alt="Основне зображення">
+          </div>
+          <div class="product-image-section">
+            <div class="section-title">
+              <p>Детальне зображення</p>
+            </div>
+            <img src="{{productData.imageMain}}" alt="Детальне зображення">
+          </div>
+        </div>
+      </div>
+
     </form>
   </div>
 </div>
+y

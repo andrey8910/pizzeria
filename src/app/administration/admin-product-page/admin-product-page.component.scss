@@ -39,13 +39,54 @@
         justify-content: space-between;
 
 
-        lable{
+        .product-item-label{
           flex: 0 0 20%;
         }
 
-        input, textarea{
+        .product-item-label , ingredients {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .product-item-value{
           flex: 0 0 80%;
           min-width: 500px;
+
+
+          .ingredient-form{
+
+            .add-ingredient{
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            }
+
+            .ingredient{
+              display: flex;
+              align-items: center;
+              gap: 6px;
+
+              span {
+                padding: 6px;
+                background-color: rgba(0,0,0, 0.1);
+                border-radius: 10px;
+              }
+            }
+          }
+
+          .product-image-section {
+            img {
+              max-height: 160px;
+            }
+          }
+        }
+
+        .product-item-value , ingredients {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+          flex-wrap: wrap;
         }
       }
     }
