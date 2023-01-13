@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="product-data-header">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="comeBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+      назад
+    </button>
+    <p>Інформація про продукт <span *ngIf="productId">ID {{productId}}</span></p>
+  </div>
+  <div class="product-spinner" *ngIf="isLoader">
+    <p-progressSpinner  ></p-progressSpinner>
+  </div>
+  <div class="not-found-product" *ngIf="!isLoader && !isReadyProductData">
+    <p> Продукт не знайдено</p>
+  </div>
+  <div class="product-data-body" *ngIf="isReadyProductData">
+    <form class="form-product-data">
+
+      <div class="form-product-item">
+        <label for="product-title" class="block">Заголовок</label>
+        <input
+          id="product-title"
+          pInputText
+          [readonly]="!canEdit"
+          value="{{productData.title}}"
+        />
+      </div>
+
+      <div class="form-product-item">
+        <label for="product-description" class="block">Опис</label>
+        <textarea
+          id="product-description"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [autoResize]="true"
+          [readonly]="!canEdit"
+          value="{{productData.description}}"
+        ></textarea>
+
+      </div>
+    </form>
+  </div>
+</div>

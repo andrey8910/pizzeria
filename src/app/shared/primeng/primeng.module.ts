@@ -29,6 +29,7 @@ import {ScrollTopModule} from 'primeng/scrolltop';
 import {AccordionModule} from 'primeng/accordion';
 import {PasswordModule} from 'primeng/password';
 import {DividerModule} from 'primeng/divider';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {DividerModule} from 'primeng/divider';
     ScrollTopModule,
     AccordionModule,
     PasswordModule,
-    DividerModule
+    DividerModule,
+    ProgressSpinnerModule
 
 
 
@@ -96,7 +98,8 @@ import {DividerModule} from 'primeng/divider';
     ScrollTopModule,
     AccordionModule,
     PasswordModule,
-    DividerModule
+    DividerModule,
+    ProgressSpinnerModule
 
   ],
   providers: [MessageService, ConfirmationService]

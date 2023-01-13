@@ -1,0 +1,56 @@
+:host{
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 400px;
+  padding-top: 80px;
+
+  .product-data-header{
+    display: flex;
+    align-items: center;
+    gap: 100px;
+  }
+
+  .product-spinner{
+    width: 100%;
+    display: flex;
+    padding: 100px 50%;
+  }
+
+  .not-found-product{
+    padding: 100px;
+
+    p{
+      text-align: center;
+    }
+  }
+
+  .product-data-body{
+    width: 100%;
+    margin: 20px 0;
+
+    .form-product-data{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .form-product-item{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+
+        lable{
+          flex: 0 0 20%;
+        }
+
+        input, textarea{
+          flex: 0 0 80%;
+          min-width: 500px;
+        }
+      }
+    }
+
+
+  }
+
+}

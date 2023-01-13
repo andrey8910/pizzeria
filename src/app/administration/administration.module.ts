@@ -14,11 +14,7 @@ import { AdminUserPageComponent } from './admin-user-page/admin-user-page.compon
 import { AdminSliderComponent } from './admin-slider/admin-slider.component';
 import { AdminSliderItemComponent } from './admin-slider-item/admin-slider-item.component';
 import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-editor.component';
-
-
-
-
-
+import { AdminProductPageComponent } from './admin-product-page/admin-product-page.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +25,7 @@ import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-e
     AdminSliderComponent,
     AdminSliderItemComponent,
     AdminSliderEditorComponent,
-
-
-
+    AdminProductPageComponent,
   ],
   imports: [
     CommonModule,
@@ -39,12 +33,21 @@ import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-e
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-
     RouterModule.forChild([
       {
         path: '',
         pathMatch: 'full',
         component: AdministrationComponent,
+      },
+      {
+        path: 'products',
+        pathMatch: 'full',
+        component: AdminProductsComponent,
+      },
+      {
+        path: 'product/:id',
+        pathMatch: 'full',
+        component: AdminProductPageComponent,
       },
       {
         path: 'users',
@@ -63,9 +66,7 @@ import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-e
       }
     ])
   ],
-  exports: [
-
-  ],
+  exports: [],
   providers: [AdminGuard, AdminGuardService]
 })
 export class AdministrationModule { }
