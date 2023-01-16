@@ -64,7 +64,8 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
         description: new FormControl(this.productData.description, [ Validators.required, Validators.minLength(6)]),
         ingredients: this.fb.array([]),
         minPrice: new FormControl(this.productData.minPrice, [Validators.required]),
-        minWeight: new FormControl(this.productData.minWeight, [Validators.required])
+        minWeight: new FormControl(this.productData.minWeight, [Validators.required]),
+        params: this.fb.group({})
       })
 
       if(this.productData.ingredients){
@@ -75,12 +76,54 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
           (this.formProductData.controls['ingredients'] as FormArray).push(ingredientForm)
         })
       }
+
+      if(this.productData.params){
+
+        Object.entries(this.productData.params).forEach(param =>{
+          (this.formProductData.get('params') as FormGroup).setControl(param[0], new FormArray([]));
+
+          Object.entries(param[1]).forEach(value => {
+            ((this.formProductData.get('params') as FormGroup).get(param[0]) as FormArray).push(
+              this.fb.group({
+                [value[0]] : [value[1], [Validators.required]]
+              })
+            )
+          })
+        })
+        this.cdr.markForCheck()
+      }
+
+      // if(this.productData.params.price){
+      //   for(let [i,param] of Object.entries(this.productData.params.price) ){
+      //     const size = this.fb.group({
+      //       [i] : [param, []]
+      //     });
+      //
+      //     (this.formProductData.controls['price'] as FormArray).push(size);
+      //     // const par = this.fb.group<any>({
+      //     //   [param] : [this.productData.params.price[i], []]
+      //     // });
+      //     // (this.formProductData.controls['price'] as FormArray).push(par)
+      //   }
+      // }
+      this.cdr.markForCheck()
     }
     this.cdr.markForCheck()
   }
 
   get ingredients(): FormArray {
     return this.formProductData.controls["ingredients"] as FormArray;
+  }
+
+  get params(): FormGroup{
+    return this.formProductData.controls["params"] as FormGroup;
+  }
+
+  public getParamsProp(prop : any){
+
+     return ((this.formProductData?.controls["params"] as FormGroup).controls[`${prop}`] as FormArray);
+
+
   }
 
   private getProductData(productId: number){
@@ -122,7 +165,17 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
   }
 
   public editProductData(){
-    console.log(this.formProductData.value)
+    console.log(this.formProductData.value);
+    console.log(this.params)
+  }
+
+  public addParamProperty(param: any){
+    const paramPropertyForm = this.fb.group({
+      '': ['', [Validators.required]]
+    });
+    this.getParamsProp(param).push(paramPropertyForm);
+    this.cdr.markForCheck();
+
   }
 
 

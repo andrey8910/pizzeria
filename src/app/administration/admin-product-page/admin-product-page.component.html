@@ -122,7 +122,7 @@
             formControlName = "minPrice"
             mode="decimal"
             [readonly]="!canEdit"
-            [showButtons]="true"
+            [showButtons]="canEdit"
             [min]="0"
             [max]="500">
           </p-inputNumber>
@@ -138,15 +138,76 @@
             formControlName = "minWeight"
             mode="decimal"
             [readonly]="!canEdit"
-            [showButtons]="true"
+            [showButtons]="canEdit"
             [min]="0"
             [max]="1000">
           </p-inputNumber>
         </div>
       </div>
 
-      <div class="form-product-item">
-        <label for="product-minWeight" class="product-item-label">Параметри</label>
+      <div class="form-product-item" *ngIf="params" formGroupName = "params">
+
+        <label class="product-item-label">Параметри:</label>
+        <div class="product-item-value item-params">
+          <div *ngFor="let param of params.controls | keyvalue">
+
+            <div class="param-header">
+              <span class="header-title">Параметр :</span>
+              <span class="header-title-value">{{param.key}}</span>
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-plus"
+                class="header-btn p-button-rounded p-button-success p-button-outlined"
+                (click)="addParamProperty(param.key)"
+                *ngIf="canEdit"
+              ></button>
+            </div>
+
+            <div class="param-block" formArrayName = "{{param.key}}">
+              <div *ngFor="let propForm of getParamsProp(param.key).controls; let i = index">
+                <div [formGroupName]="i">
+                  <div *ngFor="let prop of propForm.value | keyvalue">
+                    <p class="param-key">{{prop.key}}</p>
+                    <p-inputNumber
+                      class="param-value"
+                      formControlName = "{{prop.key}}"
+                      mode="decimal"
+                      [readonly]="!canEdit"
+                      [showButtons]="canEdit"
+                      [min]="0"
+                      [max]="1000">
+                    </p-inputNumber>
+                    <p>{{prop.key}}</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="add-param-property">
+              <label for="paramType">Вкажіть тип параметру</label>
+              <input
+                id="paramType"
+                pInputText
+                placeholder="напишіть тип параметру"
+              />
+              <label for="paramValue">Вкажіть значення типу</label>
+              <p-inputNumber id="paramValue"></p-inputNumber>
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-check"
+                class="p-button-rounded p-button-outlined"
+
+              ></button>
+
+            </div>
+
+          </div>
+        </div>
       </div>
 
       <div class="form-product-item">
@@ -171,4 +232,4 @@
     </form>
   </div>
 </div>
-y
+

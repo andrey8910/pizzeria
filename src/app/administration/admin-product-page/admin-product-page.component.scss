@@ -31,12 +31,14 @@
     .form-product-data{
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 30px;
 
       .form-product-item{
         display: flex;
         width: 100%;
         justify-content: space-between;
+        padding-bottom: 10px;
+        border-bottom: 1px solid gainsboro;
 
 
         .product-item-label{
@@ -82,7 +84,53 @@
           }
         }
 
-        .product-item-value , ingredients {
+        .product-item-value.item-params {
+          flex: 1 1 20%;
+          display: flex;
+          gap: 100px;
+
+          .param-header{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .header-title{
+              font-size: 12px;
+            }
+            .header-title-value{
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+
+          }
+          .param-block{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+
+          }
+
+          .add-param-property{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 1px solid limegreen;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+
+            label {
+              font-size: 12px;
+            }
+            input {
+              width: 100%;
+            }
+          }
+        }
+
+        .product-item-value.ingredients {
           display: flex;
           align-items: center;
           gap: 30px;
