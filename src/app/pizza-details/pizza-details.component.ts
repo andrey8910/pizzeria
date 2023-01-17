@@ -5,7 +5,7 @@ import {Location, ViewportScroller} from '@angular/common';
 import { Subject, Subscription} from 'rxjs';
 import {ProductsService} from "../core/services/products.service";
 import {catchError, finalize, takeUntil, tap} from "rxjs/operators";
-import {  FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl } from '@angular/forms';
 import {SizeParam} from "../core/interfaces/size-param";
 import {PizzaOrder} from "../core/interfaces/pizza-order";
 import {ShoppingCartService} from "../core/services/shopping-cart.service";

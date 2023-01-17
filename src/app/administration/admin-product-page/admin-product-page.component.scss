@@ -115,6 +115,7 @@
           .add-param-property{
             display: flex;
             flex-direction: column;
+            align-items: flex-end;
             gap: 10px;
             border: 1px solid limegreen;
             border-radius: 10px;
@@ -123,6 +124,7 @@
 
             label {
               font-size: 12px;
+              align-self: center;
             }
             input {
               width: 100%;

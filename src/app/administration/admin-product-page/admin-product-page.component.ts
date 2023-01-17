@@ -178,6 +178,10 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
 
   }
 
+  public saveParamProperty(paramKey: string, paramIndex: number, propType: string, propValue: string){
+    console.log(paramKey, paramIndex,propType,propValue)
+  }
+
 
   public comeBack() {
     this.location.back();
