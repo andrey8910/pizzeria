@@ -102,8 +102,8 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
 
   public onSelectPizzaSize(size: any){
     const  param: SizeParam = size.key
-    this.selectedPizzaWeight = this.itemPizza.params.weight[param]
-    this.selectedPizzaPrice = this.itemPizza.params.price[param]
+    //this.selectedPizzaWeight = this.itemPizza.params.weight[param]
+   // this.selectedPizzaPrice = this.itemPizza.params.price[param]
   }
 
   toShoppingCart(item: Pizza): void{

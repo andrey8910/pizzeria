@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import { Observable } from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
 
@@ -20,35 +20,59 @@ export class PizzaCardComponent implements OnInit {
 
   private shoppingCart$: Observable<PizzaOrder[]>;
   public pizzaParamsSelectForm: FormGroup;
-  public pizzaSize: any  = [
-    {name: 'Мала (22см)', key: 'small'},
-    {name: 'Середня (30см)', key: 'medium'},
-    {name: 'Велика (36см)', key: 'big'}
-  ];
+  public pizzaSize: any = [];
 
-  public selectedPizzaSize: any;
+  public selectedPizzaSize: any
   public selectedPizzaWeight: number;
   public selectedPizzaPrice: number;
 
   constructor(
     private shoppingService: ShoppingCartService,
-
-    ) {}
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
+    this.init()
+  }
+
+  private init(){
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
     this.shoppingService.loadAll();
-    this.selectedPizzaSize = this.pizzaSize[0];
-    this.pizzaParamsSelectForm = new FormGroup({
-      pizzaSelectSize: new FormControl(this.pizzaSize[0])
-    })
+    if(this.pizzaItem){
+      this.pizzaItem.params.size.forEach( value =>{
+        Object.entries(value).forEach(s => {
+          const size = {
+            name : s[1],
+            key: s[0]
+          }
+          this.pizzaSize.push(size)
+        })
+      })
+      this.pizzaParamsSelectForm = new FormGroup({
+        pizzaSelectSize: new FormControl(this.pizzaSize[0])
+      })
+    }
+    this.cdr.markForCheck();
   }
 
   onSelectPizzaSize(event: any){
-  const  param: SizeParam = event.key
-    this.selectedPizzaWeight = this.pizzaItem.params.weight[param]
-    this.selectedPizzaPrice = this.pizzaItem.params.price[param]
+  const  sizeParam: SizeParam = event.key;
+  this.pizzaItem.params.price.forEach(param => {
+    Object.entries(param).forEach(p => {
+      if(p[0] == sizeParam){
+        this.selectedPizzaPrice = p[1]
+      }
+    })
+  });
+    this.pizzaItem.params.weight.forEach(param => {
+      Object.entries(param).forEach(p => {
+        if(p[0] == sizeParam){
+          this.selectedPizzaWeight = p[1]
+        }
+      })
+    })
 
+    this.cdr.markForCheck();
   }
 
   toShoppingCart(item: Pizza): void{

@@ -1,7 +1,7 @@
 <div class="pizza-card">
   <div class="pizza-main-img">
     <img src="{{pizzaItem.imageMain}}" alt="{{pizzaItem.title}}">
-    <span class="pizza-card-minWeight">{{ selectedPizzaSize ? (selectedPizzaWeight ? selectedPizzaWeight : pizzaItem.minWeight) + ' г' : pizzaItem.minWeight + ' г'}}</span>
+    <span class="pizza-card-minWeight">{{ pizzaSize ? (selectedPizzaWeight ? selectedPizzaWeight : pizzaItem.minWeight) + ' г' : pizzaItem.minWeight + ' г'}}</span>
   </div>
   <div class="pizza-card-title-block">
     <span class="pizza-card-title">{{pizzaItem.title | titlecase}}</span>
@@ -18,18 +18,32 @@
     <li class="pizza-ingredient" *ngFor="let ingredient of pizzaItem.ingredients">{{ingredient}}</li>
   </ul>
 
-  <div class="pizza-card-params" [formGroup]="pizzaParamsSelectForm" >
-    <div *ngFor="let size of pizzaSize" class="field-checkbox">
-      <label>
-       <p-radioButton [inputId]="size.key"
-                      name="pizzaSelectSize"
-                      [value]="size"
-                      formControlName="pizzaSelectSize"
-                      (onClick) = onSelectPizzaSize(size)
+  <div class="pizza-card-params" [formGroup]="pizzaParamsSelectForm" *ngIf="pizzaSize">
+    <div *ngFor="let size of pizzaSize " class="field-checkbox">
+      <label >
+        <p-radioButton [inputId]="size.key"
+                       name="pizzaSelectSize"
+                       [value]="size"
+                       formControlName="pizzaSelectSize"
+                       (onClick) = onSelectPizzaSize(size)
 
-       ></p-radioButton>
-       {{size.name}}
-     </label>
+        ></p-radioButton>
+        {{size.name}}
+      </label>
+
+<!--      <div *ngFor="let size of paramSize | keyvalue ">-->
+<!--        <label>-->
+<!--          <p-radioButton [inputId]="size.key"-->
+<!--                         name="pizzaSelectSize"-->
+<!--                         [value]=""-->
+<!--                         [(ngModel)]="selectedPizzaSize"-->
+<!--                         formControlName="pizzaSelectSize"-->
+<!--                         (onClick) = onSelectPizzaSize(size)-->
+<!--          ></p-radioButton>-->
+<!--        {{size.value}}-->
+<!--        </label>-->
+<!--      </div>-->
+
     </div>
   </div>
 <!--  <div class="pizza-card-details">-->
@@ -41,7 +55,7 @@
 
 <!--  </div>-->
   <div class="pizza-card-footer">
-    <div class="pizza-card-price">{{selectedPizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currency) : (pizzaItem.minPrice | currency) ): (pizzaItem.minPrice | currency)}}</div>
+    <div class="pizza-card-price">{{pizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currency) : (pizzaItem.minPrice | currency) ): (pizzaItem.minPrice | currency)}}</div>
     <button mat-raised-button
             color="primary"
             (click)="toShoppingCart(pizzaItem)"

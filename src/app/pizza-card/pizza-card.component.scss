@@ -88,6 +88,7 @@
   .pizza-card-params{
     display: flex;
     flex: 1 1 auto;
+    flex-wrap: wrap;
     justify-items: center;
     justify-content: space-between;
 

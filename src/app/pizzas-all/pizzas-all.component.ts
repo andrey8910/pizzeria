@@ -1,8 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { ProductsService } from '../core/services/products.service';
 import { Pizza } from '../core/interfaces/pizza';
-import {finalize, tap, catchError} from 'rxjs/operators';
+import {finalize, tap, catchError, takeUntil} from 'rxjs/operators';
 import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
+import {Subject} from "rxjs";
 
 
 
@@ -26,13 +27,23 @@ export class PizzasAllComponent implements OnInit {
   public loader = false;
   public showErrorMassage = false
   public showProductsNotFound = false
-  public pageSizePagination: number = 6
+  public pageSizePagination: number = 12
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  constructor(private productsService: ProductsService) { }
+  constructor(
+    private productsService: ProductsService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
     this.getPizzas()
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   private getPizzas(){
@@ -40,7 +51,8 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.getPizzas()
       .pipe(
         tap((data:Pizza[]) => {
-          this.pizzas = data.slice(0, this.pageSizePagination)
+          this.pizzas = data.slice(0, this.pageSizePagination);
+          this.cdr.markForCheck()
         }),
         finalize(() => {
           this.loader = false
@@ -49,7 +61,8 @@ export class PizzasAllComponent implements OnInit {
         catchError((err) =>  {
           this.showProductsNotFound = true
           throw 'Помилка сервера. Деталі: ' + err
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe()
   }
@@ -58,12 +71,13 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.findPizza(event.target.value)
       .pipe(
         tap((data:Pizza[]) => {
-          this.pizzas = data.slice(0, this.pageSizePagination)
-          this.searchTextBD = event.target.value
-        })
+          this.pizzas = data.slice(0, this.pageSizePagination);
+          this.searchTextBD = event.target.value;
+          this.cdr.markForCheck();
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe()
-
   }
 
   public toSortPizzas(){
@@ -71,8 +85,11 @@ export class PizzasAllComponent implements OnInit {
       this.productsService.sortByPrice(this.valueSortingMethod.code)
         ?.pipe(
           tap((data:Pizza[]) => {
-            this.pizzas = data.slice(0, this.pageSizePagination)
-          })).subscribe()
+            this.pizzas = data.slice(0, this.pageSizePagination);
+            this.cdr.markForCheck();
+          }),
+          takeUntil(this.destroy$)
+          ).subscribe()
     }
   }
 
@@ -80,12 +97,13 @@ export class PizzasAllComponent implements OnInit {
     this.productsService.getPizzaFromPagination(event)
       .pipe(
         tap((data: Pizza[]) => {
-          this.pizzas = data
-          this.pageSizePagination = event.pageSize
-        })
+          this.pizzas = data;
+          this.pageSizePagination = event.pageSize;
+          this.cdr.markForCheck();
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe()
   }
-
 
 }
