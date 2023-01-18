@@ -1,8 +1,6 @@
 import {Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import { Observable } from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
-
-
 import { ShoppingCartService } from "../core/services/shopping-cart.service";
 import {Pizza} from "../core/interfaces/pizza";
 import {PizzaOrder } from "../core/interfaces/pizza-order";
@@ -15,6 +13,7 @@ import { SizeParam } from '../core/interfaces/size-param'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PizzaCardComponent implements OnInit {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   @Input() pizzaItem: Pizza
 
@@ -33,6 +32,11 @@ export class PizzaCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.init()
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   private init(){

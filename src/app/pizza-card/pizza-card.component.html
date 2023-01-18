@@ -26,34 +26,13 @@
                        [value]="size"
                        formControlName="pizzaSelectSize"
                        (onClick) = onSelectPizzaSize(size)
-
         ></p-radioButton>
         {{size.name}}
       </label>
 
-<!--      <div *ngFor="let size of paramSize | keyvalue ">-->
-<!--        <label>-->
-<!--          <p-radioButton [inputId]="size.key"-->
-<!--                         name="pizzaSelectSize"-->
-<!--                         [value]=""-->
-<!--                         [(ngModel)]="selectedPizzaSize"-->
-<!--                         formControlName="pizzaSelectSize"-->
-<!--                         (onClick) = onSelectPizzaSize(size)-->
-<!--          ></p-radioButton>-->
-<!--        {{size.value}}-->
-<!--        </label>-->
-<!--      </div>-->
-
     </div>
   </div>
-<!--  <div class="pizza-card-details">-->
-<!--    <button-->
-<!--      mat-raised-button-->
-<!--      color="primary"-->
-<!--      [routerLink]="[pizzaItem.id]"-->
-<!--    >Про піцу</button>-->
 
-<!--  </div>-->
   <div class="pizza-card-footer">
     <div class="pizza-card-price">{{pizzaSize ? ((selectedPizzaPrice) ? (selectedPizzaPrice | currency) : (pizzaItem.minPrice | currency) ): (pizzaItem.minPrice | currency)}}</div>
     <button mat-raised-button

@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
-import {Subscription} from "rxjs";
+import {Subject} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {OrdersService} from "../../core/services/orders.service";
 import {Orders} from "../../core/interfaces/orders";
-import {tap} from "rxjs/operators";
+import {takeUntil, tap} from "rxjs/operators";
 import {ProductsService} from "../../core/services/products.service";
 
 @Component({
@@ -14,6 +14,7 @@ import {ProductsService} from "../../core/services/products.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderPageComponent implements OnInit {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   public orderId: number
   public order: Orders = {
@@ -27,9 +28,6 @@ export class OrderPageComponent implements OnInit {
 
   public orderTotalPrice = 0
 
-  private subscription: Subscription;
-
-
   constructor( private activateRoute: ActivatedRoute,
                private location: Location,
                private ordersService: OrdersService,
@@ -39,13 +37,17 @@ export class OrderPageComponent implements OnInit {
   ngOnInit(): void {
     this.init()
   }
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
   public comeBack(){
     this.location.back()
   }
 
   private init(){
-    this.subscription = this.activateRoute.params.subscribe(params => this.orderId = params['id']);
+    this.activateRoute.params.subscribe(params => this.orderId = params['id']);
 
     this.ordersService.getOrderById(this.orderId)
       .pipe(
@@ -54,7 +56,6 @@ export class OrderPageComponent implements OnInit {
             this.orderNotFound = false
             this.order = order[0]
             order[0].orderList.forEach(item =>{
-
               let orderListItem: any = {
                 productId: item.productId,
                 title: '',
@@ -62,23 +63,38 @@ export class OrderPageComponent implements OnInit {
                 size: item.size,
                 weight: 0,
                 sumPrice: 0
-
               }
 
-              this.productsService.getPizzaById(item.productId)
-                .pipe(
+              this.productsService.getPizzaById(item.productId).pipe(
                   tap((res: any) => {
                     if(res.length > 0){
                       orderListItem.title = res[0].title
-                      orderListItem.sumPrice = res[0].params.price[orderListItem.size.key] * orderListItem.quantity
-                      this.orderTotalPrice += orderListItem.sumPrice
-                      orderListItem.weight = res[0].params.weight[orderListItem.size.key]
+                      //console.log(res[0].params.price)
+                      res[0].params.price.forEach((price : any) => {
+                        Object.entries(price).forEach(p => {
+                          if(p[0] == orderListItem.size.key){
+                            const orderPrice: any = p[1];
+                            orderListItem.sumPrice = orderPrice * orderListItem.quantity;
+                            this.cdr.markForCheck();
+                          }
+                        })
+                      })
 
+                      this.orderTotalPrice += orderListItem.sumPrice
+
+                      res[0].params.weight.forEach((weight : any) => {
+                        Object.entries(weight).forEach(w => {
+                          if(w[0] == orderListItem.size.key){
+                            orderListItem.weight = w[1];
+                            this.cdr.markForCheck();
+                          }
+                        })
+                      })
                       this.orderList.push(orderListItem)
                       this.cdr.markForCheck();
                     }
-
-                  })
+                  }),
+                takeUntil(this.destroy$)
                 ).subscribe()
             })
             this.cdr.markForCheck();
@@ -86,7 +102,8 @@ export class OrderPageComponent implements OnInit {
             this.orderNotFound = true
             this.cdr.markForCheck();
           }
-        })
+        }),
+        takeUntil(this.destroy$)
       ).subscribe()
   }
 

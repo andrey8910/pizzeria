@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {AuthorizationDialogData} from "../../core/interfaces/authorization-dialog";
 import {OrdersService} from "../../core/services/orders.service";
 import {UserAuthenticationCheckService} from "../../core/services/user-authentication-check.service";
-import {tap} from "rxjs/operators";
+import {takeUntil, tap} from "rxjs/operators";
 import {ProductsService} from "../../core/services/products.service";
 import {Location} from "@angular/common";
 
@@ -15,6 +15,7 @@ import {Location} from "@angular/common";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderPendingComponent implements OnInit {
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   public ordersPending: any[] = []
   public userAuthenticationCheck$: Observable<AuthorizationDialogData> ;
@@ -28,6 +29,11 @@ export class OrderPendingComponent implements OnInit {
 
   ngOnInit(): void {
     this.init()
+  }
+
+  ngOnDestroy(){
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   public comeBack(){
@@ -44,7 +50,8 @@ export class OrderPendingComponent implements OnInit {
         if(res.isPassedAuthentication){
           this.getOrdersById(this.resultAuth.resultAuthentication.id)
         }
-      })
+      }),
+      takeUntil(this.destroy$)
     ).subscribe()
   }
 
@@ -55,7 +62,6 @@ export class OrderPendingComponent implements OnInit {
         this.ordersPending = [];
 
         this.ordersPending = res.filter(item => item.orderStatus === "в роботі")
-
         this.ordersPending.map((item: any) => {
           item.orderPrice = 0
           item.orderList.forEach((listItem:any) =>{
@@ -64,15 +70,23 @@ export class OrderPendingComponent implements OnInit {
             this.productsService.getPizzaById(listItem.productId)
               .pipe(
                 tap((product: any) => {
-                  listItem.title = product[0].title
-                  listItem.price = product[0].params.price[listItem.size.key]
-                  item.orderPrice += listItem.price * listItem.quantity
+                  listItem.title = product[0].title;
+                  product[0].params.price.forEach((price: any) => {
+                    Object.entries(price).forEach(p => {
+                      if(p[0] == listItem.size.key){
+                        listItem.price = p[1];
+                        item.orderPrice += listItem.price * listItem.quantity;
+                      }
+                    })
+                  })
                   this.cdr.markForCheck();
-                })
+                }),
+                takeUntil(this.destroy$)
               ).subscribe()
           })
         })
-      })
+      }),
+      takeUntil(this.destroy$)
     ).subscribe()
   }
 

@@ -189,7 +189,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
           orderChange.productList.push(productListItem)
           this.cdr.markForCheck();
         })
-        this.userOrdersUnitedProducts.push(orderChange)
+        this.userOrdersUnitedProducts.push(orderChange);
         this.cdr.markForCheck();
       })
     }

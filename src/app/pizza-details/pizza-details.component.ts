@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Pizza} from "../core/interfaces/pizza";
 import {ActivatedRoute} from "@angular/router";
 import {Location, ViewportScroller} from '@angular/common';
-import { Subject, Subscription} from 'rxjs';
+import { Subject} from 'rxjs';
 import {ProductsService} from "../core/services/products.service";
 import {catchError, finalize, takeUntil, tap} from "rxjs/operators";
 import {FormGroup, FormControl } from '@angular/forms';
@@ -25,7 +25,6 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
   public loader = false
   public itemPizza: Pizza
   public pizzaId: number
-  private subscription: Subscription;
   public pizzaDetailsSelectForm: FormGroup;
 
 
@@ -33,11 +32,7 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
   public selectedPizzaWeight: number;
   public selectedPizzaPrice: number;
 
-  public pizzaSize: any  = [
-    {name: 'Мала (22см)', key: 'small'},
-    {name: 'Середня (30см)', key: 'medium'},
-    {name: 'Велика (36см)', key: 'big'}
-  ];
+  public pizzaSize: any  = [];
 
   constructor(private activateRoute: ActivatedRoute,
               private location: Location,
@@ -46,6 +41,7 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
               private scrollTopService: ScrollTopService,
               @Inject(WINDOW) private window: Window,
               private viewportScroller: ViewportScroller,
+              private cdr: ChangeDetectorRef
               ) { }
 
   ngOnInit(): void {
@@ -61,13 +57,29 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
 
   private initialization(){
 
-    this.subscription = this.activateRoute.params.subscribe(params => this.pizzaId = params['id']);
+    this.activateRoute.params.subscribe(params => this.pizzaId = params['id']);
     this.loader = true;
 
-    this.productsService.getPizzaById(this.pizzaId)
-      .pipe(
+    this.productsService.getPizzaById(this.pizzaId).pipe(
         tap((pizza:Pizza[]) => {
           this.itemPizza = pizza[0]
+        }),
+        tap(() => {
+          if(!this.itemPizza) return;
+          this.itemPizza.params.size.forEach(size => {
+            Object.entries(size).forEach(s => {
+              const size = {
+                name : s[1],
+                key: s[0]
+              }
+              this.pizzaSize.push(size);
+              this.selectedPizzaSize = this.pizzaSize[0];
+              this.pizzaDetailsSelectForm = new FormGroup({
+                pizzaSelectSize: new FormControl(this.pizzaSize[0])
+              });
+              this.cdr.markForCheck();
+            })
+          })
         }),
         finalize(() => {
           this.loader = false
@@ -76,15 +88,10 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
           throw 'Помилка сервера. Деталі: ' + err
         }),
         takeUntil(this.destroy$),
-      )
-      .subscribe()
+      ).subscribe()
 
-    this.selectedPizzaSize = this.pizzaSize[0];
-    this.pizzaDetailsSelectForm = new FormGroup({
-      pizzaSelectSize: new FormControl(this.pizzaSize[0])
-    })
-
-    this.handleScroll()
+    this.handleScroll();
+    this.cdr.markForCheck();
   }
 
   private handleScroll(){
@@ -101,9 +108,24 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
   }
 
   public onSelectPizzaSize(size: any){
-    const  param: SizeParam = size.key
-    //this.selectedPizzaWeight = this.itemPizza.params.weight[param]
-   // this.selectedPizzaPrice = this.itemPizza.params.price[param]
+    const  sizeParam: SizeParam = size.key
+    this.itemPizza.params.price.forEach(param => {
+      Object.entries(param).forEach(p => {
+        if(p[0] == sizeParam){
+          this.selectedPizzaPrice = p[1];
+          this.cdr.markForCheck();
+        }
+      })
+    });
+    this.itemPizza.params.weight.forEach(param => {
+      Object.entries(param).forEach(p => {
+        if(p[0] == sizeParam){
+          this.selectedPizzaWeight = p[1];
+          this.cdr.markForCheck();
+        }
+      })
+    })
+
   }
 
   toShoppingCart(item: Pizza): void{

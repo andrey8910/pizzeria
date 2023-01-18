@@ -15,6 +15,7 @@ import {Subject} from "rxjs";
 })
 
 export class PizzasAllComponent implements OnInit {
+
   public searchText: string
   public searchTextBD: string = '';
   public sortingMethod = [
@@ -25,12 +26,11 @@ export class PizzasAllComponent implements OnInit {
 
   public pizzas: Pizza[];
   public loader = false;
-  public showErrorMassage = false
-  public showProductsNotFound = false
-  public pageSizePagination: number = 12
+  public showErrorMassage = false;
+  public showProductsNotFound = false;
+  public pageSizePagination: number = 6;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
-
 
   constructor(
     private productsService: ProductsService,
