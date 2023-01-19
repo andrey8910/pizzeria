@@ -13,6 +13,14 @@
   .products-body{
    width: 100%;
 
+    .create-product-block{
+      width: 100%;
+      border: 1px solid grey;
+      border-radius: 10px;
+      margin-top: 20px;
+      padding: 20px;
+    }
+
     .products-table{
       width: 100%;
       margin: 20px 0;

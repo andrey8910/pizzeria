@@ -6,6 +6,7 @@ import {takeUntil, tap} from "rxjs/operators";
 import {ProductsService} from "../../core/services/products.service";
 import {Pizza} from "../../core/interfaces/pizza";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-admin-product-page',
@@ -28,7 +29,9 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
               private activateRoute: ActivatedRoute,
               private productsService: ProductsService,
               private cdr: ChangeDetectorRef,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService,) {
   }
 
   ngOnInit() {
@@ -65,7 +68,9 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
         ingredients: this.fb.array([]),
         minPrice: new FormControl(this.productData.minPrice, [Validators.required]),
         minWeight: new FormControl(this.productData.minWeight, [Validators.required]),
-        params: this.fb.group({})
+        params: this.fb.group({}),
+        imageBig: new FormControl(this.productData.imageBig, [Validators.required]),
+        imageMain: new FormControl(this.productData.imageMain, [Validators.required])
       })
 
       if(this.productData.ingredients){
@@ -82,30 +87,19 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
         Object.entries(this.productData.params).forEach(param =>{
           (this.formProductData.get('params') as FormGroup).setControl(param[0], new FormArray([]));
 
-          Object.entries(param[1]).forEach(value => {
-            ((this.formProductData.get('params') as FormGroup).get(param[0]) as FormArray).push(
-              this.fb.group({
-                [value[0]] : [value[1], [Validators.required]]
-              })
-            )
+          Object.entries(param[1]).forEach((value : any) => {
+           Object.entries(value[1]).forEach(v => {
+             const paramForm = this.fb.group<any>({
+               [v[0]] : [v[1], [Validators.required]]
+             });
+             ((this.formProductData.get('params') as FormGroup).get(param[0]) as FormArray).push(paramForm)
+           })
+
           })
         })
         this.cdr.markForCheck()
       }
 
-      // if(this.productData.params.price){
-      //   for(let [i,param] of Object.entries(this.productData.params.price) ){
-      //     const size = this.fb.group({
-      //       [i] : [param, []]
-      //     });
-      //
-      //     (this.formProductData.controls['price'] as FormArray).push(size);
-      //     // const par = this.fb.group<any>({
-      //     //   [param] : [this.productData.params.price[i], []]
-      //     // });
-      //     // (this.formProductData.controls['price'] as FormArray).push(par)
-      //   }
-      // }
       this.cdr.markForCheck()
     }
     this.cdr.markForCheck()
@@ -120,7 +114,7 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
   }
 
   public getParamsProp(prop : any){
-
+     // console.log(prop, ((this.formProductData?.controls["params"] as FormGroup).controls[`${prop}`] as FormArray).controls)
      return ((this.formProductData?.controls["params"] as FormGroup).controls[`${prop}`] as FormArray);
 
 
@@ -135,7 +129,6 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
         this.isLoader = false;
         this.isReadyProductData = true;
         this.productData = product[0];
-        console.log(this.productData)
         this.createdFormProductData();
       }),
       takeUntil(this.destroy$)
@@ -158,10 +151,28 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
   }
 
   public deleteIngredient(index:number){
-    if(index){
-      this.ingredients.removeAt(index);
-      this.cdr.markForCheck()
-    }
+
+      this.confirmationService.confirm({
+        message: 'Ви впевнені, що хочете видалити інгридієнт ?',
+        header: 'Видалення інгридієнта',
+        icon: 'pi pi-info-circle',
+        accept: () => {
+          this.ingredients.removeAt(index);
+          this.cdr.markForCheck();
+          this.messageService.add({severity:'info', summary:'Підтверджено !', detail:'Інгридієнт видалено !'});
+        },
+        reject: (type: any) => {
+          switch(type) {
+            case ConfirmEventType.REJECT:
+              this.messageService.add({severity:'error', summary:'Відмінено !', detail:'Видалення скасовано.'});
+              break;
+            case ConfirmEventType.CANCEL:
+              this.messageService.add({severity:'warn', summary:'Скасовано !', detail:'Видалення скасовано.'});
+              break;
+          }
+        }
+      });
+
   }
 
   public editProductData(){
@@ -175,15 +186,53 @@ export class AdminProductPageComponent implements OnInit,OnDestroy{
     });
     this.getParamsProp(param).push(paramPropertyForm);
     this.cdr.markForCheck();
-
   }
 
   public saveParamProperty(paramKey: string, paramIndex: number, propType: string, propValue: string){
-    console.log(paramKey, paramIndex,propType,propValue)
+
+    const paramPropertyForm = this.fb.group({
+      [propType] : [this.checkTypeParamsProp(propValue) ? +propValue : propValue, [Validators.required]]
+    });
+
+    this.getParamsProp(paramKey).push(paramPropertyForm);
+    this.getParamsProp(paramKey).removeAt(paramIndex);
+    this.cdr.markForCheck();
+  }
+
+  public removeParamProperty(param: string, indexProp: number){
+
+    this.confirmationService.confirm({
+      message: 'Ви впевнені, що хочете видалити властивість ?',
+      header: 'Видалення властивості',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.getParamsProp(param).removeAt(indexProp);
+        this.cdr.markForCheck();
+        this.messageService.add({severity:'info', summary:'Підтверджено !', detail:'Властивість видалено !'});
+      },
+      reject: (type: any) => {
+        switch(type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({severity:'error', summary:'Відмінено !', detail:'Видалення скасовано.'});
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({severity:'warn', summary:'Скасовано !', detail:'Видалення скасовано.'});
+            break;
+        }
+      }
+    });
+
   }
 
 
   public comeBack() {
     this.location.back();
+  }
+  public  test(prop: any){
+    console.log(isFinite(prop),'!')
+  }
+
+  public checkTypeParamsProp(prop: any): boolean {
+      return isFinite(prop);
   }
 }

@@ -8,8 +8,32 @@
       назад
     </button>
     <p>Продукти</p>
+
+    <button
+      *ngIf="!showCreateProduct"
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-plus"
+      class="p-button-rounded p-button-success p-button-outlined"
+      pTooltip="створити продукт" tooltipPosition="right"
+      (click)="addProduct()"
+    ></button>
   </div>
   <div class="products-body">
+
+
+    <div class="create-product-block" *ngIf="showCreateProduct">
+      <p>Форма створення нового продукту</p>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Скасувати"
+        class="p-button-outlined p-button-info"
+        (click)="canselAddProduct()"
+      ></button>
+    </div>
 
     <div class="products-table" *ngIf="!loader">
       <p-table
@@ -55,7 +79,7 @@
                 icon="pi pi-times"
                 class="p-button-rounded p-button-danger p-button-outlined"
                 pTooltip="видалити" tooltipPosition="top"
-
+                (click)="removeProduct(product.id)"
               ></button>
 
             </td>
@@ -70,3 +94,6 @@
 
   </div>
 </div>
+
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<p-toast></p-toast>
