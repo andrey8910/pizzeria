@@ -25,6 +25,237 @@
 
     <div class="create-product-block" *ngIf="showCreateProduct">
       <p>Форма створення нового продукту</p>
+      <div class="form-create-product" [formGroup]="formNewProduct">
+        <div class="form-create-left-section">
+          <div class="product-title">
+             <span class="p-float-label">
+                <input
+                  id="product-title"
+                  type="text"
+                  pInputText
+                  formControlName="title"
+                >
+                <label for="product-title">Назва продукту</label>
+             </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['title'].invalid && formNewProduct.controls['title'].touched">
+              Вкажіть назву продукту від 6 до 30 символів
+            </div>
+          </div>
+
+          <div class="product-description">
+              <span class="p-float-label">
+                <textarea
+                  id="product-description"
+                  rows="5" cols="30"
+                  pInputTextarea
+                  formControlName="description"
+                ></textarea>
+                <label for="product-description">Опис продукту</label>
+              </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['description'].invalid && formNewProduct.controls['description'].touched">
+              Вкажіть опис продукту від 6 до 600 символів
+            </div>
+          </div>
+
+          <div class="product-minPrice">
+           <span class="p-float-label">
+              <input
+                id="product-minPrice"
+                type="number"
+                pInputText
+                formControlName="minPrice"
+              >
+              <label for="product-minPrice">Мінімальна ціна</label>
+           </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['minPrice'].invalid && formNewProduct.controls['minPrice'].touched">
+              Вкажіть ціну від 100 до 2000
+            </div>
+          </div>
+
+          <div class="product-minWeight">
+             <span class="p-float-label">
+                <input
+                  id="product-minWeight"
+                  type="number"
+                  pInputText
+                  formControlName="minWeight"
+                >
+                <label for="product-minWeight">Мінімальна вага</label>
+             </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['minWeight'].invalid && formNewProduct.controls['minWeight'].touched">
+              Вкажіть вагу від 10г. до 1500г.
+            </div>
+          </div>
+
+          <div class="product-mainImg">
+             <span class="p-float-label">
+                <textarea
+                  id="product-mainImg"
+                  rows="5" cols="30"
+                  pInputTextarea
+                  formControlName="imageMain"
+                ></textarea>
+                <label for="product-description">Основне зображення</label>
+              </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['imageMain'].invalid && formNewProduct.controls['imageMain'].touched">
+              Вкажіть лінк на зображкння !
+            </div>
+
+          </div>
+
+          <div class="product-bigImg">
+             <span class="p-float-label">
+                <textarea
+                  id="product-bigImg"
+                  rows="5" cols="30"
+                  pInputTextarea
+                  formControlName="imageBig"
+                ></textarea>
+                <label for="product-description">Детальне зображення</label>
+              </span>
+
+            <div class="error-valid-message" *ngIf="formNewProduct.controls['imageBig'].invalid && formNewProduct.controls['imageBig'].touched">
+              Вкажіть лінк на зображкння !
+            </div>
+          </div>
+
+        </div>
+        <div class="form-create-right-section">
+
+          <div class="product-ingredients" formArrayName="ingredients">
+            <div class="add-product-ingredients-block">
+              <p>Інгридієнти :</p>
+              <button
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-plus"
+                class="p-button-rounded p-button-success p-button-text"
+                (click)="addIngredient()"
+                pTooltip="додати" tooltipPosition="top"
+              ></button>
+
+            </div>
+
+            <div class="product-ingredients-list">
+              <div class="product-ingredient" *ngFor="let ingredientForm of ingredients.controls; let i = index" >
+                <div class="ingredient-form" [formGroupName]="i">
+                  <div class="add-ingredient" *ngIf="ingredientForm.value.name.length == 0">
+                    <input
+                      #newIngredient
+                      pInputText
+                      placeholder="напишіть назву інгридієнта"
+                    />
+                    <button
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-check"
+                      class="p-button-rounded p-button-outlined"
+                      pTooltip="зберегти" tooltipPosition="right"
+                      [disabled]="newIngredient.value.length == 0"
+                      (click)="saveIngredient(i, newIngredient.value)"
+                    ></button>
+
+                  </div>
+                  <div class="ingredient" *ngIf="ingredientForm.value.name.length !== 0">
+                    <span >{{ingredientForm.value.name}}</span>
+                    <button
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-times"
+                      class="p-button-rounded p-button-danger p-button-text"
+                      pTooltip="видалити" tooltipPosition="right"
+                      (click)="removeIngredient(i)"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-params" formGroupName = "params">
+            <div class="add-product-params-block">
+              <p>Параметри :</p>
+            </div>
+            <div class="product-params-list">
+              <div class="params-list-item" *ngFor="let paramControl of params.controls | keyvalue">
+                <div class="param-header">
+                  <span class="header-title-value">{{paramControl.key}}</span>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-plus"
+                    class="p-button-rounded p-button-success p-button-text"
+                    pTooltip="додати" tooltipPosition="right"
+                    (click)="addParamProperty(paramControl.key)"
+
+                  ></button>
+                </div>
+                <div class="param-block" formArrayName = "{{paramControl.key}}">
+                  <div *ngFor="let propForm of getParamsProp(paramControl.key).controls; let paramIndex = index">
+                    <div [formGroupName]="paramIndex">
+                      <div *ngFor="let prop of propForm.value | keyvalue">
+
+                        <div class="show-param-property" *ngIf="prop.key && prop.value">
+                          <div class="prop-param">
+                            <p class="param-key">Назва : <span>{{prop.key}}</span></p>
+                            <p class="param-key">Значення : <span>{{prop.value}}</span></p>
+                          </div>
+                          <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-times"
+                            class="p-button-rounded p-button-danger p-button-text"
+
+                          ></button>
+
+
+                        </div>
+                        <div class="add-param-property" *ngIf="!prop.key && !prop.value">
+                          <input
+                            #propType
+                            pInputText
+                            placeholder="напишіть тип"
+                            value = "{{prop.key}}"
+                          />
+                          <input
+                            #propValue
+                            pInputText
+                            placeholder="напишіть значення"
+                            value = "{{prop.value}}"
+                          >
+                          <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-check"
+                            class="p-button-rounded p-button-outlined"
+                            pTooltip="зберегти" tooltipPosition="left"
+                            (click)="saveParamProp(paramControl.key, paramIndex, propType.value, propValue.value)"
+                          ></button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
       <button
         pButton
         pRipple
@@ -32,6 +263,16 @@
         label="Скасувати"
         class="p-button-outlined p-button-info"
         (click)="canselAddProduct()"
+      ></button>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Зберегти"
+        class="p-button-outlined p-button-info"
+        [disabled] = "formNewProduct.invalid"
+        (click)="saveAddProduct()"
       ></button>
     </div>
 
