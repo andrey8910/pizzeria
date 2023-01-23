@@ -123,7 +123,7 @@ export class AdminProductsComponent implements OnInit {
 
   public addIngredient(){
     const ingredientForm = this.fb.group<any>({
-      name: ['']
+      name: ['', [Validators.required]]
     });
     this.ingredients.push(ingredientForm);
     this.cdr.markForCheck()
@@ -134,7 +134,6 @@ export class AdminProductsComponent implements OnInit {
       this.ingredients.at(index).value.name = ingredientValue;
     }
     this.cdr.markForCheck()
-    console.log(index, ingredientValue )
   }
 
   public removeIngredient(index: number){
