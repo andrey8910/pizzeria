@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 import {Location} from "@angular/common";
 import {Subject} from "rxjs";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ValidateUrl} from "../../core/Validators";
+import {ValidateUrl, ingredientsValidator} from "../../core/Validators";
 
 
 @Component({
@@ -21,6 +21,7 @@ export class AdminProductsComponent implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   public loader: boolean = false;
   public showCreateProduct = false;
+  public showAddIngredientBtn = true;
   public products : Pizza[];
   public formNewProduct: FormGroup;
 
@@ -47,7 +48,7 @@ export class AdminProductsComponent implements OnInit {
     this.formNewProduct = this.fb.group({
       title: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]),
       description: new FormControl('', [ Validators.required, Validators.minLength(6), Validators.maxLength(600)]),
-      ingredients: this.fb.array([]),
+      ingredients: this.fb.array([], [ingredientsValidator]),
       minPrice: new FormControl('', [Validators.required, Validators.min(100), Validators.max(2000)]),
       minWeight: new FormControl('', [Validators.required, Validators.min(10), Validators.max(1500)]),
       params: this.fb.group({
@@ -90,7 +91,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   public saveAddProduct(){
-    console.log(this.formNewProduct.value)
+    console.log(this.formNewProduct)
   }
 
   public canselAddProduct(){
@@ -123,9 +124,10 @@ export class AdminProductsComponent implements OnInit {
 
   public addIngredient(){
     const ingredientForm = this.fb.group<any>({
-      name: ['', [Validators.required]]
+      name: ['', []]
     });
     this.ingredients.push(ingredientForm);
+    this.showAddIngredientBtn = false;
     this.cdr.markForCheck()
   }
 
@@ -133,6 +135,7 @@ export class AdminProductsComponent implements OnInit {
     if(ingredientValue.length > 0){
       this.ingredients.at(index).value.name = ingredientValue;
     }
+    this.showAddIngredientBtn = true;
     this.cdr.markForCheck()
   }
 

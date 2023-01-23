@@ -55,8 +55,13 @@ export function ValidatePassConfirm(control: AbstractControl) {
     return null;
   }
 
+  export function ingredientsValidator(control: AbstractControl) {
+  if( !control.value.length ) {
+    return { ingredients : 'error ingredients'}
+  }
+  return null
+  }
 
-   // return frm.controls['userPass'].value === frm.controls['confirmUserPassword'].value ? null : frm.controls['confirmUserPassword'].setErrors({ incorrect: true });
 
 
 

@@ -136,6 +136,7 @@
                 type="button"
                 icon="pi pi-plus"
                 class="p-button-rounded p-button-success p-button-text"
+                *ngIf="showAddIngredientBtn"
                 (click)="addIngredient()"
                 pTooltip="додати" tooltipPosition="top"
               ></button>
@@ -193,7 +194,7 @@
                   <span class="header-title-value">{{paramControl.key}}</span>
                   <button
                     pButton
-                    pRipple
+                     pRipple
                     type="button"
                     icon="pi pi-plus"
                     class="p-button-rounded p-button-success p-button-text"
