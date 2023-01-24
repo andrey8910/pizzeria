@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Pizza} from "../core/interfaces/pizza";
+import {Pizza, SizeModel} from "../core/interfaces/pizza";
 import {ActivatedRoute} from "@angular/router";
 import {Location, ViewportScroller} from '@angular/common';
 import { Subject} from 'rxjs';
@@ -66,20 +66,22 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
         }),
         tap(() => {
           if(!this.itemPizza) return;
-          this.itemPizza.params.size.forEach(size => {
-            Object.entries(size).forEach(s => {
+          this.itemPizza.params.forEach((param: SizeModel) => {
+            if(param.size){
               const size = {
-                name : s[1],
-                key: s[0]
+                name : param.title,
+                key: param.size
               }
               this.pizzaSize.push(size);
-              this.selectedPizzaSize = this.pizzaSize[0];
-              this.pizzaDetailsSelectForm = new FormGroup({
-                pizzaSelectSize: new FormControl(this.pizzaSize[0])
-              });
-              this.cdr.markForCheck();
-            })
+            }
           })
+        }),
+        tap(() => {
+          this.selectedPizzaSize = this.pizzaSize.filter((item : any) => {return item.key == "small"})[0];
+          this.pizzaDetailsSelectForm = new FormGroup({
+            pizzaSelectSize: new FormControl(this.selectedPizzaSize)
+          });
+          this.cdr.markForCheck();
         }),
         finalize(() => {
           this.loader = false
@@ -108,23 +110,14 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
   }
 
   public onSelectPizzaSize(size: any){
-    const  sizeParam: SizeParam = size.key
-    this.itemPizza.params.price.forEach(param => {
-      Object.entries(param).forEach(p => {
-        if(p[0] == sizeParam){
-          this.selectedPizzaPrice = p[1];
-          this.cdr.markForCheck();
-        }
-      })
+    const  sizeParam: SizeParam = size.key;
+    this.itemPizza.params.forEach((param:SizeModel) => {
+      if(param.size == sizeParam){
+        this.selectedPizzaPrice = param.price;
+        this.selectedPizzaWeight = param.weight;
+      }
     });
-    this.itemPizza.params.weight.forEach(param => {
-      Object.entries(param).forEach(p => {
-        if(p[0] == sizeParam){
-          this.selectedPizzaWeight = p[1];
-          this.cdr.markForCheck();
-        }
-      })
-    })
+    this.cdr.markForCheck();
 
   }
 
@@ -133,7 +126,11 @@ export class PizzaDetailsComponent implements OnInit, OnDestroy {
     const itemOrder: PizzaOrder = {
       ...item,
       orderId: 0,
-      size: this.pizzaDetailsSelectForm.controls['pizzaSelectSize'].value.name,
+      // size: this.pizzaDetailsSelectForm.controls['pizzaSelectSize'].value.name,
+      size: {
+        name: this.pizzaDetailsSelectForm.controls['pizzaSelectSize'].value.name,
+        key: this.pizzaDetailsSelectForm.controls['pizzaSelectSize'].value.key,
+      },
       weight: this.selectedPizzaWeight ? this.selectedPizzaWeight : item.minWeight ,
       price: this.selectedPizzaPrice ? this.selectedPizzaPrice : item.minPrice,
       quantity: 1

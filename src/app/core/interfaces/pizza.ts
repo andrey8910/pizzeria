@@ -1,16 +1,23 @@
+// export interface SizeModel {
+//   weight: [
+//     { [key : string] : number }
+//   ],
+//   price: [
+//     { [key : string] : number }
+//   ],
+//   size: [
+//     { [key : string] : string }
+//   ],
+//   title: [
+//     { [key : string] : string }
+//     ]
+// }
+
 export interface SizeModel {
-  weight: [
-    { [key : string] : number }
-  ],
-  price: [
-    { [key : string] : number }
-  ],
-  size: [
-    { [key : string] : string }
-  ],
-  title: [
-    { [key : string] : string }
-    ]
+  price: number;
+  size: string;
+  weight: number;
+  title: string;
 }
 
 export interface Pizza {
@@ -22,5 +29,5 @@ export interface Pizza {
   minWeight: number;
   imageBig: string;
   imageMain: string;
-  params : SizeModel;
+  params : SizeModel[];
 }

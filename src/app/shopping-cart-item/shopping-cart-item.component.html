@@ -1,6 +1,6 @@
 <img src="{{itemShop.imageMain}}" alt="order">
 <div class="item-params">
-  <p class="item-title">{{itemShop.title}} <span>{{itemShop.size}}</span> <span>{{itemShop.weight + ' г'}}</span></p>
+  <p class="item-title">{{itemShop.title}} <span>{{itemShop.size.name}}</span> <span>{{itemShop.weight + ' г'}}</span></p>
 
   <ul class="item-ingredients-list">
     <li class="item-ingredient"  *ngFor="let ingredient of itemShop.ingredients">

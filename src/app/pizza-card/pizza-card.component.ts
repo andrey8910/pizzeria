@@ -2,7 +2,7 @@ import {Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef} fr
 import {Observable, Subject} from "rxjs";
 import {  FormGroup, FormControl } from '@angular/forms';
 import { ShoppingCartService } from "../core/services/shopping-cart.service";
-import {Pizza} from "../core/interfaces/pizza";
+import {Pizza, SizeModel} from "../core/interfaces/pizza";
 import {PizzaOrder } from "../core/interfaces/pizza-order";
 import { SizeParam } from '../core/interfaces/size-param'
 
@@ -43,37 +43,31 @@ export class PizzaCardComponent implements OnInit {
     this.shoppingCart$ = this.shoppingService.shoppingCart$;
     this.shoppingService.loadAll();
     if(this.pizzaItem){
-      this.pizzaItem.params.size.forEach( value =>{
-        Object.entries(value).forEach(s => {
+      this.pizzaItem.params.forEach((param: SizeModel) => {
+        if(param.size){
           const size = {
-            name : s[1],
-            key: s[0]
-          }
-          this.pizzaSize.push(size)
-        })
+                  name : param.title,
+                  key: param.size
+                }
+          this.pizzaSize.push(size);
+        }
       })
+      this.selectedPizzaSize = this.pizzaSize.filter((item : any) => {return item.key == "small"})[0];
       this.pizzaParamsSelectForm = new FormGroup({
-        pizzaSelectSize: new FormControl(this.pizzaSize[0])
+        pizzaSelectSize: new FormControl(this.selectedPizzaSize)
       })
     }
     this.cdr.markForCheck();
   }
 
   onSelectPizzaSize(event: any){
-  const  sizeParam: SizeParam = event.key;
-  this.pizzaItem.params.price.forEach(param => {
-    Object.entries(param).forEach(p => {
-      if(p[0] == sizeParam){
-        this.selectedPizzaPrice = p[1]
+
+    const  sizeParam: SizeParam = event.key;
+    this.pizzaItem.params.forEach((param:SizeModel) => {
+      if(param.size == sizeParam){
+        this.selectedPizzaPrice = param.price;
+        this.selectedPizzaWeight = param.weight;
       }
-    })
-  });
-    this.pizzaItem.params.weight.forEach(param => {
-      Object.entries(param).forEach(p => {
-        if(p[0] == sizeParam){
-          this.selectedPizzaWeight = p[1]
-        }
-      })
     })
 
     this.cdr.markForCheck();
