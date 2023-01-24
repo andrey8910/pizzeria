@@ -8,6 +8,7 @@ import {AuthorizationDialogData} from "../../core/interfaces/authorization-dialo
 import {tap} from "rxjs/operators";
 import {ProductsService} from "../../core/services/products.service";
 import {SortEvent} from "primeng/api";
+import {SizeModel} from "../../core/interfaces/pizza";
 
 @Component({
   selector: 'app-orders-history',
@@ -49,8 +50,7 @@ export class OrdersHistoryComponent implements OnInit {
   public getOrderByClientId(clientId: number){
     this.ordersService.getOrdersByClientId(clientId).pipe(
       tap((res:Orders[]) => {
-
-          this.ordersIssued = res.filter(item => item.orderStatus === "видано")
+        this.ordersIssued = res;
           if(this.ordersIssued.length > 0){
             this.ordersIssued.map((item) => {
               item.orderPrice = 0
@@ -60,8 +60,14 @@ export class OrdersHistoryComponent implements OnInit {
                 this.productsService.getPizzaById(listItem.productId)
                   .pipe(
                     tap((product: any) => {
+
                       listItem.title = product[0].title
-                      listItem.price = product[0].params.price[listItem.size.key]
+                      product[0].params.forEach((param: SizeModel) => {
+                        if(param.size == listItem.size.key){
+                          listItem.price = param.price;
+                        }
+                      })
+
                       item.orderPrice += listItem.price * listItem.quantity
                       this.cdr.markForCheck();
                     })

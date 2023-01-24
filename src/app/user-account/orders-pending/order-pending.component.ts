@@ -43,10 +43,8 @@ export class OrderPendingComponent implements OnInit {
   private init(){
     this.userAuthenticationCheck$ = this.userAuthCheckService.userAuthenticationCheck$
     this.userAuthenticationCheck$.pipe(
-
       tap(res => {
         this.resultAuth = res
-
         if(res.isPassedAuthentication){
           this.getOrdersById(this.resultAuth.resultAuthentication.id)
         }
@@ -58,26 +56,21 @@ export class OrderPendingComponent implements OnInit {
   private getOrdersById(clientId: number){
     this.ordersService.getOrdersByClientId(clientId).pipe(
       tap(res => {
-
         this.ordersPending = [];
-
-        this.ordersPending = res.filter(item => item.orderStatus === "в роботі")
+        this.ordersPending = res.filter(item => item.orderStatus === "в роботі");
         this.ordersPending.map((item: any) => {
           item.orderPrice = 0
           item.orderList.forEach((listItem:any) =>{
             listItem.idOrder = item.id
-
             this.productsService.getPizzaById(listItem.productId)
               .pipe(
                 tap((product: any) => {
                   listItem.title = product[0].title;
-                  product[0].params.price.forEach((price: any) => {
-                    Object.entries(price).forEach(p => {
-                      if(p[0] == listItem.size.key){
-                        listItem.price = p[1];
-                        item.orderPrice += listItem.price * listItem.quantity;
-                      }
-                    })
+                  product[0].params.forEach((param: any) => {
+                    if(param.size == listItem.size.key) {
+                      listItem.price = param.price;
+                      item.orderPrice += listItem.price * listItem.quantity;
+                    }
                   })
                   this.cdr.markForCheck();
                 }),

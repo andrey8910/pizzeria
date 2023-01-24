@@ -1364,6 +1364,22 @@
       ],
       "orderStatus": "створено",
       "id": 20
+    },
+    {
+      "clientId": 2,
+      "creationTime": 1674563287383,
+      "orderList": [
+        {
+          "productId": 5,
+          "size": {
+            "name": "Середня (30см)",
+            "key": "medium"
+          },
+          "quantity": 1
+        }
+      ],
+      "orderStatus": "створено",
+      "id": 21
     }
   ],
   "slider": [

@@ -6,6 +6,7 @@ import {OrdersService} from "../../core/services/orders.service";
 import {Orders} from "../../core/interfaces/orders";
 import {takeUntil, tap} from "rxjs/operators";
 import {ProductsService} from "../../core/services/products.service";
+import {SizeModel} from "../../core/interfaces/pizza";
 
 @Component({
   selector: 'app-order-page',
@@ -55,6 +56,7 @@ export class OrderPageComponent implements OnInit {
           if(order.length > 0){
             this.orderNotFound = false
             this.order = order[0]
+
             order[0].orderList.forEach(item =>{
               let orderListItem: any = {
                 productId: item.productId,
@@ -69,27 +71,14 @@ export class OrderPageComponent implements OnInit {
                   tap((res: any) => {
                     if(res.length > 0){
                       orderListItem.title = res[0].title
-                      //console.log(res[0].params.price)
-                      res[0].params.price.forEach((price : any) => {
-                        Object.entries(price).forEach(p => {
-                          if(p[0] == orderListItem.size.key){
-                            const orderPrice: any = p[1];
-                            orderListItem.sumPrice = orderPrice * orderListItem.quantity;
-                            this.cdr.markForCheck();
-                          }
-                        })
+                      res[0].params.forEach((param : SizeModel) => {
+                        if(param.size == orderListItem.size.key){
+                          orderListItem.sumPrice = param.price * orderListItem.quantity;
+                          orderListItem.weight = param.weight;
+                          this.cdr.markForCheck();
+                        }
                       })
-
                       this.orderTotalPrice += orderListItem.sumPrice
-
-                      res[0].params.weight.forEach((weight : any) => {
-                        Object.entries(weight).forEach(w => {
-                          if(w[0] == orderListItem.size.key){
-                            orderListItem.weight = w[1];
-                            this.cdr.markForCheck();
-                          }
-                        })
-                      })
                       this.orderList.push(orderListItem)
                       this.cdr.markForCheck();
                     }
@@ -106,5 +95,4 @@ export class OrderPageComponent implements OnInit {
         takeUntil(this.destroy$)
       ).subscribe()
   }
-
 }
