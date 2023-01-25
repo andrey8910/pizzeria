@@ -28,6 +28,10 @@ export class ProductsService {
     return this.httpClient.post<Pizza>(`${environment.urlPizzaAll}`, pizza)
   }
 
+  removePizza(id: number){
+    return this.httpClient.delete<Pizza>(`${environment.urlPizzaAll}/${id}`)
+  }
+
 
   public findPizza(searchText: string){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?q=${searchText}`)

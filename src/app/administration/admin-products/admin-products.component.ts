@@ -77,8 +77,17 @@ export class AdminProductsComponent implements OnInit {
       header: 'Видалення продукта',
       icon: 'pi pi-info-circle',
       accept: () => {
+        this.productsService.removePizza(productId).pipe(
+          tap(() => {
+            this.getPizzas();
+            this.cdr.markForCheck();
+            this.messageService.add({severity:'info', summary:'Підтверджено !', detail:'Продукт видалено !'});
+          }),
+          takeUntil(this.destroy$)
+        ).subscribe();
+
         this.cdr.markForCheck();
-        this.messageService.add({severity:'info', summary:'Підтверджено !', detail:'Продукт видалено !'});
+
       },
       reject: (type: any) => {
         switch(type) {
