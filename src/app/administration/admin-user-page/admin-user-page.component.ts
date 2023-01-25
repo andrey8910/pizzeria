@@ -18,6 +18,7 @@ import {Orders} from "../../core/interfaces/orders";
 import {ProductsService} from "../../core/services/products.service";
 import {Subject} from "rxjs";
 import {Table} from "primeng/table";
+import {SizeModel} from "../../core/interfaces/pizza";
 
 @Component({
   selector: 'app-admin-user-page',
@@ -159,6 +160,7 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
 
   private getProductDataForOrderList(ordersPage: Orders[]) {
     if (ordersPage.length > 0) {
+
       ordersPage.forEach((order: Orders) => {
         let orderChange: any = {
           orderNumber: order.id,
@@ -178,10 +180,14 @@ export class AdminUserPageComponent implements OnInit, AfterViewInit, OnDestroy 
           }
           this.productsService.getPizzaById(listItem.productId).pipe(
             tap((res: any[]) => {
-              productListItem.title = res[0].title
-              productListItem.price = res[0].params.price[productListItem.size.key] * productListItem.quantity
-              productListItem.params = res[0].params
-              orderChange.orderPrice += productListItem.price
+              productListItem.title = res[0].title;
+              res[0].params.forEach((param: SizeModel) => {
+                if(param.size == productListItem.size.key){
+                  productListItem.price = param.price * productListItem.quantity;
+                }
+              });
+              productListItem.params = res[0].params;
+              orderChange.orderPrice += productListItem.price;
               this.cdr.markForCheck();
             }),
             takeUntil(this.destroy$)

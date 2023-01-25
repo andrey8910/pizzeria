@@ -62,6 +62,13 @@ export function ValidatePassConfirm(control: AbstractControl) {
   return null
   }
 
+export function paramsValidator(control: AbstractControl) {
+  if( !control.value.length ) {
+    return { params : 'error params length'}
+  }
+  return null
+}
+
 
 
 

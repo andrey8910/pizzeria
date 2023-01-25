@@ -15,6 +15,7 @@ import { AdminSliderComponent } from './admin-slider/admin-slider.component';
 import { AdminSliderItemComponent } from './admin-slider-item/admin-slider-item.component';
 import { AdminSliderEditorComponent } from './admin-slider-editor/admin-slider-editor.component';
 import { AdminProductPageComponent } from './admin-product-page/admin-product-page.component';
+import { AdminAddEditProductComponent } from './admin-add-edit-product/admin-add-edit-product.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AdminProductPageComponent } from './admin-product-page/admin-product-pa
     AdminSliderItemComponent,
     AdminSliderEditorComponent,
     AdminProductPageComponent,
+    AdminAddEditProductComponent,
   ],
   imports: [
     CommonModule,

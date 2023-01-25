@@ -4,6 +4,7 @@ import { Pizza } from '../interfaces/pizza';
 import {environment} from "../../../environments/environment";
 import {LegacyPageEvent as PageEvent} from "@angular/material/legacy-paginator";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,11 @@ export class ProductsService {
   public getPizzaFromPagination(event: PageEvent){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?_page=${event.pageIndex + 1}&_limit=${event.pageSize}`)
   }
+
+  addPizza(pizza : Pizza){
+    return this.httpClient.post<Pizza>(`${environment.urlPizzaAll}`, pizza)
+  }
+
 
   public findPizza(searchText: string){
     return this.httpClient.get<Pizza[]>(`${environment.urlPizzaAll}?q=${searchText}`)
