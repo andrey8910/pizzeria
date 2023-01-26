@@ -48,14 +48,14 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
   }
 
   private init(){
-    this.createFormNewProduct();
+    this.getFormAddOrEditProduct();
   }
 
-  private createFormNewProduct(){
+  private getFormAddOrEditProduct(){
 
     this.formAddOrEditProduct = this.fb.group({
       title: new FormControl(this.productToEdit ? this.productToEdit.title : '', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]),
-      description: new FormControl(this.productToEdit ? this.productToEdit.description : '', [ Validators.required, Validators.minLength(6), Validators.maxLength(800)]),
+      description: new FormControl(this.productToEdit ? this.productToEdit.description : '', [ Validators.required, Validators.minLength(6), Validators.maxLength(900)]),
       ingredients: this.fb.array([], [ingredientsValidator]),
       minPrice: new FormControl(this.productToEdit ? this.productToEdit.minPrice : '', [Validators.required, Validators.min(100), Validators.max(2000)]),
       minWeight: new FormControl(this.productToEdit ? this.productToEdit.minWeight : '', [Validators.required, Validators.min(10), Validators.max(1500)]),
@@ -134,7 +134,12 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
     this.cdr.markForCheck();
   };
 
-  public canselAddParam(){
+  public removeParam(indexParam: number){
+    this.params.removeAt(indexParam);
+    this.cdr.markForCheck();
+  }
+
+  public cancelAddParam(){
     this.formAddParamProduct.reset();
     this.showAddParamBtn = true;
     this.cdr.markForCheck();
@@ -186,9 +191,20 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
     }
   }
 
-  public canselAddProduct(){
+  public saveEditProduct(formValue: any){
+
+  }
+
+  public cancelAddProduct(){
     this.isAddedProduct.emit(false);
     this.formAddOrEditProduct.reset();
+    this.cdr.markForCheck();
+  }
+
+  public cancelEditProduct(){
+
+    this.getFormAddOrEditProduct();
+
     this.cdr.markForCheck();
   }
 

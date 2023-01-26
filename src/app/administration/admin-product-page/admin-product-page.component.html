@@ -7,19 +7,19 @@
       <mat-icon>keyboard_backspace</mat-icon>
       назад
     </button>
-    <p>Редагувати данні продукта <span *ngIf="productId">ID {{productId}}</span></p>
+    <p>Редагуання даних  продукту <span *ngIf="productId">ID {{productId}}</span></p>
 
-    <p-inputSwitch [(ngModel)]="canEdit"></p-inputSwitch>
-    <button
-      *ngIf="canEdit"
-      pButton
-      pRipple
-      type="button"
-      label="Зберегти зміни"
-      class="p-button-outlined"
-      (click)="editProductData()"
-      [disabled]="formProductData.invalid"
-    ></button>
+<!--    <p-inputSwitch [(ngModel)]="canEdit"></p-inputSwitch>-->
+<!--    <button-->
+<!--      *ngIf="canEdit"-->
+<!--      pButton-->
+<!--      pRipple-->
+<!--      type="button"-->
+<!--      label="Зберегти зміни"-->
+<!--      class="p-button-outlined"-->
+<!--      (click)="editProductData()"-->
+<!--      [disabled]="formProductData.invalid"-->
+<!--    ></button>-->
 
   </div>
   <div class="product-spinner" *ngIf="isLoader">
@@ -30,268 +30,269 @@
   </div>
   <div class="product-data-body" *ngIf="isReadyProductData && productData">
 
-    <form class="form-product-data" [formGroup]="formProductData">
+    <app-admin-add-edit-product [productToEdit]="productData"></app-admin-add-edit-product>
+<!--    <form class="form-product-data" [formGroup]="formProductData">-->
 
-      <div class="form-product-item">
-        <label for="product-title" class="product-item-label">Заголовок</label>
-        <input
-          id="product-title"
-          class="product-item-value"
-          pInputText
-          [readonly]="!canEdit"
-          formControlName = "title"
-        />
-      </div>
+<!--      <div class="form-product-item">-->
+<!--        <label for="product-title" class="product-item-label">Заголовок</label>-->
+<!--        <input-->
+<!--          id="product-title"-->
+<!--          class="product-item-value"-->
+<!--          pInputText-->
+<!--          [readonly]="!canEdit"-->
+<!--          formControlName = "title"-->
+<!--        />-->
+<!--      </div>-->
 
-      <div class="form-product-item">
-        <label for="product-description" class="product-item-label">Опис</label>
-        <textarea
-          id="product-description"
-          class="product-item-value"
-          rows="5"
-          cols="30"
-          pInputTextarea
-          [autoResize]="true"
-          [readonly]="!canEdit"
-          formControlName = "description"
-        ></textarea>
+<!--      <div class="form-product-item">-->
+<!--        <label for="product-description" class="product-item-label">Опис</label>-->
+<!--        <textarea-->
+<!--          id="product-description"-->
+<!--          class="product-item-value"-->
+<!--          rows="5"-->
+<!--          cols="30"-->
+<!--          pInputTextarea-->
+<!--          [autoResize]="true"-->
+<!--          [readonly]="!canEdit"-->
+<!--          formControlName = "description"-->
+<!--        ></textarea>-->
 
-      </div>
+<!--      </div>-->
 
-      <div class="form-product-item" formArrayName="ingredients" >
-        <span class="product-item-label ingredients" >
-          Інгридієнти
+<!--      <div class="form-product-item" formArrayName="ingredients" >-->
+<!--        <span class="product-item-label ingredients" >-->
+<!--          Інгридієнти-->
 
-          <button
-            pButton
-            pRipple
-            type="button"
-            icon="pi pi-plus"
-            class="p-button-rounded p-button-success p-button-outlined"
-            (click)="addIngredient()"
-            *ngIf="canEdit"
-          ></button>
-        </span>
+<!--          <button-->
+<!--            pButton-->
+<!--            pRipple-->
+<!--            type="button"-->
+<!--            icon="pi pi-plus"-->
+<!--            class="p-button-rounded p-button-success p-button-outlined"-->
+<!--            (click)="addIngredient()"-->
+<!--            *ngIf="canEdit"-->
+<!--          ></button>-->
+<!--        </span>-->
 
-        <div class="product-item-value ingredients" >
+<!--        <div class="product-item-value ingredients" >-->
 
-          <div *ngFor="let ingredientForm of ingredients.controls; let i = index">
-            <div class="ingredient-form" [formGroupName]="i">
-              <div class="add-ingredient" *ngIf="ingredientForm.value.name.length == 0">
-                <input
-                  #newIngredient
-                  pInputText
-                  placeholder="напишіть назву інгридієнта"
-                />
-                <button
-                  pButton
-                  pRipple
-                  type="button"
-                  icon="pi pi-check"
-                  class="p-button-rounded p-button-outlined"
-                  (click)="saveIngredientName(i, newIngredient.value)"
-                ></button>
+<!--          <div *ngFor="let ingredientForm of ingredients.controls; let i = index">-->
+<!--            <div class="ingredient-form" [formGroupName]="i">-->
+<!--              <div class="add-ingredient" *ngIf="ingredientForm.value.name.length == 0">-->
+<!--                <input-->
+<!--                  #newIngredient-->
+<!--                  pInputText-->
+<!--                  placeholder="напишіть назву інгридієнта"-->
+<!--                />-->
+<!--                <button-->
+<!--                  pButton-->
+<!--                  pRipple-->
+<!--                  type="button"-->
+<!--                  icon="pi pi-check"-->
+<!--                  class="p-button-rounded p-button-outlined"-->
+<!--                  (click)="saveIngredientName(i, newIngredient.value)"-->
+<!--                ></button>-->
 
-              </div>
+<!--              </div>-->
 
-              <div class="ingredient" *ngIf="ingredientForm.value.name.length !== 0">
-                <span >{{ingredientForm.value.name}}</span>
-                <button
-                  *ngIf="canEdit"
-                  pButton
-                  pRipple
-                  type="button"
-                  icon="pi pi-times"
-                  class="p-button-rounded p-button-danger p-button-outlined"
-                  (click)="deleteIngredient(i)"
-                ></button>
-              </div>
+<!--              <div class="ingredient" *ngIf="ingredientForm.value.name.length !== 0">-->
+<!--                <span >{{ingredientForm.value.name}}</span>-->
+<!--                <button-->
+<!--                  *ngIf="canEdit"-->
+<!--                  pButton-->
+<!--                  pRipple-->
+<!--                  type="button"-->
+<!--                  icon="pi pi-times"-->
+<!--                  class="p-button-rounded p-button-danger p-button-outlined"-->
+<!--                  (click)="deleteIngredient(i)"-->
+<!--                ></button>-->
+<!--              </div>-->
 
-            </div>
+<!--            </div>-->
 
-          </div>
-        </div>
+<!--          </div>-->
+<!--        </div>-->
 
-      </div>
+<!--      </div>-->
 
-      <div class="form-product-item">
-        <label for="product-minPrice" class="product-item-label">Мінімальна ціна, грн.</label>
-        <div class="product-item-value">
-          <p-inputNumber
-            id="product-minPrice"
-            formControlName = "minPrice"
-            mode="decimal"
-            [readonly]="!canEdit"
-            [showButtons]="canEdit"
-            [min]="0"
-            [max]="500">
-          </p-inputNumber>
-        </div>
+<!--      <div class="form-product-item">-->
+<!--        <label for="product-minPrice" class="product-item-label">Мінімальна ціна, грн.</label>-->
+<!--        <div class="product-item-value">-->
+<!--          <p-inputNumber-->
+<!--            id="product-minPrice"-->
+<!--            formControlName = "minPrice"-->
+<!--            mode="decimal"-->
+<!--            [readonly]="!canEdit"-->
+<!--            [showButtons]="canEdit"-->
+<!--            [min]="0"-->
+<!--            [max]="500">-->
+<!--          </p-inputNumber>-->
+<!--        </div>-->
 
-      </div>
+<!--      </div>-->
 
-      <div class="form-product-item">
-        <label for="product-minWeight" class="product-item-label">Мінімальна вага, гр.</label>
-        <div class="product-item-value">
-          <p-inputNumber
-            id="product-minWeight"
-            formControlName = "minWeight"
-            mode="decimal"
-            [readonly]="!canEdit"
-            [showButtons]="canEdit"
-            [min]="0"
-            [max]="1000">
-          </p-inputNumber>
-        </div>
-      </div>
+<!--      <div class="form-product-item">-->
+<!--        <label for="product-minWeight" class="product-item-label">Мінімальна вага, гр.</label>-->
+<!--        <div class="product-item-value">-->
+<!--          <p-inputNumber-->
+<!--            id="product-minWeight"-->
+<!--            formControlName = "minWeight"-->
+<!--            mode="decimal"-->
+<!--            [readonly]="!canEdit"-->
+<!--            [showButtons]="canEdit"-->
+<!--            [min]="0"-->
+<!--            [max]="1000">-->
+<!--          </p-inputNumber>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="form-product-item" *ngIf="params" formGroupName = "params">
+<!--      <div class="form-product-item" *ngIf="params" formGroupName = "params">-->
 
-        <label class="product-item-label">Параметри:</label>
-        <div class="product-item-value item-params">
-          <div *ngFor="let paramControl of params.controls | keyvalue">
-            <div class="param-header">
-              <span class="header-title">Параметр :</span>
-              <span class="header-title-value">{{paramControl.key}}</span>
-              <button
-                pButton
-                pRipple
-                type="button"
-                icon="pi pi-plus"
-                class="header-btn p-button-rounded p-button-success p-button-outlined"
-                pTooltip="додати" tooltipPosition="right"
-                (click)="addParamProperty(paramControl.key)"
-              ></button>
-            </div>
+<!--        <label class="product-item-label">Параметри:</label>-->
+<!--        <div class="product-item-value item-params">-->
+<!--          <div *ngFor="let paramControl of params.controls | keyvalue">-->
+<!--            <div class="param-header">-->
+<!--              <span class="header-title">Параметр :</span>-->
+<!--              <span class="header-title-value">{{paramControl.key}}</span>-->
+<!--              <button-->
+<!--                pButton-->
+<!--                pRipple-->
+<!--                type="button"-->
+<!--                icon="pi pi-plus"-->
+<!--                class="header-btn p-button-rounded p-button-success p-button-outlined"-->
+<!--                pTooltip="додати" tooltipPosition="right"-->
+<!--                (click)="addParamProperty(paramControl.key)"-->
+<!--              ></button>-->
+<!--            </div>-->
 
-            <div class="param-block" formArrayName = "{{paramControl.key}}">
-              <div *ngFor="let propForm of getParamsProp(paramControl.key).controls; let paramIndex = index">
-                <div [formGroupName]="paramIndex">
-                  <div *ngFor="let prop of propForm.value | keyvalue">
+<!--            <div class="param-block" formArrayName = "{{paramControl.key}}">-->
+<!--              <div *ngFor="let propForm of getParamsProp(paramControl.key).controls; let paramIndex = index">-->
+<!--                <div [formGroupName]="paramIndex">-->
+<!--                  <div *ngFor="let prop of propForm.value | keyvalue">-->
 
-                    <div class="show-param-property" *ngIf="prop.key && prop.value">
-                      <div class="name-prop-param">
-                        <p class="param-key">{{prop.key}}</p>
-                        <button
-                          pButton
-                          pRipple
-                          type="button"
-                          icon="pi pi-times"
-                          class="p-button-rounded p-button-danger p-button-text"
-                          pTooltip="видалити" tooltipPosition="right"
-                          *ngIf="canEdit"
-                          (click)="removeParamProperty(paramControl.key,paramIndex)"
-                        ></button>
-                      </div>
-
-
-                      <p-inputNumber
-                        *ngIf="checkTypeParamsProp(prop.value)"
-                        class="param-value"
-                        formControlName = "{{prop.key}}"
-                        mode="decimal"
-                        [readonly]="!canEdit"
-                        [showButtons]="canEdit"
-                        [min]="0"
-                        [max]="1000">
-                      </p-inputNumber>
-                      <input
-                        *ngIf="!checkTypeParamsProp(prop.value)"
-                        pInputText
-                        value = "{{prop.value}}"
-                      />
-
-                    </div>
-
-                    <div class="add-param-property" *ngIf="!prop.key && !prop.value">
-                      <label for="paramType">Вкажіть тип параметру</label>
-                      <input
-                        id="paramType"
-                        #propType
-                        pInputText
-                        placeholder="напишіть тип параметру"
-                        value = "{{prop.key}}"
-                      />
-                      <label for="paramValue">Вкажіть значення типу</label>
-
-                      <input
-                        id="paramValue"
-                        #propValue
-                        pInputText
-                        placeholder="напишіть значення"
-                        value = "{{prop.value}}"
-                      >
-
-                      <button
-                        pButton
-                        pRipple
-                        type="button"
-                        icon="pi pi-check"
-                        class="p-button-rounded p-button-outlined"
-                        pTooltip="зберегти" tooltipPosition="left"
-                        (click)="saveParamProperty(paramControl.key, paramIndex, propType.value, propValue.value)"
-                      ></button>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-product-item">
-        <label for="product-minWeight" class="product-item-label">Зображення</label>
-        <div class="product-item-value images">
-          <div class="product-image-section">
-            <div class="image-block">
-              <div class="section-title">
-                <p>Основне зображення</p>
-              </div>
-
-              <img src="{{productData.imageBig}}" alt="Основне зображення">
-            </div>
+<!--                    <div class="show-param-property" *ngIf="prop.key && prop.value">-->
+<!--                      <div class="name-prop-param">-->
+<!--                        <p class="param-key">{{prop.key}}</p>-->
+<!--                        <button-->
+<!--                          pButton-->
+<!--                          pRipple-->
+<!--                          type="button"-->
+<!--                          icon="pi pi-times"-->
+<!--                          class="p-button-rounded p-button-danger p-button-text"-->
+<!--                          pTooltip="видалити" tooltipPosition="right"-->
+<!--                          *ngIf="canEdit"-->
+<!--                          (click)="removeParamProperty(paramControl.key,paramIndex)"-->
+<!--                        ></button>-->
+<!--                      </div>-->
 
 
-            <div class="image-link-block">
-              <label for="imageBig" class="product-item-label">Link</label>
-              <textarea
-                id="imageBig"
-                class="product-item-value"
-                pInputTextarea
-                [autoResize]="true"
-                [readonly]="!canEdit"
-                formControlName = "imageBig"
-              ></textarea>
-            </div>
-          </div>
-          <div class="product-image-section">
-            <div class="image-block">
-              <div class="section-title">
-                <p>Детальне зображення</p>
-              </div>
-              <img src="{{productData.imageMain}}" alt="Детальне зображення">
-            </div>
+<!--                      <p-inputNumber-->
+<!--                        *ngIf="checkTypeParamsProp(prop.value)"-->
+<!--                        class="param-value"-->
+<!--                        formControlName = "{{prop.key}}"-->
+<!--                        mode="decimal"-->
+<!--                        [readonly]="!canEdit"-->
+<!--                        [showButtons]="canEdit"-->
+<!--                        [min]="0"-->
+<!--                        [max]="1000">-->
+<!--                      </p-inputNumber>-->
+<!--                      <input-->
+<!--                        *ngIf="!checkTypeParamsProp(prop.value)"-->
+<!--                        pInputText-->
+<!--                        value = "{{prop.value}}"-->
+<!--                      />-->
+
+<!--                    </div>-->
+
+<!--                    <div class="add-param-property" *ngIf="!prop.key && !prop.value">-->
+<!--                      <label for="paramType">Вкажіть тип параметру</label>-->
+<!--                      <input-->
+<!--                        id="paramType"-->
+<!--                        #propType-->
+<!--                        pInputText-->
+<!--                        placeholder="напишіть тип параметру"-->
+<!--                        value = "{{prop.key}}"-->
+<!--                      />-->
+<!--                      <label for="paramValue">Вкажіть значення типу</label>-->
+
+<!--                      <input-->
+<!--                        id="paramValue"-->
+<!--                        #propValue-->
+<!--                        pInputText-->
+<!--                        placeholder="напишіть значення"-->
+<!--                        value = "{{prop.value}}"-->
+<!--                      >-->
+
+<!--                      <button-->
+<!--                        pButton-->
+<!--                        pRipple-->
+<!--                        type="button"-->
+<!--                        icon="pi pi-check"-->
+<!--                        class="p-button-rounded p-button-outlined"-->
+<!--                        pTooltip="зберегти" tooltipPosition="left"-->
+<!--                        (click)="saveParamProperty(paramControl.key, paramIndex, propType.value, propValue.value)"-->
+<!--                      ></button>-->
+
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="form-product-item">-->
+<!--        <label for="product-minWeight" class="product-item-label">Зображення</label>-->
+<!--        <div class="product-item-value images">-->
+<!--          <div class="product-image-section">-->
+<!--            <div class="image-block">-->
+<!--              <div class="section-title">-->
+<!--                <p>Основне зображення</p>-->
+<!--              </div>-->
+
+<!--              <img src="{{productData.imageBig}}" alt="Основне зображення">-->
+<!--            </div>-->
 
 
-            <div class="image-link-block">
-              <label for="imageMain" class="product-item-label">Link</label>
-              <textarea
-                id="imageMain"
-                class="product-item-value"
-                pInputTextarea
-                [autoResize]="true"
-                [readonly]="!canEdit"
-                formControlName = "imageMain"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--            <div class="image-link-block">-->
+<!--              <label for="imageBig" class="product-item-label">Link</label>-->
+<!--              <textarea-->
+<!--                id="imageBig"-->
+<!--                class="product-item-value"-->
+<!--                pInputTextarea-->
+<!--                [autoResize]="true"-->
+<!--                [readonly]="!canEdit"-->
+<!--                formControlName = "imageBig"-->
+<!--              ></textarea>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="product-image-section">-->
+<!--            <div class="image-block">-->
+<!--              <div class="section-title">-->
+<!--                <p>Детальне зображення</p>-->
+<!--              </div>-->
+<!--              <img src="{{productData.imageMain}}" alt="Детальне зображення">-->
+<!--            </div>-->
 
-    </form>
+
+<!--            <div class="image-link-block">-->
+<!--              <label for="imageMain" class="product-item-label">Link</label>-->
+<!--              <textarea-->
+<!--                id="imageMain"-->
+<!--                class="product-item-value"-->
+<!--                pInputTextarea-->
+<!--                [autoResize]="true"-->
+<!--                [readonly]="!canEdit"-->
+<!--                formControlName = "imageMain"-->
+<!--              ></textarea>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </form>-->
   </div>
 </div>
 

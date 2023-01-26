@@ -138,6 +138,10 @@
               padding: 10px;
               border-radius: 10px;
 
+              .remove-param-btn{
+                align-self: flex-end;
+              }
+
               .param-form-item{
                 display: flex;
                 align-items: center;
