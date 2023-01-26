@@ -312,6 +312,7 @@
                 (click)="removeParam(i)"
               ></button>
 
+
               <div class="param-form-item">
                 <label for="sizeInput" class="block">Розмір</label>
                 <input id="sizeInput"
@@ -321,6 +322,9 @@
                        pInputText
                        formControlName= "size"
                 />
+                <span class="error-valid-message" *ngIf="params.controls[i].get('size')?.invalid">
+                        Довжина від 1 до 10 символів!
+                </span>
               </div>
 
               <div class="param-form-item">
@@ -332,6 +336,9 @@
                        pInputText
                        formControlName= "price"
                 />
+                <span class="error-valid-message" *ngIf="params.controls[i].get('price')?.invalid">
+                        Ціна від 10 до 1000 !
+                </span>
               </div>
 
               <div class="param-form-item">
@@ -343,6 +350,9 @@
                        pInputText
                        formControlName= "weight"
                 />
+                <span class="error-valid-message" *ngIf="params.controls[i].get('weight')?.invalid">
+                        Вага від 10 до 2000 !
+                </span>
               </div>
 
               <div class="param-form-item">
@@ -354,6 +364,9 @@
                        pInputText
                        formControlName= "title"
                 />
+                <span class="error-valid-message" *ngIf="params.controls[i].get('title')?.invalid">
+                        Довжина від 1 до 30 символів!
+                </span>
               </div>
 
 
@@ -406,7 +419,7 @@
       type="button"
       label="Редагувати"
       class="p-button-outlined p-button-info"
-      [disabled] = "formAddOrEditProduct.invalid"
+      [disabled] = "formAddOrEditProduct.invalid "
       (click)="saveEditProduct(formAddOrEditProduct.value)"
     ></button>
   </div>

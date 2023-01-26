@@ -13,7 +13,7 @@ import {Subject} from "rxjs";
 import {ingredientsValidator, paramsValidator, ValidateUrl} from "../../core/Validators";
 import {Pizza, SizeModel} from "../../core/interfaces/pizza";
 import {ProductsService} from "../../core/services/products.service";
-import {takeUntil, tap} from "rxjs/operators";
+import {catchError, takeUntil, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-admin-add-edit-product',
@@ -75,10 +75,10 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
 
       this.productToEdit.params.forEach((param: SizeModel) => {
         const paramForm = this.fb.group<any>({
-          price: [param.price, []],
-          size: [param.size, []],
-          weight: [param.weight, []],
-          title: [param.title, []],
+          price: new FormControl(param.price, [Validators.required, Validators.min(10), Validators.max(1000)]) ,
+          size: new FormControl(param.size, [Validators.required, Validators.minLength(1), Validators.maxLength(10)]),
+          weight: new FormControl(param.weight, [Validators.required, Validators.min(10), Validators.max(2000)]),
+          title: new FormControl(param.title, [Validators.required, Validators.minLength(1), Validators.maxLength(30)]),
         });
         this.params.push(paramForm);
       });
@@ -191,8 +191,36 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
     }
   }
 
-  public saveEditProduct(formValue: any){
+  public saveEditProduct(formValue: Pizza){
+      if(formValue){
+        const editProductData : Pizza = {
+          id: this.productToEdit.id,
+          title: formValue.title,
+          description: formValue.description,
+          minPrice: formValue.minPrice,
+          ingredients: [],
+          minWeight: formValue.minWeight,
+          imageBig: formValue.imageBig,
+          imageMain: formValue.imageMain,
+          params : formValue.params
+        }
 
+        formValue.ingredients.forEach((ingredient: any) => {
+          editProductData.ingredients.push(ingredient.name);
+        })
+
+        this.productsService.editPizza(editProductData , this.productToEdit.id).pipe(
+          tap(res => {
+            if(res){
+              this.cdr.markForCheck();
+            }
+          }),
+          catchError((err) =>  {
+            throw 'Помилка сервера. Деталі: ' + err
+          }),
+          takeUntil(this.destroy$)
+        ).subscribe()
+      }
   }
 
   public cancelAddProduct(){
@@ -200,6 +228,7 @@ export class AdminAddEditProductComponent implements OnInit, OnDestroy{
     this.formAddOrEditProduct.reset();
     this.cdr.markForCheck();
   }
+
 
   public cancelEditProduct(){
 

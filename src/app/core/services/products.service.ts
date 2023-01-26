@@ -28,6 +28,10 @@ export class ProductsService {
     return this.httpClient.post<Pizza>(`${environment.urlPizzaAll}`, pizza)
   }
 
+  editPizza(pizza: Pizza, id: number){
+    return this.httpClient.put<Pizza>(`${environment.urlPizzaAll}/${id}`, pizza)
+  }
+
   removePizza(id: number){
     return this.httpClient.delete<Pizza>(`${environment.urlPizzaAll}/${id}`)
   }
