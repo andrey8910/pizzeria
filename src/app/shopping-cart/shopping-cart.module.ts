@@ -26,12 +26,14 @@ import {CustomerGuard} from "../core/guards/customer.guard";
         path: '',
         pathMatch: 'full',
         component:  ShoppingCartComponent,
+
       },
       {
         path: 'order',
         pathMatch: 'full',
         canActivate : [CustomerGuard],
         component:  OrderComponent,
+        data: { title: 'order' }
       }
 
     ])

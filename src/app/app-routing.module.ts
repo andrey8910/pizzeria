@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'pizza/:id',
     loadChildren: () => import('./pizza-details/pizza-details.module')
       .then(module => module.PizzaDetailsModule)
-
   },
   { path: 'shopping',
     loadChildren: () => import('./shopping-cart/shopping-cart.module')

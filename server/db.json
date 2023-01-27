@@ -1380,6 +1380,22 @@
       ],
       "orderStatus": "створено",
       "id": 21
+    },
+    {
+      "clientId": 1,
+      "creationTime": 1674818964977,
+      "orderList": [
+        {
+          "productId": 5,
+          "size": {
+            "name": "Мала (22см)",
+            "key": "small"
+          },
+          "quantity": 1
+        }
+      ],
+      "orderStatus": "створено",
+      "id": 22
     }
   ],
   "slider": [

@@ -25,7 +25,8 @@ import {HighlightPipe} from "../core/pipes/highlight.pipe";
             {
                 path: '',
                 pathMatch: 'full',
-                component: PizzasAllComponent
+                component: PizzasAllComponent,
+
             }
         ]),
 
