@@ -4,7 +4,7 @@
     <span class="pizza-card-minWeight">{{ pizzaSize ? (selectedPizzaWeight ? selectedPizzaWeight : pizzaItem.minWeight) + ' г' : pizzaItem.minWeight + ' г'}}</span>
   </div>
   <div class="pizza-card-title-block">
-    <span class="pizza-card-title">{{pizzaItem.title | titlecase}}</span>
+    <span [innerHTML] = "pizzaItem.title | highlight : searchText" class="pizza-card-title"></span>
     <button
       class="pizza-card-details-btn"
       mat-stroked-button

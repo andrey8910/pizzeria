@@ -7,6 +7,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {RouterModule} from "@angular/router";
 import {LayoutModule} from "./layout/layout.module";
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,8 +21,9 @@ import {LayoutModule} from "./layout/layout.module";
     RouterModule.forRoot([], {scrollPositionRestoration: 'enabled'})
   ],
   providers: [],
-  exports: [
-  ],
+    exports: [
+
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -71,6 +71,7 @@
     <app-pizza-card
       *ngFor="let pizza of pizzas | productsFilter: searchText"
       [pizzaItem] = pizza
+      [searchText]="searchText"
     ></app-pizza-card>
   </div>
 

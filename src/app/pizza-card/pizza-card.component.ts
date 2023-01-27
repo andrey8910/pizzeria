@@ -15,7 +15,8 @@ import { SizeParam } from '../core/interfaces/size-param'
 export class PizzaCardComponent implements OnInit {
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
-  @Input() pizzaItem: Pizza
+  @Input() pizzaItem: Pizza;
+  @Input() searchText: string;
 
   private shoppingCart$: Observable<PizzaOrder[]>;
   public pizzaParamsSelectForm: FormGroup;
