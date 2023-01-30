@@ -3,72 +3,56 @@
   width: 100%;
   min-height: 400px;
   padding-top: 80px;
-
   .product-data-header{
     display: flex;
     align-items: center;
     gap: 100px;
   }
-
   .product-spinner{
     width: 100%;
     display: flex;
     padding: 100px 50%;
   }
-
   .not-found-product{
     padding: 100px;
-
     p{
       text-align: center;
     }
   }
-
   .product-data-body{
     width: 100%;
     margin: 20px 0;
-
     .form-product-data{
       display: flex;
       flex-direction: column;
       gap: 30px;
-
       .form-product-item{
         display: flex;
         width: 100%;
         justify-content: space-between;
         padding-bottom: 10px;
         border-bottom: 1px solid gainsboro;
-
-
         .product-item-label{
           flex: 0 0 20%;
         }
-
         .product-item-label , ingredients {
           display: flex;
           align-items: center;
           gap: 20px;
         }
-
         .product-item-value{
           flex: 0 0 80%;
           min-width: 500px;
-
-
           .ingredient-form{
-
             .add-ingredient{
               display: flex;
               align-items: center;
               gap: 6px;
             }
-
             .ingredient{
               display: flex;
               align-items: center;
               gap: 6px;
-
               span {
                 padding: 6px;
                 background-color: rgba(0,0,0, 0.1);
@@ -76,20 +60,15 @@
               }
             }
           }
-
-
         }
-
         .product-item-value.item-params {
           flex: 1 1 20%;
           display: flex;
           gap: 100px;
-
           .param-header{
             display: flex;
             align-items: center;
             gap: 10px;
-
             .header-title{
               font-size: 12px;
             }
@@ -97,29 +76,22 @@
               font-size: 18px;
               font-weight: 500;
             }
-
-
           }
           .param-block{
             display: flex;
             flex-direction: column;
             gap: 20px;
-
             .name-prop-param{
               display: flex;
               align-items: center;
               gap: 6px;
-
               .param-key{
                 padding: 6px;
                 background-color: rgba(0,0,0, 0.1);
                 border-radius: 10px;
               }
-
             }
-
           }
-
           .add-param-property{
             display: flex;
             flex-direction: column;
@@ -129,7 +101,6 @@
             border-radius: 10px;
             padding: 10px;
             margin-top: 10px;
-
             label {
               font-size: 12px;
               align-self: center;
@@ -139,47 +110,34 @@
             }
           }
         }
-
         .product-item-value.ingredients {
           display: flex;
           align-items: center;
           gap: 30px;
           flex-wrap: wrap;
         }
-
         .product-item-value.images {
           display: flex;
           flex-direction: column;
           gap: 20px;
-
           .product-image-section{
             display: flex;
             gap: 50px;
-
             .image-block{
               flex: 1 1 70%;
               img {
                 width: 100%;
               }
             }
-
             .image-link-block{
               flex: 1 1 30%;
-
               textarea{
                 width: 100%;
               }
             }
-
-
-
           }
-
         }
       }
     }
-
-
   }
-
 }
